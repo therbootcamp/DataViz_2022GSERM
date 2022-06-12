@@ -1,23 +1,23 @@
 ---
-title: "Styling with ggplot2"
-author: "Data Visualization for Social Good<br>
+title: "Styling"
+author: "Visualizing and communicating data with R<br>
   <a href='https://correlaid.org/correlaid-x/switzerland/'>
-    CorrelAid Switzerland
+    <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font>
   </a>
   <br>
   <a href='https://correlaidswitzerland.github.io/DataViz4Good/'>
-    <i class='fas fa-clock' style='font-size:.9em;'></i>
+    <i class='fas fa-clock' style='font-size:1.4em;'></i>
   </a>&#8239; 
   <a href='https://correlaid.org/correlaid-x/switzerland/'>
-    <i class='fas fa-home' style='font-size:.9em;' ></i>
+    <i class='fas fa-home' style='font-size:1.4em;' ></i>
   </a>&#8239;
   <a href='switzerland@correlaid.org'>
-    <i class='fas fa-envelope' style='font-size: .9em;'></i>
+    <i class='fas fa-envelope' style='font-size: 1.4em;'></i>
   </a>&#8239;
   <a href='https://www.linkedin.com/company/correlaidswiss/'>
-    <i class='fab fa-linkedin' style='font-size: .9em;'></i>
+    <i class='fab fa-linkedin' style='font-size: 1.4em;'></i>
   </a>"
-date: "February 2021"
+date: "June 2022"
 output:
   xaringan::moon_reader:
     css: ["default", "baselrbootcamp.css"]
@@ -39,13 +39,13 @@ layout: true
     <a href="https://therbootcamp.github.io/">
       <span style="padding-left:82px"> 
         <font color="#7E7E7E">
-          https://correlaid.org/correlaid-x/switzerland/
+          https://therbootcamp.github.io
         </font>
       </span>
     </a>
     <a href="https://correlaid.org/correlaid-x/switzerland/">
       <font color="#7E7E7E">
-      Data Visualization for Social Good | February 2021
+      The R Bootcamp | June 2022
       </font>
     </a>
     </span>

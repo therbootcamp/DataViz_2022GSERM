@@ -1,23 +1,23 @@
 ---
-title: "Wrangling"
-author: "Data Visualization for Social Good<br>
+title: "Intro 2 R"
+author: "Visualizing and communicating data with R<br>
   <a href='https://correlaid.org/correlaid-x/switzerland/'>
-    CorrelAid Switzerland
+    <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font>
   </a>
   <br>
   <a href='https://correlaidswitzerland.github.io/DataViz4Good/'>
-    <i class='fas fa-clock' style='font-size:.9em;'></i>
+    <i class='fas fa-clock' style='font-size:1.4em;'></i>
   </a>&#8239; 
   <a href='https://correlaid.org/correlaid-x/switzerland/'>
-    <i class='fas fa-home' style='font-size:.9em;' ></i>
+    <i class='fas fa-home' style='font-size:1.4em;' ></i>
   </a>&#8239;
   <a href='switzerland@correlaid.org'>
-    <i class='fas fa-envelope' style='font-size: .9em;'></i>
+    <i class='fas fa-envelope' style='font-size: 1.4em;'></i>
   </a>&#8239;
   <a href='https://www.linkedin.com/company/correlaidswiss/'>
-    <i class='fab fa-linkedin' style='font-size: .9em;'></i>
+    <i class='fab fa-linkedin' style='font-size: 1.4em;'></i>
   </a>"
-date: "February 2021"
+date: "June 2022"
 output:
   xaringan::moon_reader:
     css: ["default", "baselrbootcamp.css"]
@@ -39,13 +39,13 @@ layout: true
     <a href="https://therbootcamp.github.io/">
       <span style="padding-left:82px"> 
         <font color="#7E7E7E">
-          https://correlaid.org/correlaid-x/switzerland/
+          https://therbootcamp.github.io
         </font>
       </span>
     </a>
     <a href="https://correlaid.org/correlaid-x/switzerland/">
       <font color="#7E7E7E">
-      Data Visualization for Social Good | February 2021
+      The R Bootcamp | June 2022
       </font>
     </a>
     </span>
@@ -107,6 +107,369 @@ basel = readr::read_csv('1_data/basel.csv')
 
 --->
 
+# The R ecosphere
+
+<br><br>
+<p align="center">
+<img src="image/recosphere.png" height="300px">
+</p>
+
+---
+
+# Base R primer
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/2560px-R_logo.svg.png" height="340px">
+</p>
+
+
+]
+
+---
+
+# Object <mono><-</mono> function
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span><high>Object <mono><-</mono> function</high></span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align="center">
+  <img src="image/assignment_eng.png">
+</p>
+
+
+]
+
+---
+
+# <mono><-</mono> creates objects
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><high><mono><-</mono> creates objects</high></span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+
+]
+
+.pull-right5[
+```{r}
+# an object named score
+score <- c(8, 4, 6, 3, 7, 3)
+
+# print the object (aka show its contents)
+print(score)
+
+# print the object (aka show its contents)
+score
+
+```
+
+]
+
+---
+
+# <mono><-</mono> creates objects
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><high><mono><-</mono> creates objects</high></span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+
+]
+
+.pull-right5[
+```{r}
+# an object named score
+score <- c(8, 4, 6, 3, 7, 3)
+
+# mean of score
+mean(score)
+```
+
+]
+
+
+---
+
+# Functions 
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span><high>Everything that happens is a function call</high></span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+]
+
+.pull-right5[
+<p align="center"><img src="image/input_output.png" height="400"></p>
+]
+
+---
+
+# Functions 
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span><high>Everything that happens is a function call</high></span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+]
+
+.pull-right5[
+
+```{r}
+# an object named score
+score <- c(8, 4, 6, 3, 7, 3)
+
+# print the object (aka show its contents)
+score
+
+# mean of score
+mean(score)
+
+```
+]
+
+
+---
+
+# Arguments 
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span><high>Functions have (default) arguments</high></span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+]
+
+.pull-right5[
+```{r, error=TRUE,tidy=T}
+# no argument
+mean()
+
+# one (necessary) argument
+mean(score)
+
+# one (necessary) argument with name
+mean(x = score)
+
+# NA added to vector score
+mean(x = c(score, NA))
+```
+]
+
+
+---
+
+# Arguments 
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span><high>Functions have (default) arguments</high></span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+]
+
+.pull-right5[
+```{r, error=TRUE,tidy=T}
+# no argument
+mean()
+
+# one (necessary) argument
+mean(score)
+
+# one (necessary) argument with name
+mean(x = score)
+
+# change default in additional argument
+mean(x = c(score, NA), na.rm = TRUE)
+
+```
+]
+
+---
+
+# Classes 
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span><high>Beware object/argument classes</high></span></li>
+    <li><span>Functions "live" in packages</span></li>
+  </ul><br>
+</ul>
+]
+
+.pull-right5[
+
+<p align = "center">
+<img src="image/types.png"><br>
+</p>
+
+]
+
+
+---
+
+# Packages 
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Assignments<br></span></li>
+  <ul class="level">
+    <li><span>Object <mono><-</mono> function</span></li>
+    <li><span><mono><-</mono> creates objects</span></li>
+  </ul><br>
+  <li class="m2"><span>Functions</span></li>
+  <ul class="level">
+    <li><span>Everything that happens is a function call</span></li>
+    <li><span>Functions have (default) arguments</span></li>
+    <li><span>Beware object/argument classes/span></li>
+    <li><span><high>Functions "live" in packages</high><</span></li>
+  </ul><br>
+</ul>
+]
+
+.pull-right5[
+
+<high>Install</high> package <high>once</high> using `install.packages()`
+
+```{r, eval = FALSE}
+install.packages("tidyverse")
+```
+<br2>
+<high>Load</high> existing package <high>every time</high> using `library()`
+
+```{r, eval = FALSE}
+library(tidyverse)
+```
+
+<p align="left"><img src="image/tidyverse_load.png" height="180"></p>
+]
+
+
+---
+
+# The R ecosphere
+
+<br><br>
+<p align="center">
+<img src="image/recosphere.png" height="300px">
+</p>
+
+
+---
+
 .pull-left3[
 
 # Tidyverse
@@ -131,58 +494,6 @@ basel = readr::read_csv('1_data/basel.csv')
 
 
 ---
-
-
-.pull-left3[
-
-# Tidyverse
-
-<ul>
-  <li class="m1"><span>The tidyverse is...</span></li><br>
-  <ul class="level">
-    <li><span>A collection of user-friendly <high>packages</high> for analyzing <high>tidy data</high></span></li><br>
-    <li><span>An <high>ecosystem</high> for analytics and data science with common design principles</span></li><br>
-    <li><span>A <high>dialect</high> of the R language</span></li>
-  </ul>
-</ul>
-
-]
-
-.pull-right65[
-<br><br>
-<p align="center">
-<img src="image/tidyverse_highlight.png" height = "520px">
-</p>
-]
-
----
-
-# RStudio
-
-.pull-left3[
-
-<ul>
-  <li class="m1"><span>RStudio is...</span></li><br>
-  <ul class="level">
-    <li><span>A high-productivity <high>data science IDE.</high></span></li><br>
-    <li><span>The <high>company</high> behind the tidyverse.</span></li><br>
-    <li><span>Designed for R tidyverse with <high>good integration</high> for Python, Markdown, or C++.</span></li><br>
-  </ul>
-</ul>
-
-]
-
-.pull-right6[
-<p align="center">
-<img src="image/rstudio.png">
-</p>
-]
-
-
----
-
-
-
 
 
 .pull-left3[
@@ -802,7 +1113,7 @@ options(tibble.width = 35, tibble.max_extra_cols = 10, tibble.print_max = 5,
 .pull-right5[
 
 <p align="center">
-<img src="https://github.com/gadenbuie/tidyexplain/raw/master/images/tidyr-spread-gather.gif" height=420px><br>
+<img src="image/tidyr-spread-gather-loop.gif" height=420px><br>
 <font style="font-size:10px">adapted from <a href="https://github.com/gadenbuie/tidyexplain">tidyexplain</a></font>
 </p>
 
@@ -835,11 +1146,121 @@ basel %>%
 ```
 ]
 
+---
+
+# The R ecosphere
+
+<br><br>
+<p align="center">
+<img src="image/recosphere.png" height="300px">
+</p>
+
+
+---
+
+# RStudio
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>RStudio is...</span></li><br>
+  <ul class="level">
+    <li><span>A high-productivity <high>data science IDE.</high></span></li><br>
+    <li><span>The <high>company</high> behind the tidyverse.</span></li><br>
+    <li><span>Designed for R tidyverse with <high>good integration</high> for Python, Markdown, or C++.</span></li><br>
+  </ul>
+</ul>
+
+]
+
+.pull-right6[
+<p align="center">
+<img src="image/rstudio.png">
+</p>
+]
+
+---
+
+# RStudio
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>RStudio is...</span></li><br>
+  <ul class="level">
+    <li><span>A high-productivity <high>data science IDE.</high></span></li><br>
+    <li><span>The <high>company</high> behind the tidyverse.</span></li><br>
+    <li><span>Designed for R tidyverse with <high>good integration</high> for Python, Markdown, or C++.</span></li><br>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align = "left">
+  <img src="image/editor_edit.png">
+<br><br><br>
+Shortcut für <high>schicke Code zur Console</high>:<br><br2><font size = 6>&#8984;/ctrl + &#9166;</font><br><br2><br2>
+Shortcut für <high>führe Chunk wiederholt aus</high>:<br><br2><font size = 6>  &#8984;/ctrl + &#9095; + p</font>
+</p>
+
+]
+
+---
+
+# RStudio
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>RStudio is...</span></li><br>
+  <ul class="level">
+    <li><span>A high-productivity <high>data science IDE.</high></span></li><br>
+    <li><span>The <high>company</high> behind the tidyverse.</span></li><br>
+    <li><span>Designed for R tidyverse with <high>good integration</high> for Python, Markdown, or C++.</span></li><br>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align = "center">
+  <img src="image/auto_complete_1.png">
+</p>
+
+]
+
+---
+
+# RStudio
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>RStudio is...</span></li><br>
+  <ul class="level">
+    <li><span>A high-productivity <high>data science IDE.</high></span></li><br>
+    <li><span>The <high>company</high> behind the tidyverse.</span></li><br>
+    <li><span>Designed for R tidyverse with <high>good integration</high> for Python, Markdown, or C++.</span></li><br>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align = "left">
+  <img src="image/folder_structure.png" height="340px">
+</p>
+
+]
 
 
 ---
 
 class: middle, center
 
-<h1><a href="https://therbootcamp.github.io/EDA_2020Sep/_sessions/Wrangling/Wrangling_practical.html">Practical</a></h1>
+<h1><a href="">Practical</a></h1>
 
