@@ -86,7 +86,7 @@ basel = read_csv('1_Data/taxation.csv')
 # Tidyverse
 
 <ul>
-  <li class="m1"><span>The tidyverse is...</span></li><br>
+  <li class="m1"><span>The tidyverse is ...</span></li><br>
   <ul class="level">
     <li><span>A collection of user-friendly <high>packages</high> for analyzing <high>tidy data</high></span></li><br>
     <li><span>An <high>ecosystem</high> for analytics and data science with common design principles</span></li><br>

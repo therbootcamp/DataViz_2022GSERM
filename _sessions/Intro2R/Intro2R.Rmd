@@ -335,7 +335,7 @@ mean(score)
 ]
 
 .pull-right5[
-```{r, error=TRUE,tidy=T}
+```{r, error=TRUE, tidy=T}
 # no argument
 mean()
 

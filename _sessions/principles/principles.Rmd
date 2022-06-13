@@ -175,10 +175,10 @@ library(gridExtra)
 
 <ul>
   <li class="m1"><span><high>Memory-</high> and <high>attention span</high> of humans are limited.</span></li><br>
-  <li class="m2"><span>Information processing is strongly influenced:</span></li>
+  <li class="m2"><span>Information processing is strongly influenced by:</span></li>
   <ul class="level">
     <span><li><high>Top-down</high>: expectations and prior knowledge</span></li>
-    <span><li><high>Bottom-up</high>:Visual characteristica</li></span>
+    <span><li><high>Bottom-up</high>: visual characteristica</li></span>
   </ul>
   </span></li>
 </ul>
@@ -200,7 +200,7 @@ library(gridExtra)
 
 <ul>
   <li class="m1"><span><high>Memory-</high> and <high>attention span</high> of humans are limited.</span></li><br>
-  <li class="m2"><span>Information processing is influenced by:</span></li>
+  <li class="m2"><span>Information processing is strongly influenced by:</span></li>
   <ul class="level">
     <span><li><high>Top-down</high>: expectations and prior knowledge</span></li>
     <span><li><high>Bottom-up</high>: visual characteristics</li></span>
@@ -224,10 +224,10 @@ library(gridExtra)
 
 <ul>
   <li class="m1"><span><high>Memory-</high> and <high>attention span</high> of humans are limited.</span></li><br>
-  <li class="m2"><span>Information processing is strongly influenced:</span></li>
+  <li class="m2"><span>Information processing is strongly influenced by:</span></li>
   <ul class="level">
     <span><li><high>Top-down</high>: expectations and prior knowledge</span></li>
-    <span><li><high>Bottom-up</high>:Visual characteristica</li></span>
+    <span><li><high>Bottom-up</high>: visual characteristics</li></span>
   </ul>
   </span></li>
 </ul>
@@ -250,10 +250,10 @@ library(gridExtra)
 
 <ul>
   <li class="m1"><span><high>Memory-</high> and <high>attention span</high> of humans are limited.</span></li><br>
-  <li class="m2"><span>Information processing is influenced by:</span></li>
+  <li class="m2"><span>Information processing is strongly influenced by:</span></li>
   <ul class="level">
     <span><li><high>Top-down</high>: expectations and prior knowledge</span></li>
-    <span><li><high>Bottom-up</high>: visual characteristica</li></span>
+    <span><li><high>Bottom-up</high>: visual characteristics</li></span>
   </ul>
   </span></li>
 </ul>
@@ -601,7 +601,7 @@ class: middle, center
 <p align="center">
 
 <img src="image/harding.png" height="540px"><br>
-<font style="font-size:10px">from <a href="https://www.hardingcenter.de/sites/default/files/2021-05/DE_mRNA-Impfung_Begleittext.pdf">Harding Center for  Riks Literacy</a></font>
+<font style="font-size:10px">from <a href="https://www.hardingcenter.de/sites/default/files/2021-05/DE_mRNA-Impfung_Begleittext.pdf">Harding Center for Risk Literacy</a></font>
 </p>
 
 

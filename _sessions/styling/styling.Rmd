@@ -118,7 +118,7 @@ basel %>%
 
 .pull-left45[
 
-# the <mono>gg</mono> object
+# The <mono>gg</mono> object
 
 <ul>
   <li class="m1"><span>The output of <mono>ggplot()</mono> can be stored in an <mono>gg</mono> object.</span></li>
@@ -688,7 +688,7 @@ basel %>%
 # `labs()`
 
 <ul>
-  <li class="m1"><span>Vaious annotions can be added using <mono>labs()</mono>.</span></li>
+  <li class="m1"><span>Various annotaions can be added using <mono>labs()</mono>.</span></li>
   <li class="m2"><span>Key arguments:</span></li>
   <ul class="level">
     <li><span><mono>x,y</mono> | Axes</span></li>

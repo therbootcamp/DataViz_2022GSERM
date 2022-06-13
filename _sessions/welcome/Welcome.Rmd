@@ -91,7 +91,7 @@ Klicke auf <high>"....running..."</high> auf unserer Website!
 # Goal
 
 
->### The goal of this workshop is to introduce you to R's tools for data visualization and communication and how they can use to effectively communicate insights from data!
+>### The goal of this workshop is to introduce you to R's tools for data visualization and communication and how they can be used to effectively communicate insights from data!
 
 ]
 
@@ -111,7 +111,7 @@ Klicke auf <high>"....running..."</high> auf unserer Website!
 # Schedule 
 
 <ul>
-  <li class="m1"><span>Core of the workshop consists of 7 sessions on R, consisting of.</span></li>
+  <li class="m1"><span>Core of the workshop consists of 7 sessions on R. Each session is structured into:</span></li>
   <ul class="level">
     <li><span>30-60min introduction</high></span></li> 
     <li><span>30-60min coding exercises</span></li> 
