@@ -1,5 +1,5 @@
 ---
-title: "Styling exercises"
+title: "Styling exercises solutions"
 output:
 editor_options:
   chunk_output_type: console
@@ -75,7 +75,7 @@ basel %>%
 
 # 4 - Labs
 
-1. Ok, the plot itself is pretty decent already. What's missing, is appropriate annotion. Use `labs()` to add titles for the axes, a plot title and subtitle, and a caption.  
+1. Ok, the plot itself is pretty decent already. What's missing, is appropriate annotation. Use `labs()` to add titles for the axes, a plot title and subtitle, and a caption.  
 
 ```{r}
 basel %>% 
@@ -91,7 +91,7 @@ basel %>%
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       captin = "Source: Open Data Basel-Stadt")
+       caption = "Source: Open Data Basel-Stadt")
 ```
 
 # 5 - Colors
@@ -112,7 +112,7 @@ basel %>%
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       captin = "Source: Open Data Basel-Stadt") + 
+       caption = "Source: Open Data Basel-Stadt") + 
   scale_color_viridis_d()
 ```
 
@@ -136,7 +136,7 @@ basel %>%
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       captin = "Source: Open Data Basel-Stadt") + 
+       caption = "Source: Open Data Basel-Stadt") + 
   scale_color_viridis_d()
 ```
 
@@ -172,7 +172,7 @@ averages %>%
              y = wealth_median_mean,
              col = rich)) + 
   geom_line() +
-  geom_line() +
+  geom_point() +
   theme_minimal() + 
   theme(legend.position = "bottom",
      legend.title = element_blank(),
@@ -181,7 +181,7 @@ averages %>%
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       captin = "Source: Open Data Basel-Stadt") + 
+       caption = "Source: Open Data Basel-Stadt") + 
   scale_color_viridis_d()
 ```
 
@@ -204,11 +204,11 @@ averages %>%
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       captin = "Source: Open Data Basel-Stadt") + 
+       caption = "Source: Open Data Basel-Stadt") + 
   scale_color_viridis_d()
 ```
 
-5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependend variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you have control the color using `scale_fill_*`.    
+5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependent variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you have control the color using `scale_fill_*`.    
 
 ```{r}
 averages %>% 
@@ -228,7 +228,7 @@ averages %>%
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       captin = "Source: Open Data Basel-Stadt") + 
+       caption = "Source: Open Data Basel-Stadt") + 
   scale_color_viridis_d() + scale_fill_viridis_d()
 ```
 

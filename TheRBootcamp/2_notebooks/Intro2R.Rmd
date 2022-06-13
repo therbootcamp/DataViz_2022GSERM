@@ -4,8 +4,11 @@ output:
 editor_options:
   chunk_output_type: console
 ---
-
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE,
+                      eval = FALSE)
+```
 In this practical, you will read in the `taxation.csv` data set and analyze it descriptively using the `dplyr` package.
 
 # 0 - Preliminaries
@@ -19,7 +22,7 @@ library(tidyverse)
 2. Use the code below to read in the `taxation.csv` data set and store it as an object called `basel`. The messages printed in the console tell you how R has inferred the types of each of the columns. Should be all good.
 
 ```{r }
-basel <- read_csv('1_Data/taxation.csv')
+basel <- read_csv('../1_data/taxation.csv')
 ```
 
 3. Take a look at `basel` by sending it to console. Note how the `tibble` shows types for each of the columns. Also note how some cases and variables are abbreviated. 
@@ -47,7 +50,7 @@ basel %>%
 
 # 2 - Filter
 
-1. Now look at the average Gini coefficients for just one quarter: "Bettingen"`. 
+1. Now look at the average Gini coefficients for just one quarter: "Bettingen". 
 
 ```{r }
 basel %>% 
@@ -67,7 +70,7 @@ basel %>%
 
 # 3 - Grouping
 
-1. Wouldn't it be great if one did have to select each quarter one by one using filter? The `group_by` and`summarize` idiom saves you from exactly that. Complete the code below to calculate the average Gini coefficients for every `quarter`.  
+1. Wouldn't it be great if one did not have to select each quarter one by one using filter? The `group_by` and`summarize` idiom saves you from exactly that. Complete the code below to calculate the average Gini coefficients for every `quarter`.  
 
 ```{r }
 basel %>% 
@@ -111,7 +114,7 @@ basel %>%
 
 # 5 - Go explore
 
-1. Calculate the average income and wealth across time?
+1. Calculate the average income and wealth across time!
 
 2. How has the mean income/wealth developed relative to the median?
 
