@@ -14,15 +14,15 @@ class: center, middle, inverse, title-slide
 
 # ggplot
 ### Visualizing and communicating data with R<br>
-<a href='https://correlaid.org/correlaid-x/switzerland/'>
+<a href='https://therbootcamp.github.io'>
 <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br>
-<a href='https://correlaidswitzerland.github.io/DataViz4Good/'>
+<a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
 <i class='fas fa-clock' style='font-size:1.4em;'></i> </a> 
-<a href='https://correlaid.org/correlaid-x/switzerland/'>
+<a href='https://therbootcamp.github.io'>
 <i class='fas fa-home' style='font-size:1.4em;' ></i> </a> 
-<a href='switzerland@correlaid.org'>
+<a href='therbootcamp@gmail.com'>
 <i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a> 
-<a href='https://www.linkedin.com/company/correlaidswiss/'>
+<a href='https://www.linkedin.com/company/27090302'>
 <i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
 ### June 2022
 
@@ -43,7 +43,7 @@ layout: true
         &lt;/font&gt;
       &lt;/span&gt;
     &lt;/a&gt;
-    &lt;a href="https://correlaid.org/correlaid-x/switzerland/"&gt;
+    &lt;a href="https://therbootcamp.github.io/"&gt;
       &lt;font color="#7E7E7E"&gt;
       The R Bootcamp | June 2022
       &lt;/font&gt;
@@ -611,6 +611,41 @@ ggplot(data = basel_avg_long,
 
 ]
 
+---
+
+# &lt;mono&gt;aes()&lt;/mono&gt;
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;aes()&lt;/mono&gt; helps define the structure of the &lt;highm&gt;mapping&lt;/highm&gt; Argument.&lt;/span&gt;&lt;/li&gt;
+
+&lt;br&gt;
+
+```r
+# use basel_avg_long
+ggplot(data = basel_avg_long,
+       mapping = aes(
+         x = year, 
+         y = income,
+                     
+         # add many dimensions
+         # (not recommended)
+         col = statistic) +
+  geom_point() +
+  geom_line() 
+```
+
+
+
+]
+
+.pull-right45[
+
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 
 ---
@@ -642,7 +677,7 @@ basel_long &lt;- basel %&gt;%
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -679,16 +714,186 @@ ggplot(data = basel_long,
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# patchwork
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; provides a simple syntax to combine plots.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; syntax:&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;+&lt;/mono&gt; | combine horizontally&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;/&lt;/mono&gt; | combine vertically&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;|&lt;/mono&gt; | spacer&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;()&lt;/mono&gt; | grouper&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;&amp;&lt;/mono&gt; | apply to all&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;plot_layout&lt;/mono&gt; | control layout&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+
+
+&lt;br&gt;
+
+
+```r
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+
+
+```r
+breite/clara
+```
+
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# patchwork
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; provides a simple syntax to combine plots.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; syntax:&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;+&lt;/mono&gt; | combine horizontally&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;/&lt;/mono&gt; | combine vertically&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;|&lt;/mono&gt; | spacer&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;()&lt;/mono&gt; | grouper&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;&amp;&lt;/mono&gt; | apply to all&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;plot_layout&lt;/mono&gt; | control layout&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+
+```r
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+
+
+```r
+breite+clara
+```
+
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 
 ---
 
+# patchwork
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; provides a simple syntax to combine plots.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; syntax:&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;+&lt;/mono&gt; | combine horizontally&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;/&lt;/mono&gt; | combine vertically&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;|&lt;/mono&gt; | spacer&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;()&lt;/mono&gt; | grouper&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;&amp;&lt;/mono&gt; | apply to all&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;plot_layout&lt;/mono&gt; | control layout&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+
+```r
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+
+
+```r
+breite+clara+plot_layout(guides="collect")
+```
+
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# patchwork
+
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; provides a simple syntax to combine plots.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;patchwork&lt;/mono&gt; syntax:&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;+&lt;/mono&gt; | combine horizontally&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;/&lt;/mono&gt; | combine vertically&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;|&lt;/mono&gt; | spacer&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;()&lt;/mono&gt; | grouper&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;&amp;&lt;/mono&gt; | apply to all&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;plot_layout&lt;/mono&gt; | control layout&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+
+```r
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+```r
+all/(breite+clara)+
+  plot_layout(guides="collect")
+```
+
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+
 class: middle, center
 
-&lt;h1&gt;&lt;a href="https://correlaidswitzerland.github.io/DataViz4Good/"&gt;Schedule&lt;/a&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;a href=""&gt;Practical&lt;/a&gt;&lt;/h1&gt;
 
 
 

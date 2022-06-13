@@ -140,8 +140,22 @@ basel %>%
   scale_color_viridis_d()
 ```
 
+# 7 - Aggregation
 
-# 6 - Go explore
+1. Let's whether the richer quarters saw a larger increase in wealth than the poorer quarters. To this end, first use some `dplyr` to create a new grouping variable that codes whether a quarter belongs to the richer or poorer quarters in 2001. 
+
+```{r}
+basel %>% 
+  arrange(year, wealth_median) %>% 
+  group_by(wealth_2001 = first(wealth_median)) %>% 
+  
+
+  
+```
+
+
+
+# 8 - Go explore
 
 1. Install the `ggthemes` package and try out some of its themes. 
 

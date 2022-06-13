@@ -1,20 +1,20 @@
 ---
 title: "ggplot"
 author: "Visualizing and communicating data with R<br>
-  <a href='https://correlaid.org/correlaid-x/switzerland/'>
+  <a href='https://therbootcamp.github.io'>
     <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font>
   </a>
   <br>
-  <a href='https://correlaidswitzerland.github.io/DataViz4Good/'>
+  <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
     <i class='fas fa-clock' style='font-size:1.4em;'></i>
   </a>&#8239; 
-  <a href='https://correlaid.org/correlaid-x/switzerland/'>
+  <a href='https://therbootcamp.github.io'>
     <i class='fas fa-home' style='font-size:1.4em;' ></i>
   </a>&#8239;
-  <a href='switzerland@correlaid.org'>
+  <a href='therbootcamp@gmail.com'>
     <i class='fas fa-envelope' style='font-size: 1.4em;'></i>
   </a>&#8239;
-  <a href='https://www.linkedin.com/company/correlaidswiss/'>
+  <a href='https://www.linkedin.com/company/27090302'>
     <i class='fab fa-linkedin' style='font-size: 1.4em;'></i>
   </a>"
 date: "June 2022"
@@ -43,7 +43,7 @@ layout: true
         </font>
       </span>
     </a>
-    <a href="https://correlaid.org/correlaid-x/switzerland/">
+    <a href="https://therbootcamp.github.io/">
       <font color="#7E7E7E">
       The R Bootcamp | June 2022
       </font>
@@ -702,6 +702,48 @@ ggplot(data = basel_avg_long,
 
 ]
 
+---
+
+# <mono>aes()</mono>
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>aes()</mono> helps define the structure of the <highm>mapping</highm> Argument.</span></li>
+
+<br>
+```{r, eval = F}
+# use basel_avg_long
+ggplot(data = basel_avg_long,
+       mapping = aes(
+         x = year, 
+         y = income,
+                     
+         # add many dimensions
+         # (not recommended)
+         col = statistic) +
+  geom_point() +
+  geom_line() 
+```
+
+
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 4}
+ggplot(data = basel_avg_long,
+       mapping = aes(x = year, 
+                     y = income,
+                     col = statistic)) +
+
+  geom_point() +
+  geom_line() 
+```
+
+]
+
 
 
 ---
@@ -789,12 +831,210 @@ ggplot(data = basel_long,
 
 ]
 
+---
+
+# patchwork
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>patchwork</mono> provides a simple syntax to combine plots.</span></li>
+  <li class="m2"><span><mono>patchwork</mono> syntax:</span></li>
+  <ul class="level">
+    <li><span><mono>+</mono> | combine horizontally</span></li>
+    <li><span><mono>/</mono> | combine vertically</span></li>
+    <li><span><mono>|</mono> | spacer</span></li>
+    <li><span><mono>()</mono> | grouper</span></li>
+    <li><span><mono>&</mono> | apply to all</span></li>
+    <li><span><mono>plot_layout</mono> | control layout</span></li>
+  </ul>
+</ul>
+
+```{r, echo = F}
+require(patchwork)
+
+breite <- basel %>% 
+  filter(quarter == "Breite") %>% 
+  group_by(year) %>% 
+  summarize(
+    income_mean = mean(income_mean),
+    income_median = mean(income_median)) %>% 
+  pivot_longer(-year, 
+               names_to = "statistic", 
+               values_to = "income") %>% 
+  ggplot(mapping = aes(x = year, 
+                     y = income,
+                     col = statistic)) +
+  geom_point() + geom_line()  + 
+  labs(title = "breite")
+
+clara <- basel %>% 
+  filter(quarter == "Clara") %>% 
+  group_by(year) %>% 
+  summarize(
+    income_mean = mean(income_mean),
+    income_median = mean(income_median)) %>% 
+  pivot_longer(-year, 
+               names_to = "statistic", 
+               values_to = "income") %>% 
+  ggplot(mapping = aes(x = year, 
+                     y = income,
+                     col = statistic)) +
+  geom_point() + geom_line()  + 
+  labs(title = "clara")
+
+
+all = ggplot(data = basel_avg_long,
+       mapping = aes(
+         x = year, 
+         y = income,
+         color = statistic)) +
+  geom_point() +
+  geom_line() + 
+  labs(title = "All")
+  
+
+```
+
+<br>
+
+```{r, fig.width = 7, fig.height = 5.5, echo = TRUE, eval = F}
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+
+```{r, fig.width = 5, fig.height = 4}
+breite/clara
+```
+
+]
+
+---
+
+# patchwork
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>patchwork</mono> provides a simple syntax to combine plots.</span></li>
+  <li class="m2"><span><mono>patchwork</mono> syntax:</span></li>
+  <ul class="level">
+    <li><span><mono>+</mono> | combine horizontally</span></li>
+    <li><span><mono>/</mono> | combine vertically</span></li>
+    <li><span><mono>|</mono> | spacer</span></li>
+    <li><span><mono>()</mono> | grouper</span></li>
+    <li><span><mono>&</mono> | apply to all</span></li>
+    <li><span><mono>plot_layout</mono> | control layout</span></li>
+  </ul>
+</ul>
+
+<br>
+
+```{r, fig.width = 7, fig.height = 5.5, echo = TRUE, eval = F}
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+
+```{r, fig.width = 5, fig.height = 4}
+breite+clara
+```
+
+]
+
+
+---
+
+# patchwork
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>patchwork</mono> provides a simple syntax to combine plots.</span></li>
+  <li class="m2"><span><mono>patchwork</mono> syntax:</span></li>
+  <ul class="level">
+    <li><span><mono>+</mono> | combine horizontally</span></li>
+    <li><span><mono>/</mono> | combine vertically</span></li>
+    <li><span><mono>|</mono> | spacer</span></li>
+    <li><span><mono>()</mono> | grouper</span></li>
+    <li><span><mono>&</mono> | apply to all</span></li>
+    <li><span><mono>plot_layout</mono> | control layout</span></li>
+  </ul>
+</ul>
+
+<br>
+
+```{r, fig.width = 7, fig.height = 5.5, echo = TRUE, eval = F}
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+
+```{r, fig.width = 5, fig.height = 4}
+breite+clara+plot_layout(guides="collect")
+```
+
+]
+
+---
+
+.pull-left45[
+
+# patchwork
+
+
+<ul>
+  <li class="m1"><span><mono>patchwork</mono> provides a simple syntax to combine plots.</span></li>
+  <li class="m2"><span><mono>patchwork</mono> syntax:</span></li>
+  <ul class="level">
+    <li><span><mono>+</mono> | combine horizontally</span></li>
+    <li><span><mono>/</mono> | combine vertically</span></li>
+    <li><span><mono>|</mono> | spacer</span></li>
+    <li><span><mono>()</mono> | grouper</span></li>
+    <li><span><mono>&</mono> | apply to all</span></li>
+    <li><span><mono>plot_layout</mono> | control layout</span></li>
+  </ul>
+</ul>
+
+<br>
+
+```{r, fig.width = 7, fig.height = 5.5, echo = TRUE, eval = F}
+# two quarter-specific plots
+breite
+clara
+```
+
+]
+
+.pull-right45[
+<br><br><br>
+```{r, fig.width = 5, fig.height = 4}
+all/(breite+clara)+
+  plot_layout(guides="collect")
+```
+
+]
+
+
 
 ---
 
 class: middle, center
 
-<h1><a href="https://correlaidswitzerland.github.io/DataViz4Good/">Schedule</a></h1>
+<h1><a href="">Practical</a></h1>
 
 
 

@@ -1,20 +1,20 @@
 ---
 title: "Principles"
 author: "Visualizing and communicating data with R<br>
-  <a href='https://correlaid.org/correlaid-x/switzerland/'>
+  <a href='https://therbootcamp.github.io'>
     <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font>
   </a>
   <br>
-  <a href='https://correlaidswitzerland.github.io/DataViz4Good/'>
+  <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
     <i class='fas fa-clock' style='font-size:1.4em;'></i>
   </a>&#8239; 
-  <a href='https://correlaid.org/correlaid-x/switzerland/'>
+  <a href='https://therbootcamp.github.io'>
     <i class='fas fa-home' style='font-size:1.4em;' ></i>
   </a>&#8239;
-  <a href='switzerland@correlaid.org'>
+  <a href='therbootcamp@gmail.com'>
     <i class='fas fa-envelope' style='font-size: 1.4em;'></i>
   </a>&#8239;
-  <a href='https://www.linkedin.com/company/correlaidswiss/'>
+  <a href='https://www.linkedin.com/company/27090302'>
     <i class='fab fa-linkedin' style='font-size: 1.4em;'></i>
   </a>"
 date: "June 2022"
@@ -43,7 +43,7 @@ layout: true
         </font>
       </span>
     </a>
-    <a href="https://correlaid.org/correlaid-x/switzerland/">
+    <a href="https://therbootcamp.github.io/">
       <font color="#7E7E7E">
       The R Bootcamp | June 2022
       </font>
@@ -582,4 +582,28 @@ library(gridExtra)
 
 class: middle, center
 
-<h1><a href="">Practical</a></h1>
+<h1><a href="">Practical</a><br>What's wrong with this?</h1>
+
+
+---
+
+<br>
+<p align="center">
+
+<img src="image/oecd.jpeg" height="540px"><br>
+<font style="font-size:10px">adapted from <a href="https://openknowledge.worldbank.org/handle/10986/13330">World Bank</a></font>
+</p>
+
+
+---
+
+<br>
+<p align="center">
+
+<img src="image/harding.png" height="540px"><br>
+<font style="font-size:10px">from <a href="https://www.hardingcenter.de/sites/default/files/2021-05/DE_mRNA-Impfung_Begleittext.pdf">Harding Center for  Riks Literacy</a></font>
+</p>
+
+
+
+

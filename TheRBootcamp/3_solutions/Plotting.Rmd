@@ -13,10 +13,11 @@ In this practical, you will visualize the development of wealth in Basel across 
 
 # 0 - Preliminaries
 
-1. If you haven't done so already, load the `tidyverse` and the `taxation.csv` data. 
+1. If you haven't done so already, load the `tidyverse`, `patchwork`, and the `taxation.csv` data. 
 
 ```{r}
 library(tidyverse)
+library(patchwork)
 basel <- read_csv('../1_data/taxation.csv')
 ```
 
@@ -115,7 +116,7 @@ avg_wealth_long %>%
   facet_wrap(~ variable)
 ```
 
-3. Not ideal, right? The problem is that, per default, ggplot tries to use the same scales for the different facets. Set `scales = "free"` inside the `facet_wrap` function. Depending on your screen layout you may also want to set `ncol = 1` to have the facets sit on top of each other.
+3. Not ideal, right? The problem is that, per default, `ggplot` tries to use the same scales for the different facets. Set `scales = "free"` inside the `facet_wrap` function. Depending on your screen layout you may also want to set `ncol = 1` to have the facets sit on top of each other.
 
 ```{r}
 avg_wealth_long %>% 
@@ -127,7 +128,44 @@ avg_wealth_long %>%
 
 4. For Baselers everything has been going up: The mean wealth, the median walth, and the Gini. Development in the Gini seems mild, however, note that it sits almost at the maximum of the scale. The Gini can maximially be 1 and that only if one person has all of the wealth and everyone else nothing. Part of the reason for the mild development, thus, likely is that extreme changes in the distribution of wealth are necessary for the Gini rise by noticable amounts. 
 
-# 5 - Go explore
+# 5 - Multiple plots
+
+1. Ok, let's try to compose the plot of the three wealth metrics in a way that gives the Gini more attention. Specifically, use the `patchwork` package to create a plot with rows where the development of the Gini takes up the entire upper row, while the other two metrics share the lower row. To do this, first create three different plots, one for each of the three panels.
+
+```{r}
+gini_plot <- avg_wealth_long %>% 
+  filter(variable == "avg_wealth_gini") %>% 
+  ggplot(mapping = aes(x = year, 
+                       y = value)) +
+  geom_point() + geom_line() 
+
+mean_plot <- avg_wealth_long %>% 
+  filter(variable == "avg_wealth_mean") %>% 
+  ggplot(mapping = aes(x = year, 
+                       y = value)) +
+  geom_point() + geom_line() 
+
+median_plot <- avg_wealth_long %>% 
+  filter(variable == "avg_wealth_median") %>% 
+  ggplot(mapping = aes(x = year, 
+                       y = value)) +
+  geom_point() + geom_line() 
+```
+
+2. Now, use `patchwork` syntax to compose the plot.  
+
+```{r}
+gini_plot / (mean_plot + median_plot)
+```
+
+3. Finally, add `plot_annotation(tag_levels = "A")` so that the labels are lettered according to the alphabet. 
+
+```{r}
+gini_plot / (mean_plot + median_plot) + plot_annotation(tag_levels = "A")
+```
+
+
+# 6 - Go explore
 
 1. Try other kinds of plots. E.g., for the full `basel` data set, use `geom_boxplot()` or `geom_violin()` to show the distribution of `wealth_mean` across the quarters for each of the `years`.    
 

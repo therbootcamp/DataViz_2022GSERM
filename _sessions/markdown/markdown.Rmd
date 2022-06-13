@@ -1,0 +1,2329 @@
+---
+title: "markdown"
+author: "Visualizing and communicating data with R<br>
+  <a href='https://therbootcamp.github.io'>
+    <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font>
+  </a>
+  <br>
+  <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
+    <i class='fas fa-clock' style='font-size:1.4em;'></i>
+  </a>&#8239; 
+  <a href='https://therbootcamp.github.io'>
+    <i class='fas fa-home' style='font-size:1.4em;' ></i>
+  </a>&#8239;
+  <a href='therbootcamp@gmail.com'>
+    <i class='fas fa-envelope' style='font-size: 1.4em;'></i>
+  </a>&#8239;
+  <a href='https://www.linkedin.com/company/27090302'>
+    <i class='fab fa-linkedin' style='font-size: 1.4em;'></i>
+  </a>"
+date: "June 2022"
+output:
+  xaringan::moon_reader:
+    css: ["default", "baselrbootcamp.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+layout: true
+
+<div class="my-footer">
+  <span style="text-align:center">
+    <span> 
+      <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png" height=14 style="vertical-align: middle"/>
+    </span>
+    <a href="https://therbootcamp.github.io/">
+      <span style="padding-left:82px"> 
+        <font color="#7E7E7E">
+          https://therbootcamp.github.io
+        </font>
+      </span>
+    </a>
+    <a href="https://therbootcamp.github.io/">
+      <font color="#7E7E7E">
+      The R Bootcamp | June 2022
+      </font>
+    </a>
+    </span>
+  </div> 
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+options(width = 110)
+options(digits = 4)
+
+# Load packages
+require(tidyverse)
+library(leaflet)
+library(plotly)
+
+# load color set
+source("../../_materials/palette/therbootcamp_palettes.R")
+
+# knitr options
+knitr::opts_chunk$set(dpi = 300, echo = FALSE, warning = FALSE, fig.align = 'center', message= FALSE)
+
+# special print function: avoid if possible
+print2 <- function(x, nlines=10,...) {
+   cat(head(capture.output(print(x,...)), nlines), sep="\n")}
+
+basel <- read_csv("1_Data/taxation.csv")
+
+```
+
+# What is Markdown?
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Developed by John Gruber and Aaron Swartz in 2004.<br><br>
+  "<high>easy-to-read</high> and <high>easy-to-write</high> plain text format, [...] convert it to structurally valid XHTML (or HTML)"</span></li> 
+  <li class="m2"><span>Simple <high>syntax for formating</high> documents.</span></li>  
+  <ul>
+    <li><span>highlight text with bold and italic text</span></li>   
+    <li><span>lists</span></li>  
+    <li><span>headers</span></li> 
+    <li><span>hyperlinks</span></li>
+    <li><span>images</span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+<br>
+
+<p align = "center">
+  <img src="image/markdown.png" width=400px><br>
+  <font style="font-size:10px">from <a href="https://de.wikipedia.org/wiki/Markdown">wikipedia.org</a></font>
+</p>
+
+]
+
+---
+
+# What is R Markdown?
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Uses Markdown for <high>formating dynamic reports</high> that include ...</span></li><br> 
+  <ul>
+    <li><span><high>R code chunks</high></span></li>
+    <li><span><high>R inline Code</high></span></li>  
+    <li><span><high>Visualisierungen</high></span></li>
+    <li><span>Statistical outputs</span></li>
+    <li><span>Tabellen</span></li>
+    <li><span>etc.</span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align = "center">
+  <img src="image/hex.png" height=300><br>
+  <font style="font-size:10px">from <a href="https://rmarkdown.rstudio.com/docs/">rmarkdown.rstudio.com</a></font>
+</p>
+
+]
+
+---
+
+# R Markdown elements
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>RMarkdown scripts consist of several <high>elements</high>.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Element</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>YAML</mono>
+  </td>
+  <td bgcolor="white">
+  <b>Y</b>AML <b>A</b>in't <b>M</b>arkup <b>L</b>anguage<br>
+  <high>general document settings</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>Setup chunk</mono>
+  </td>
+  <td bgcolor="white">
+  control <high>chunks</high> settings<br>
+  load <high>packages</high><br>
+  load <high>data</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>Markdown</mono>
+  </td>
+  <td bgcolor="white">
+  <high>header</high><br>
+  <high>text</high> highlighting
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>Code chunk</mono>
+  </td>
+  <td bgcolor="white">
+  R <high>Code</high><br>
+  R <high>Outputs<high>
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<p align = "center">
+  <img src="image/markdown_templ.png" height=400px>
+</p>
+
+]
+
+---
+
+# Pipeline
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>RMarkdown can be translated into different <high>document types</high>.</span></li><br>
+    <ul>
+    <li><span>PDF</span></li>
+    <li><span>HTML</span></li>   
+    <li><span>Word</span></li>
+    <li><span>PowerPoint</span></li>
+  </ul><br>
+  <li class="m2"><span>To this end, <high>several translation steps</high> are necessary.</span></li><br>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align = "center">
+  <img src="image/pipeline.png">
+</p>
+
+]
+
+---
+
+# HTML Pipeline
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>HTML is a <high>universal framework</high> for documents, presentations, and dashboards</span></li>
+  <li class="m2"><span>HTML <high>export to PDF</high> is often straightforward.</span></li><br>
+</ul>
+
+]
+
+.pull-right5[
+
+<p align = "center">
+  <img src="image/pipeline2.png">
+</p>
+
+]
+
+---
+
+# HTML
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span><b>H</b>yper<b>T</b>ext <b>M</b>arkup <b>L</b>anguage.</span></li>
+  <li class="m2"><span>The format of the <high>World Wide Web</high>s.</span></li>
+  <li class="m3"><span>Affords flexible styling through <high>CSS</high> (Cascading Style Sheets).</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_templ_html.png">
+</p>
+
+]
+
+---
+
+# Rendern
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>HTML gets interpreted in RStudio (or browsers) so that a well-formated document emerges.</span></li>
+  <li class="m2"><span><high>Rstudio</high> also shows rendered documents (rather than the raw html). </span></li><br>
+</ul>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans.png">
+</p>
+
+]
+
+---
+
+# Headers
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Headers on different <high>levels</high> can be set using <mono>#</mono>.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:20px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono># text</mono>
+  </td>
+  <td bgcolor="white">
+  Ebene 1
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>## text</mono>
+  </td>
+  <td bgcolor="white">
+  Ebene 2
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>...</mono>
+  </td>
+  <td bgcolor="white">
+  ...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>##### txt</mono>
+  </td>
+  <td bgcolor="white">
+  Ebene 5
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_2.png">
+</p>
+
+]
+
+---
+
+# Headers
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Überschriften verschiedener <high>Ebenen</high> werden durch verschieden viele <mono>#</mono> ausgedrückt.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:20px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono># text</mono>
+  </td>
+  <td bgcolor="white">
+  level 1
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>## text</mono>
+  </td>
+  <td bgcolor="white">
+  level 2
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>...</mono>
+  </td>
+  <td bgcolor="white">
+  ...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>##### txt</mono>
+  </td>
+  <td bgcolor="white">
+  level 5
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_3.png">
+</p>
+
+]
+
+---
+
+# Highlighting
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Various operators enable <high>text- and code</high> highlighting.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:20px" width=100%>
+  <col width="50%">
+  <col width="50%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;<mono>text</mono>&ast;
+  </td>
+  <td bgcolor="white">
+  italic
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;&ast;<mono>text</mono>&ast;&ast;
+  </td>
+  <td bgcolor="white">
+  bold
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;&ast;&ast;<mono>text</mono>&ast;&ast;&ast;
+  </td>
+  <td bgcolor="white">
+  italic and bold 
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &grave;<mono>text</mono>&grave;
+  </td>
+  <td bgcolor="white">
+  code
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &grave;<mono>r "text"</mono>&grave;
+  </td>
+  <td bgcolor="white">
+  inline code
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_5.png">
+</p>
+
+]
+
+---
+
+# Highlighting
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Various operators enable <high>text- and code</high> highlighting.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:20px" width=100%>
+  <col width="50%">
+  <col width="50%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;<mono>text</mono>&ast;
+  </td>
+  <td bgcolor="white">
+  italic
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;&ast;<mono>text</mono>&ast;&ast;
+  </td>
+  <td bgcolor="white">
+  bold
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;&ast;&ast;<mono>text</mono>&ast;&ast;&ast;
+  </td>
+  <td bgcolor="white">
+  italic and bold 
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &grave;<mono>text</mono>&grave;
+  </td>
+  <td bgcolor="white">
+  code
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &grave;<mono>r "text"</mono>&grave;
+  </td>
+  <td bgcolor="white">
+  inline code
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_4.png">
+</p>
+
+]
+
+
+---
+
+# Highlighting
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Various operators enable <high>text- and code</high> highlighting.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:20px" width=100%>
+  <col width="50%">
+  <col width="50%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;<mono>text</mono>&ast;
+  </td>
+  <td bgcolor="white">
+  italic
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;&ast;<mono>text</mono>&ast;&ast;
+  </td>
+  <td bgcolor="white">
+  bold
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &ast;&ast;&ast;<mono>text</mono>&ast;&ast;&ast;
+  </td>
+  <td bgcolor="white">
+  italic and bold 
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &grave;<mono>text</mono>&grave;
+  </td>
+  <td bgcolor="white">
+  code
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  &grave;<mono>r "text"</mono>&grave;
+  </td>
+  <td bgcolor="white">
+  inline code
+  </td> 
+</tr>
+</table>
+
+]
+
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_6.png">
+</p>
+
+]
+
+
+---
+
+# Inline code
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span><high>Numbers or labels</high> in text can be parameterized using inline code.</span></li>
+  <li class="m2"><span>Inline code can include any type/length of code.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_7.png">
+</p>
+
+]
+
+---
+
+# Chunks
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>A <high>code <mono>chunk</mono></high> can contain any R code.</span></li>
+  <li class="m2"><span>The behavior of code chunks can be controlled using <high>chunk arguments</high>.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_8_0.png">
+</p>
+
+]
+
+---
+
+# Chunks
+
+.pull-left3[
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:60px" width=100%>
+  <col width="60%">
+  <col width="40%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>echo=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Show/hide <high>code</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>eval=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Run/not-run <high>code</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>include=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude all <high>output</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>message=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude <highm>messages</highm> im output.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>warning=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude <highm>warnings</highm> im output.
+  </td> 
+</tr>
+</table>
+
+<p align="center" style="font-size:12px;padding-top:10px"><mono>T/F = TRUE/FALSE</mono></p>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_8.png">
+</p>
+
+]
+
+
+
+---
+
+# Chunks
+
+.pull-left3[
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:60px" width=100%>
+  <col width="60%">
+  <col width="40%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>echo=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Show/hide <high>code</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>eval=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Run/not-run <high>code</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>include=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude all <high>output</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>message=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude <highm>messages</highm> im output.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>warning=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude <highm>warnings</highm> im output.
+  </td> 
+</tr>
+</table>
+
+<p align="center" style="font-size:12px;padding-top:10px"><mono>T/F = TRUE/FALSE</mono></p>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_9.png">
+</p>
+
+]
+
+
+---
+
+# Chunks
+
+.pull-left3[
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:60px" width=100%>
+  <col width="60%">
+  <col width="40%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>echo=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Show/hide <high>code</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>eval=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Run/not-run <high>code</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>include=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude all <high>output</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>message=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude <highm>messages</highm> im output.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>warning=T/F</mono>
+  </td>
+  <td bgcolor="white">
+  Include/exclude <highm>warnings</highm> im output.
+  </td> 
+</tr>
+</table>
+
+<p align="center" style="font-size:12px;padding-top:10px"><mono>T/F = TRUE/FALSE</mono></p>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_10.png">
+</p>
+
+]
+
+---
+
+# Setup chunk
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
+  <li class="m2"><span>Addition functions assist.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_11.png">
+</p>
+
+]
+
+---
+
+# Setup chunk
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
+  <li class="m2"><span>Addition functions assist.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/markdown_trans_12.png">
+</p>
+
+]
+
+
+---
+
+# Setup chunk
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
+  <li class="m2"><span>Addition functions assist.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+
+<p align = "center">
+  <img src="image/markdown_trans_13.png">
+</p>
+
+]
+
+
+---
+
+# Setup chunk
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
+  <li class="m2"><span>Addition functions assist.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+
+<p align = "center">
+  <img src="image/markdown_trans_14.png">
+</p>
+
+]
+
+
+---
+
+# Setup chunk
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
+  <li class="m2"><span>Addition functions assist.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+<p align = "center">
+  <img src="image/markdown_trans_15.png" height=420px>
+</p>
+
+]
+
+
+---
+
+# Relative path
+
+.pull-left35[
+
+<ul>
+  <li class="m1"><span>When rendered, markdown documents do not use the current <high>working directory</high>.</span></li><br>
+  <li class="m2"><span>Paths need be defined <high>relative to the position of the .Rmd file</high>.</span></li>
+</ul>
+
+<br>
+```R
+# load data
+read_csv("../1_Data/daten.csv")
+
+```
+
+]
+
+.pull-right55[
+<br>
+<p align = "center">
+  <img src="image/folder.png" height=280px>
+</p>
+
+]
+
+
+---
+
+.pull-left4[
+
+# Grafiken skalieren
+
+<ul>
+  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
+  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.width</mono>, <mono>fig.height</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Breite</high> und <high>Höhe</high> in inches.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.asp</mono>
+  </td>
+  <td bgcolor="white">
+   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.align</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>dpi</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Auflösung</high> der Abbildung (dots per inch).
+  </td> 
+</tr>
+</table>
+]
+
+.pull-right5[
+<br>
+<p align = "center">
+  <img src="image/plot_1.png" height=520px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Grafiken skalieren
+
+<ul>
+  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
+  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.width</mono>, <mono>fig.height</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Breite</high> und <high>Höhe</high> in inches.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.asp</mono>
+  </td>
+  <td bgcolor="white">
+   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.align</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>dpi</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Auflösung</high> der Abbildung (dots per inch).
+  </td> 
+</tr>
+</table>
+]
+
+.pull-right5[
+<br>
+<p align = "center">
+  <img src="image/plot_2.png" height=520px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Grafiken skalieren
+
+<ul>
+  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
+  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.width</mono>, <mono>fig.height</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Breite</high> und <high>Höhe</high> in inches.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.asp</mono>
+  </td>
+  <td bgcolor="white">
+   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.align</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>dpi</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Auflösung</high> der Abbildung (dots per inch).
+  </td> 
+</tr>
+</table>
+]
+
+.pull-right5[
+<br>
+<p align = "center">
+  <img src="image/plot_3.png" height=520px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Grafiken skalieren
+
+<ul>
+  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
+  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.width</mono>, <mono>fig.height</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Breite</high> und <high>Höhe</high> in inches.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.asp</mono>
+  </td>
+  <td bgcolor="white">
+   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.align</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>dpi</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Auflösung</high> der Abbildung (dots per inch).
+  </td> 
+</tr>
+</table>
+]
+
+.pull-right5[
+<br>
+<p align = "center">
+  <img src="image/plot_4.png" height=520px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Grafiken skalieren
+
+<ul>
+  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
+  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.width</mono>, <mono>fig.height</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Breite</high> und <high>Höhe</high> in inches.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.asp</mono>
+  </td>
+  <td bgcolor="white">
+   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>fig.align</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>dpi</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Auflösung</high> der Abbildung (dots per inch).
+  </td> 
+</tr>
+</table>
+]
+
+.pull-right5[
+<br>
+<p align = "center">
+  <img src="image/plot_5.png" height=520px>
+</p>
+
+]
+
+
+---
+
+.pull-left4[
+
+# Bildunterschrift
+
+<ul>
+  <li class="m1"><span>Bildunterschriften können durch <highm>fig.cap</highm> gesetzt.</span></li> 
+  <li class="m2"><span>Der Text kann <high>innerhalb des Chunks</high> definiert werden.</span></li> 
+</ul>
+
+
+]
+
+.pull-right5[
+<br>
+<p align = "center">
+  <img src="image/plot_7.png" height=520px>
+</p>
+
+]
+
+
+---
+
+.pull-left4[
+
+# Links, Fussnoten
+
+<ul>
+  <li class="m1"><span>Zum Einbinden von Links und Fussnoten gibt es ebenfalls spezielle  <high>Markdown Syntax</high>.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lsqb;Name&rsqb;(URL)</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Link</high>. Name erscheint im Text, URL nicht.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>^&lsqb;Text&rsqb;</mono>
+  </td>
+  <td bgcolor="white">
+   <high>Fussnoten</high> werden unten am Text angehängt.    
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>***</mono>
+  </td>
+  <td bgcolor="white">
+   Fügt eine <high>horizontale</high> Trennlinie ein.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+<br><br>
+<p align = "center">
+  <img src="image/links.png">
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Quotes
+
+<ul>
+  <li class="m1"><span><high>Zitationen</high> (Quotes) werden direkt in Markdown erstellt.</span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Markdown</b>
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>> block quote</mono>
+  </td>
+  <td bgcolor="white">
+  Text wird als <high>Zitat</high> angezeigt.<high></high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono></mono> 
+  </td>
+  <td bgcolor="white">
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono></mono>
+  </td>
+  <td bgcolor="white">
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+<br><br>
+<p align = "center">
+  <img src="image/quote.png">
+</p>
+
+
+]
+
+
+---
+
+.pull-left4[
+
+# YAML
+
+<ul>
+  <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
+  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc</mono> 
+  </td>
+  <td bgcolor="white">
+  <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc_depth</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>theme</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Eigenschaften</high> des Textbilds.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>includes</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<br>
+<p align = "center">
+  <img src="image/yaml_1.png" height=540px>
+</p>
+
+]
+
+
+---
+
+.pull-left4[
+
+# YAML
+
+<ul>
+  <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
+  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc</mono> 
+  </td>
+  <td bgcolor="white">
+  <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc_depth</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>theme</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Eigenschaften</high> des Textbilds.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>includes</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<br>
+<p align = "center">
+  <img src="image/yaml_2.png" height=540px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# YAML
+
+<ul>
+  <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
+  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc</mono> 
+  </td>
+  <td bgcolor="white">
+  <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc_depth</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>theme</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Eigenschaften</high> des Textbilds.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>includes</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<br>
+<p align = "center">
+  <img src="image/yaml_3.png" height=540px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# YAML
+
+<ul>
+  <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
+  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc</mono> 
+  </td>
+  <td bgcolor="white">
+  <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc_depth</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>theme</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Eigenschaften</high> des Textbilds.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>includes</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<br>
+<p align = "center">
+  <img src="image/yaml_4.png" height=540px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# YAML
+
+<ul>
+  <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
+  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc</mono> 
+  </td>
+  <td bgcolor="white">
+  <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc_depth</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>theme</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Eigenschaften</high> des Textbilds.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>includes</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<br>
+<p align = "center">
+  <img src="image/yaml_5.png" height=540px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# YAML
+
+<ul>
+  <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
+  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+</ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Argument</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc</mono> 
+  </td>
+  <td bgcolor="white">
+  <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>toc_depth</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>theme</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Eigenschaften</high> des Textbilds.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>includes</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right5[
+
+<br>
+<p align = "center">
+  <img src="image/yaml_6.png" height=540px>
+</p>
+
+]
+
+---
+
+.pull-left3[
+
+# HTML
+
+
+<ul>
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  </ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Tag</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
+  <td bgcolor="white">
+  <high>Überschrift</high> Level 1, 2,...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;br&gt;</mono>
+  </td>
+  <td bgcolor="white">
+   Neue <high>Zeile</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Fett, Kursiv, Unterstrichen.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;div&gt;, &lt;p&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Abschnitt, Textabschnitt.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;table&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tabelle, Spalten.</high>
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br>
+<p align = "center">
+  <img src="image/html_1.png" height=540px>
+</p>
+
+]
+
+---
+
+.pull-left3[
+
+# HTML
+
+
+<ul>
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  </ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Tag</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
+  <td bgcolor="white">
+  <high>Überschrift</high> Level 1, 2,...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;br&gt;</mono>
+  </td>
+  <td bgcolor="white">
+   Neue <high>Zeile</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Fett, Kursiv, Unterstrichen.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;div&gt;, &lt;p&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Abschnitt, Textabschnitt.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;table&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tabelle, Spalten.</high>
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br><br><br>
+<p align = "center">
+  <img src="image/html_2.png" height=440px>
+</p>
+
+]
+
+
+---
+
+.pull-left3[
+
+# HTML
+
+
+<ul>
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  </ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Tag</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
+  <td bgcolor="white">
+  <high>Überschrift</high> Level 1, 2,...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;br&gt;</mono>
+  </td>
+  <td bgcolor="white">
+   Neue <high>Zeile</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Fett, Kursiv, Unterstrichen.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;div&gt;, &lt;p&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Abschnitt, Textabschnitt.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;table&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tabelle, Spalten.</high>
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br><br>
+<p align = "center">
+  <img src="image/html_3.png" height=480px>
+</p>
+
+]
+
+
+---
+
+.pull-left3[
+
+# HTML
+
+
+<ul>
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  </ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Tag</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
+  <td bgcolor="white">
+  <high>Überschrift</high> Level 1, 2,...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;br&gt;</mono>
+  </td>
+  <td bgcolor="white">
+   Neue <high>Zeile</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Fett, Kursiv, Unterstrichen.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;div&gt;, &lt;p&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Abschnitt, Textabschnitt.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;table&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tabelle, Spalten.</high>
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br><br>
+<p align = "center">
+  <img src="image/html_4.png" height=480px>
+</p>
+
+]
+
+---
+
+.pull-left3[
+
+# HTML
+
+
+<ul>
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  </ul>
+
+<table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
+  <col width="40%">
+  <col width="60%">
+<tr>
+  <td bgcolor="white">
+    <b>Tag</b>   
+  </td>
+  <td bgcolor="white">
+    <b>Description</b>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
+  <td bgcolor="white">
+  <high>Überschrift</high> Level 1, 2,...
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;br&gt;</mono>
+  </td>
+  <td bgcolor="white">
+   Neue <high>Zeile</high>.
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
+  </td>
+  <td bgcolor="white">
+  <high>Fett, Kursiv, Unterstrichen.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;div&gt;, &lt;p&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Abschnitt, Textabschnitt.</high>
+  </td> 
+</tr>
+<tr>
+  <td bgcolor="white">
+  <mono>&lt;table&gt;</mono> 
+  </td>
+  <td bgcolor="white">
+  <high>Tabelle, Spalten.</high>
+  </td> 
+</tr>
+</table>
+
+]
+
+.pull-right6[
+
+<br><br>
+<p align = "center">
+  <img src="image/html_5.png" height=480px>
+</p>
+
+]
+
+---
+
+.pull-left3[
+
+# CSS
+
+<ul>
+  <li class="m1"><span>Mit <b>C</b>ascading <b>S</b>tyle <b>S</b>sheets können alle <high>ästhetischen Charakteristika</high> von <high>HTML</high> Dokumenten über eine externe Datei bestimmt werden.</span></li>
+  <li class="m2"><span>CSS erlaubt komplexe <high>Vererbungen des Stils</high> zwischen HTML Tags.</span></li> 
+</ul>
+
+]
+
+.pull-right6[
+
+<br><br>
+<p align = "center">
+  <img src="image/css_1.png" height=480px>
+</p>
+
+]
+
+---
+
+class: middle, center
+
+<h1><a href="">Practical</a></h1>
+
