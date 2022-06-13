@@ -106,7 +106,7 @@ avg_wealth_long <- avg_wealth %>%
                values_to = "value")
 ```
 
-2. Use `avg_wealth_long` and `facet_wrap()` to create a plot that illustrates the development for all three variables with points and lines. To do this, `value` must go on the y-axis and `variable` must be used as the facetting variable. 
+2. Use `avg_wealth_long` and `facet_wrap()` to create a plot that illustrates the development for all three variables with points and lines. To do this, `value` must go on the y-axis and `variable` must be used as the faceting variable. 
 
 ```{r}
 avg_wealth_long %>% 
@@ -126,7 +126,7 @@ avg_wealth_long %>%
   facet_wrap(~ variable, scales = "free", ncol = 1)
 ```
 
-4. For Baselers everything has been going up: The mean wealth, the median walth, and the Gini. Development in the Gini seems mild, however, note that it sits almost at the maximum of the scale. The Gini can maximially be 1 and that only if one person has all of the wealth and everyone else nothing. Part of the reason for the mild development, thus, likely is that extreme changes in the distribution of wealth are necessary for the Gini rise by noticable amounts. 
+4. For Baselers everything has been going up: The mean wealth, the median wealth, and the Gini. Development in the Gini seems mild, however, note that it sits almost at the maximum of the scale. The Gini can maximally be 1 and that only if one person has all of the wealth and everyone else nothing. Part of the reason for the mild development, thus, likely is that extreme changes in the distribution of wealth are necessary for the Gini rise by noticeable amounts. 
 
 # 5 - Multiple plots
 
