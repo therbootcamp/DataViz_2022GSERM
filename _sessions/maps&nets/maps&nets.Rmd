@@ -479,27 +479,23 @@ quarters_map %>%
 
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
 # join basel tax data
-quarters_map <- read_sf('TheRBootcamp/1_Data/quarters') %>% 
+quarters_map <- read_sf('1_Data/quarters') %>% 
   left_join(filter(basel, year == 2017), 
             by = c("TYPE" = "quarter")) %>% 
   
-  # add centroids
-  mutate(centroid_lon = sapply(st_centroid(geometry), function(x) x[1]),
-         centroid_lat = sapply(st_centroid(geometry), function(x) x[2])
+  # determine centroids
+  mutate(centr = st_centroid(geometry),
+         lon = sapply(centr, function(x) x[1]),
+         lat = sapply(centr, function(x) x[2])) %>% 
 
-# plot quarters
-quarters_map %>% 
-  ggplot() +
-  geom_sf(aes(fill = income_mean),
-              col = "white") + 
-  theme_void() + 
-  scale_fill_continuous(name = 'Income') +
-  labs(...) +
-  
+  # plot quarters
+  ggplot(...) +
+    
   # add labels
-  geom_label_repel(aes(x = centroid_lon, 
-                       y = centroid_lat, 
-                       label = TYPE))
+  geom_label_repel(aes(x = lon, 
+                       y = lat, 
+                       label = TYPE), 
+                   size = 2.5)
 ```
 
 ]
@@ -509,7 +505,14 @@ quarters_map %>%
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
 require(ggrepel)
 
-quarters_map %>% 
+read_sf('1_Data/quarters') %>% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter")) %>% 
+  
+  # determine centroids
+  mutate(centr = st_centroid(geometry),
+         lon = sapply(centr, `[`, 1),
+         lat = sapply(centr, `[`, 2)) %>% 
   ggplot() +
   geom_sf(aes(fill = income_mean),
           col = "black") + 
@@ -518,7 +521,7 @@ quarters_map %>%
   labs(title = "Inequality in Basel",
        subtitle = "Average income in Basel's quarters in 2017",
        caption = "Source: Open Data Basel Stadt") +
-  geom_label_repel(aes(x = centroid_lon, y = centroid_lat, label = TYPE))
+  geom_label_repel(aes(x = lon, y = lat, label = TYPE), size=2.5)
 ```
 
 ]
@@ -536,22 +539,22 @@ quarters_map %>%
 
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
 # join basel tax data
-quarters_map <- quarters_map %>% 
-  left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter"))
-
-# plot quarters
 quarters_map %>% 
-  ggplot() +
-  geom_sf(aes(fill = income_mean),
-              col = "white") + 
-  theme_void() + 
-  scale_fill_continuous(name = 'Income') +
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter")) %>% 
   
-  # add annotion
-  labs(title = "Inequality in Basel",
-     subtitle = "Average income in Basel...",
-     caption = "ource: Open Data Basel...")
+  # determine centroids
+  mutate(centr = st_centroid(geometry),
+         lon = sapply(centr, function(x) x[1]),
+         lat = sapply(centr, function(x) x[2])) %>% 
+
+  # plot quarters
+  ggplot(...) +
+    
+  # add images
+  geom_image(aes(x = lon, y = lat, 
+                 image = image), 
+             size=.05)
 ```
 
 ]
@@ -559,19 +562,38 @@ quarters_map %>%
 .pull-right45[
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
+require(ggimage)
 quarters_map <- read_sf('1_Data/quarters') %>% 
   left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter"))
+            by = c("TYPE" = "quarter")) %>% 
+  mutate(centroid_lon = sapply(st_centroid(geometry), function(x) x[1]),
+         centroid_lat = sapply(st_centroid(geometry), function(x) x[2]),
+         image = case_when(
+           income_mean >= 40000 & income_mean < 60000 ~ "1_Data/coins/40k.png",
+           income_mean >= 60000 & income_mean < 80000 ~ "1_Data/coins/60k.png",
+           income_mean >= 80000 & income_mean < 100000 ~ "1_Data/coins/80k.png",
+           income_mean >= 100000 & income_mean < 120000 ~ "1_Data/coins/100k.png",
+           income_mean > 120000 ~ "1_Data/coins/120k.png",
+         ),
+         centroid_lat_offset = case_when(
+           income_mean < 50000 ~ centroid_lat + 140,
+           income_mean >= 50000 & income_mean < 65000 ~ centroid_lat + 160,
+           income_mean >= 65000 & income_mean < 80000 ~ centroid_lat + 180,
+           income_mean >= 80000 & income_mean < 100000 ~ centroid_lat + 200,
+           income_mean > 100000 ~ centroid_lat + 220,
+         ))
 
 quarters_map %>% 
   ggplot() +
   geom_sf(aes(fill = income_mean),
-              col = "white") + 
+          col = "black") + 
   theme_void() + 
   scale_fill_continuous(name = 'Income') +
   labs(title = "Inequality in Basel",
-     subtitle = "Average income in Basel's quarters in 2017",
-     caption = "Source: Open Data Basel Stadt")
+       subtitle = "Average income in Basel's quarters in 2017",
+       caption = "Source: Open Data Basel Stadt") +
+  geom_image(aes(x=centroid_lon, y = centroid_lat_offset, image = image), 
+             size=.05)
 ```
 
 ]
@@ -580,7 +602,7 @@ quarters_map %>%
 
 .pull-left3[
 
-# Networks with <mono>tidygraph</mono>/<mono>ggraph</mono>
+# Networks with <mono>tidygraph</mono> & <mono>ggraph</mono>
 
 <ul>
   <li class="m1"><span>Maps require geometric shapes stored in <high>shapefiles</high>.</span></li><br>
@@ -592,19 +614,152 @@ quarters_map %>%
 
 .pull-right6[
 
-<br><br>
 
-```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
-basel_map %>% 
-  left_join(basel %>% filter(year == 2017), by = c("TYPE" = "quarter")) %>% 
-  ggplot() + 
-  geom_sf(mapping=aes(fill = income_mean), col = 'white') + 
- theme_void() + 
-  labs(title = "Inequality in Basel",
-       subtitle = "Average income in Basel's quarters in 2017",
-       caption = "Source: Open Data Basel Stadt") + 
-  scale_fill_continuous(name = 'Income') 
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+library(ggraph)
+library(tidygraph)
+library(ggrepel)
+library(viridis)
+
+
+edges = basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  filter(weight<1, weight > .5)
+
+
+graph = as_tbl_graph(edges, directed = FALSE)
+
+graph %>% 
+  mutate(community = as.factor(group_louvain(weights = weight))) %>%
+  ggraph() + 
+  geom_edge_hive(aes(width=weight), show.legend = FALSE) + 
+  geom_node_point() + 
+  geom_node_label(aes(label = name, col = community), 
+                  show.legend = FALSE, size=3) +
+  theme_graph() + 
+  scale_color_manual(values=viridis::viridis(3)[1:2]) + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off") + 
+  labs(title="Network of income development",
+       subtitle="showing correlations between yearly income changes")
+
 ```
+
+]
+
+---
+
+# Edge list
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>Networks require particular data structures, such as an <high>edge list</high> or an adjacency matrix.</span></li><br>
+</ul>
+
+```{r, fig.width = 5, fig.height = 4, dpi=250}
+# determine correlations
+basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  
+  # limit to strong edges
+  filter(weight < 1, weight > .5)
+```
+
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  
+  # limit to strong edges
+  filter(weight < 1, weight > .5)
+```
+
+]
+
+---
+
+# tidygraph
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>Networks require particular data structures, such as an <high>edge list</high> or an adjacency matrix.</span></li><br>
+</ul>
+
+```{r, eval = FALSe, fig.width = 5, fig.height = 4, dpi=250}
+# determine correlations
+basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  filter(weight < 1, weight > .5) %>% 
+  
+  # format to graph
+  as_tbl_graph(edges, directed = FALSE)
+
+```
+
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+require(tidygraph)
+basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  filter(weight < 1, weight > .5) %>% 
+  
+  # format to graph
+  as_tbl_graph(edges, directed = FALSE)
+````
 
 ]
 

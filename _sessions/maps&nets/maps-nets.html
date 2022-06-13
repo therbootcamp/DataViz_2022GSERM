@@ -408,22 +408,23 @@ quarters_map %&gt;%
 
 ```r
 # join basel tax data
-quarters_map &lt;- quarters_map %&gt;% 
+quarters_map &lt;- read_sf('1_Data/quarters') %&gt;% 
   left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter"))
-
-# plot quarters
-quarters_map %&gt;% 
-  ggplot() +
-  geom_sf(aes(fill = income_mean),
-              col = "white") + 
-  theme_void() + 
-  scale_fill_continuous(name = 'Income') +
+            by = c("TYPE" = "quarter")) %&gt;% 
   
-  # add annotion
-  labs(title = "Inequality in Basel",
-     subtitle = "Average income in Basel...",
-     caption = "ource: Open Data Basel...")
+  # determine centroids
+  mutate(centr = st_centroid(geometry),
+         lon = sapply(centr, function(x) x[1]),
+         lat = sapply(centr, function(x) x[2])) %&gt;% 
+
+  # plot quarters
+  ggplot(...) +
+    
+  # add labels
+  geom_label_repel(aes(x = lon, 
+                       y = lat, 
+                       label = TYPE), 
+                   size = 2.5)
 ```
 
 ]
@@ -448,22 +449,22 @@ quarters_map %&gt;%
 
 ```r
 # join basel tax data
-quarters_map &lt;- quarters_map %&gt;% 
-  left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter"))
-
-# plot quarters
 quarters_map %&gt;% 
-  ggplot() +
-  geom_sf(aes(fill = income_mean),
-              col = "white") + 
-  theme_void() + 
-  scale_fill_continuous(name = 'Income') +
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter")) %&gt;% 
   
-  # add annotion
-  labs(title = "Inequality in Basel",
-     subtitle = "Average income in Basel...",
-     caption = "ource: Open Data Basel...")
+  # determine centroids
+  mutate(centr = st_centroid(geometry),
+         lon = sapply(centr, function(x) x[1]),
+         lat = sapply(centr, function(x) x[2])) %&gt;% 
+
+  # plot quarters
+  ggplot(...) +
+    
+  # add images
+  geom_image(aes(x = lon, y = lat, 
+                 image = image), 
+             size=.05)
 ```
 
 ]
@@ -478,7 +479,7 @@ quarters_map %&gt;%
 
 .pull-left3[
 
-# Networks with &lt;mono&gt;tidygraph&lt;/mono&gt;/&lt;mono&gt;ggraph&lt;/mono&gt;
+# Networks with &lt;mono&gt;tidygraph&lt;/mono&gt; &amp; &lt;mono&gt;ggraph&lt;/mono&gt;
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Maps require geometric shapes stored in &lt;high&gt;shapefiles&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
@@ -490,9 +491,167 @@ quarters_map %&gt;%
 
 .pull-right6[
 
-&lt;br&gt;&lt;br&gt;
 
 &lt;img src="maps-nets_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Edge list
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Networks require particular data structures, such as an &lt;high&gt;edge list&lt;/high&gt; or an adjacency matrix.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# determine correlations
+basel %&gt;% 
+  select(year, quarter, income_median) %&gt;% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %&gt;% 
+  select(-1) %&gt;% 
+  cor() %&gt;% 
+  as.table() %&gt;% 
+  as_tibble(.name_repair = "unique") %&gt;% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %&gt;% 
+  
+  # limit to strong edges
+  filter(weight &lt; 1, weight &gt; .5)
+```
+
+```
+# A tibble: 184 × 3
+   from                to                  weight
+   &lt;chr&gt;               &lt;chr&gt;                &lt;dbl&gt;
+ 1 Am Ring             Altstadt Grossbasel  0.523
+ 2 Bachletten          Altstadt Grossbasel  0.558
+ 3 Am Ring             Vorstädte            0.881
+ 4 St. Alban           Vorstädte            0.806
+ 5 Gundeldingen        Vorstädte            0.721
+ 6 Bruderholz          Vorstädte            0.605
+ 7 Bachletten          Vorstädte            0.770
+ 8 Gotthelf            Vorstädte            0.872
+ 9 Altstadt Kleinbasel Vorstädte            0.560
+10 Wettstein           Vorstädte            0.917
+# … with 174 more rows
+```
+
+
+]
+
+.pull-right45[
+
+
+```
+# A tibble: 184 × 3
+   from                to                  weight
+   &lt;chr&gt;               &lt;chr&gt;                &lt;dbl&gt;
+ 1 Am Ring             Altstadt Grossbasel  0.523
+ 2 Bachletten          Altstadt Grossbasel  0.558
+ 3 Am Ring             Vorstädte            0.881
+ 4 St. Alban           Vorstädte            0.806
+ 5 Gundeldingen        Vorstädte            0.721
+ 6 Bruderholz          Vorstädte            0.605
+ 7 Bachletten          Vorstädte            0.770
+ 8 Gotthelf            Vorstädte            0.872
+ 9 Altstadt Kleinbasel Vorstädte            0.560
+10 Wettstein           Vorstädte            0.917
+# … with 174 more rows
+```
+
+]
+
+---
+
+# tidygraph
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Networks require particular data structures, such as an &lt;high&gt;edge list&lt;/high&gt; or an adjacency matrix.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# determine correlations
+basel %&gt;% 
+  select(year, quarter, income_median) %&gt;% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %&gt;% 
+  select(-1) %&gt;% 
+  cor() %&gt;% 
+  as.table() %&gt;% 
+  as_tibble(.name_repair = "unique") %&gt;% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %&gt;% 
+  filter(weight &lt; 1, weight &gt; .5) %&gt;% 
+  
+  # format to graph
+  as_tbl_graph(edges, directed = FALSE)
+```
+
+```
+# A tbl_graph: 21 nodes and 184 edges
+#
+# An undirected multigraph with 1 component
+#
+# Node Data: 21 × 1 (active)
+  name        
+  &lt;chr&gt;       
+1 Am Ring     
+2 Bachletten  
+3 St. Alban   
+4 Gundeldingen
+5 Bruderholz  
+6 Gotthelf    
+# … with 15 more rows
+#
+# Edge Data: 184 × 3
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1    13  0.523
+2     2    13  0.558
+3     1    14  0.881
+# … with 181 more rows
+```
+
+
+]
+
+.pull-right45[
+
+
+```
+# A tbl_graph: 21 nodes and 184 edges
+#
+# An undirected multigraph with 1 component
+#
+# Node Data: 21 × 1 (active)
+  name        
+  &lt;chr&gt;       
+1 Am Ring     
+2 Bachletten  
+3 St. Alban   
+4 Gundeldingen
+5 Bruderholz  
+6 Gotthelf    
+# … with 15 more rows
+#
+# Edge Data: 184 × 3
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1    13  0.523
+2     2    13  0.558
+3     1    14  0.881
+# … with 181 more rows
+```
 
 ]
 
