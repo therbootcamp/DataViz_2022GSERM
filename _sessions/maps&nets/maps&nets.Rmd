@@ -469,6 +469,143 @@ quarters_map %>%
 
 ---
 
+# <mono>geom_label()</mono>
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>Styling can be adjusted just like in any other <mono>ggplot<mono>.</span></li>
+</ul>
+
+```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
+# join basel tax data
+quarters_map <- quarters_map %>% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter"))
+
+# plot quarters
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+              col = "white") + 
+  theme_void() + 
+  scale_fill_continuous(name = 'Income') +
+  
+  # add annotion
+  labs(title = "Inequality in Basel",
+     subtitle = "Average income in Basel...",
+     caption = "ource: Open Data Basel...")
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
+quarters_map <- read_sf('1_Data/quarters') %>% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter"))
+
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+              col = "white") + 
+  theme_void() + 
+  scale_fill_continuous(name = 'Income') +
+  labs(title = "Inequality in Basel",
+     subtitle = "Average income in Basel's quarters in 2017",
+     caption = "Source: Open Data Basel Stadt")
+```
+
+]
+
+
+---
+
+# <mono>geom_image()</mono>
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>Styling can be adjusted just like in any other <mono>ggplot<mono>.</span></li>
+</ul>
+
+```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
+# join basel tax data
+quarters_map <- quarters_map %>% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter"))
+
+# plot quarters
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+              col = "white") + 
+  theme_void() + 
+  scale_fill_continuous(name = 'Income') +
+  
+  # add annotion
+  labs(title = "Inequality in Basel",
+     subtitle = "Average income in Basel...",
+     caption = "ource: Open Data Basel...")
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
+quarters_map <- read_sf('1_Data/quarters') %>% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter"))
+
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+              col = "white") + 
+  theme_void() + 
+  scale_fill_continuous(name = 'Income') +
+  labs(title = "Inequality in Basel",
+     subtitle = "Average income in Basel's quarters in 2017",
+     caption = "Source: Open Data Basel Stadt")
+```
+
+]
+
+---
+
+.pull-left3[
+
+# Networks with <mono>tidygraph</mono>/<mono>ggraph</mono>
+
+<ul>
+  <li class="m1"><span>Maps require geometric shapes stored in <high>shapefiles</high>.</span></li><br>
+  <li class="m2"><span>The <high>simple features</high> (<mono>sf</mono>) framework makes processing and visualizing maps with the <mono>tidyverse<mono> easy.</span></li>
+</ul>
+
+]
+
+
+.pull-right6[
+
+<br><br>
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
+basel_map %>% 
+  left_join(basel %>% filter(year == 2017), by = c("TYPE" = "quarter")) %>% 
+  ggplot() + 
+  geom_sf(mapping=aes(fill = income_mean), col = 'white') + 
+ theme_void() + 
+  labs(title = "Inequality in Basel",
+       subtitle = "Average income in Basel's quarters in 2017",
+       caption = "Source: Open Data Basel Stadt") + 
+  scale_fill_continuous(name = 'Income') 
+```
+
+]
+
+---
+
 class: middle, center
 
 <h1><a href="">Schedule</a></h1>
