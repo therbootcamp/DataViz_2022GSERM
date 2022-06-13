@@ -717,9 +717,9 @@ basel %>%
   <li class="m1"><span>Networks require particular data structures, such as an <high>edge list</high> or an adjacency matrix.</span></li><br>
 </ul>
 
-```{r, eval = FALSe, fig.width = 5, fig.height = 4, dpi=250}
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # determine correlations
-basel %>% 
+graph = basel %>% 
   select(year, quarter, income_median) %>% 
   pivot_wider(names_from = quarter, 
               values_from = income_median) %>% 
