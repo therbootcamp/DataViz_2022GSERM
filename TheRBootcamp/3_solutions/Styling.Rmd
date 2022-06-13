@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Styling exercises"
 output:
 editor_options:
   chunk_output_type: console
@@ -142,15 +142,94 @@ basel %>%
 
 # 7 - Aggregation
 
-1. Let's whether the richer quarters saw a larger increase in wealth than the poorer quarters. To this end, first use some `dplyr` to create a new grouping variable that codes whether a quarter belongs to the richer or poorer quarters in 2001. 
+1. Let's see whether the richer quarters saw a larger increase in wealth than the poorer quarters. To this end, use the `dplyr` code below to create a new grouping variable that codes whether a quarter belongs to the richer or poorer quarters in 2001. 
 
 ```{r}
-basel %>% 
+basel <- basel %>% 
   arrange(year, wealth_median) %>% 
-  group_by(wealth_2001 = first(wealth_median)) %>% 
+  group_by(quarter) %>%
+  mutate(wealth_2001 = first(wealth_median)) %>% 
+  ungroup() %>% 
+  mutate(rich = wealth_2001 > median(wealth_2001))
   
+```
 
+2. Next, use some more `dplyr` to calculate mean and standard deviations of medians as a function of the newly-created variable `rich` and `year`. 
+
+```{r}
+averages <- basel %>% 
+  group_by(rich, year) %>%
+  summarize(wealth_median_mean = mean(wealth_median),
+            wealth_median_sd = sd(wealth_median))
   
+```
+
+3. OK, now, use the code from above to create a plot showing lines and points for the average wealth median of rich and poor quarters.    
+
+```{r}
+averages %>% 
+  ggplot(aes(x = year,
+             y = wealth_median_mean,
+             col = rich)) + 
+  geom_line() +
+  geom_line() +
+  theme_minimal() + 
+  theme(legend.position = "bottom",
+     legend.title = element_blank(),
+     legend.text = element_text(size = 7)) +
+  labs(x = "Year",
+       y = "Median wealth",
+       title = "Inequality in Basel",
+       subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
+       captin = "Source: Open Data Basel-Stadt") + 
+  scale_color_viridis_d()
+```
+
+4. It seems the rich quarters have indeed grown faster in wealth than poor quarters. Add some error bars `geom_errorbar` reflecting confidence intervals. To this end divide the standard deviation by `sqrt(10)` and then multiply by `qt(.975, 10)`.  
+
+```{r}
+averages %>% 
+  ggplot(aes(x = year,
+             y = wealth_median_mean,
+             col = rich)) + 
+  geom_line() +
+  geom_point() +
+  geom_errorbar(aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 10),
+                    ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 10))) + 
+  theme_minimal() + 
+  theme(legend.position = "bottom",
+     legend.title = element_blank(),
+     legend.text = element_text(size = 7)) +
+  labs(x = "Year",
+       y = "Median wealth",
+       title = "Inequality in Basel",
+       subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
+       captin = "Source: Open Data Basel-Stadt") + 
+  scale_color_viridis_d()
+```
+
+5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependend variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you have control the color using `scale_fill_*`.    
+
+```{r}
+averages %>% 
+  ggplot(aes(x = year,
+             y = wealth_median_mean,
+             col = rich)) + 
+  geom_ribbon(aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 10),
+                    ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 10)),
+              alpha = .5) + 
+  geom_line() +
+  geom_point() +
+  theme_minimal() + 
+  theme(legend.position = "bottom",
+     legend.title = element_blank(),
+     legend.text = element_text(size = 7)) +
+  labs(x = "Year",
+       y = "Median wealth",
+       title = "Inequality in Basel",
+       subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
+       captin = "Source: Open Data Basel-Stadt") + 
+  scale_color_viridis_d() + scale_fill_viridis_d()
 ```
 
 

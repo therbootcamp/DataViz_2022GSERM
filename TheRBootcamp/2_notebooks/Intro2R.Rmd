@@ -1,5 +1,5 @@
 ---
-title: "Wrangling"
+title: "Intro 2 R exercises"
 output:
 editor_options:
   chunk_output_type: console

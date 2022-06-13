@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Styling solutions"
 output:
 editor_options:
   chunk_output_type: console
@@ -134,6 +134,95 @@ basel %>%
      XX = "XX",
      XX = "XX") + 
   XX
+```
+
+# 7 - Aggregation
+
+1. Let's see whether the richer quarters saw a larger increase in wealth than the poorer quarters. To this end, use the `dplyr` code below to create a new grouping variable that codes whether a quarter belongs to the richer or poorer quarters in 2001. 
+
+```{r}
+basel <- basel %>% 
+  arrange(year, wealth_median) %>% 
+  group_by(quarter) %>%
+  mutate(wealth_2001 = first(wealth_median)) %>% 
+  ungroup() %>% 
+  mutate(rich = wealth_2001 > median(wealth_2001))
+  
+```
+
+2. Next, use some more `dplyr` to calculate mean and standard deviations of medians as a function of the newly-created variable `rich` and `year`. 
+
+```{r}
+averages <- basel %>% 
+  group_by(XX, XX) %>%
+  summarize(wealth_median_mean = mean(XX),
+            wealth_median_sd = sd(XX))
+  
+```
+
+3. OK, now, use the code from above to create a plot showing lines and points for the average wealth median of rich and poor quarters.    
+
+```{r}
+averages %>% 
+  ggplot(aes(x = XX,
+             y = XX,
+             col = XX)) + 
+  XX +
+  XX + 
+  XX(XX = XX,
+     XX = XX,
+     XX = XX) +
+  XX(XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX") + 
+  XX
+```
+
+4. It seems the rich quarters have indeed grown faster in wealth than poor quarters. Add some error bars `geom_errorbar` reflecting confidence intervals. To this end divide the standard deviation by `sqrt(10)` and then multiply by `qt(.975, 10)`.  
+
+```{r}
+averages %>% 
+  ggplot(aes(x = XX,
+             y = XX,
+             col = XX)) + 
+  XX +
+  XX + 
+  geom_errorbar(mapping = aes(ymin = XX - XX/XX*XX,
+                              ymax = XX - XX/XX*XX)) +
+  XX(XX = XX,
+     XX = XX,
+     XX = XX) +
+  XX(XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX") + 
+  XX
+```
+
+5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependend variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you have control the color using `scale_fill_*`.    
+
+```{r}
+averages %>% 
+  ggplot(aes(x = XX,
+             y = XX,
+             col = XX)) + 
+  geom_ribbon(mapping = aes(ymin = XX - XX/XX*XX,
+                            ymax = XX - XX/XX*XX),
+              alpha = .5) +
+  XX +
+  XX + 
+  XX(XX = XX,
+     XX = XX,
+     XX = XX) +
+  XX(XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX") + 
+  XX + scale_fill_viridis_d()
 ```
 
 
