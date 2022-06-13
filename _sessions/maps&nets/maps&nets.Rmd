@@ -572,7 +572,7 @@ quarters_map %>%
 
 ]
 
-
+---
 
 .pull-left3[
 
