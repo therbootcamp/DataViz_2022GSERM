@@ -762,7 +762,7 @@ basel %>%
            low = inc_2001 < median(inc_2001)) %>% 
   summarize(income = mean(income_median)) %>% 
   
-  # original code
+  # plot code
   ggplot(aes(x = year, y = income, 
              col = low)) +
   geom_line() + geom_point() +
@@ -791,7 +791,7 @@ basel %>%
            low = inc_2001 < median(inc_2001)) %>% 
   summarize(income = mean(income_median)) %>% 
   
-  # original code
+  # plot code
   ggplot(aes(x = year, y = income, 
              col = low)) +
   geom_line() + geom_point() +
@@ -822,15 +822,16 @@ basel %>%
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
-  # original code
+  # plot code
   ggplot(aes(x = year, y = income, 
              col = low, fill = low)) +
+  
+  # error bar geom inserted
   geom_errorbar(aes(ymin = income - income_sd,
                     ymax = income + income_sd)) + 
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() + scale_fill_viridis_d()
+
+  ...
+  
 ```
 
 
@@ -888,16 +889,17 @@ basel %>%
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
-  # original code
+  # plot code
   ggplot(aes(x = year, y = income, 
              col = low, fill = low)) +
+  
+  # ribbon geom inserted
   geom_ribbon(aes(ymin = income - income_sd,
                   ymax = income + income_sd), 
               alpha = .5) + 
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() + scale_fill_viridis_d()
+
+  ...
+
 ```
 
 
@@ -921,7 +923,7 @@ basel %>%
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
-  # original code
+  # adapted plot
   ggplot(aes(x = year, y = income, 
              col = low, fill = low)) +
   geom_ribbon(aes(ymin = income - income_sd,

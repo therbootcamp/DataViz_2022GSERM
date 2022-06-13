@@ -397,6 +397,107 @@ quarters_map %&gt;%
 
 ---
 
+# &lt;mono&gt;geom_label()&lt;/mono&gt;
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Styling can be adjusted just like in any other &lt;mono&gt;ggplot&lt;mono&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+# join basel tax data
+quarters_map &lt;- quarters_map %&gt;% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter"))
+
+# plot quarters
+quarters_map %&gt;% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+              col = "white") + 
+  theme_void() + 
+  scale_fill_continuous(name = 'Income') +
+  
+  # add annotion
+  labs(title = "Inequality in Basel",
+     subtitle = "Average income in Basel...",
+     caption = "ource: Open Data Basel...")
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+# &lt;mono&gt;geom_image()&lt;/mono&gt;
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Styling can be adjusted just like in any other &lt;mono&gt;ggplot&lt;mono&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+# join basel tax data
+quarters_map &lt;- quarters_map %&gt;% 
+  left_join(filter(basel, year == 2017), 
+            by = c("TYPE" = "quarter"))
+
+# plot quarters
+quarters_map %&gt;% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+              col = "white") + 
+  theme_void() + 
+  scale_fill_continuous(name = 'Income') +
+  
+  # add annotion
+  labs(title = "Inequality in Basel",
+     subtitle = "Average income in Basel...",
+     caption = "ource: Open Data Basel...")
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left3[
+
+# Networks with &lt;mono&gt;tidygraph&lt;/mono&gt;/&lt;mono&gt;ggraph&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Maps require geometric shapes stored in &lt;high&gt;shapefiles&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;The &lt;high&gt;simple features&lt;/high&gt; (&lt;mono&gt;sf&lt;/mono&gt;) framework makes processing and visualizing maps with the &lt;mono&gt;tidyverse&lt;mono&gt; easy.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right6[
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
 class: middle, center
 
 &lt;h1&gt;&lt;a href=""&gt;Schedule&lt;/a&gt;&lt;/h1&gt;
