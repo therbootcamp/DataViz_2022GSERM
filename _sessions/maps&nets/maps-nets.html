@@ -580,7 +580,7 @@ basel %&gt;%
 
 ```r
 # determine correlations
-basel %&gt;% 
+graph = basel %&gt;% 
   select(year, quarter, income_median) %&gt;% 
   pivot_wider(names_from = quarter, 
               values_from = income_median) %&gt;% 
@@ -595,31 +595,6 @@ basel %&gt;%
   
   # format to graph
   as_tbl_graph(edges, directed = FALSE)
-```
-
-```
-# A tbl_graph: 21 nodes and 184 edges
-#
-# An undirected multigraph with 1 component
-#
-# Node Data: 21 × 1 (active)
-  name        
-  &lt;chr&gt;       
-1 Am Ring     
-2 Bachletten  
-3 St. Alban   
-4 Gundeldingen
-5 Bruderholz  
-6 Gotthelf    
-# … with 15 more rows
-#
-# Edge Data: 184 × 3
-   from    to weight
-  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
-1     1    13  0.523
-2     2    13  0.558
-3     1    14  0.881
-# … with 181 more rows
 ```
 
 
