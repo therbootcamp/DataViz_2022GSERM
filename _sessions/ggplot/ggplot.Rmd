@@ -117,9 +117,9 @@ basel = read_csv('1_Data/taxation.csv')
     <li><span>What do size, shapes, colors, etc. represent?</span></li>
   </ul>
   <li class="m3"><span><highm>geoms</highm>: geometric shapes illustrating data</high></span></li>
-  <li class="m4"><span><highm>labs</highm>: Plot annotation</high></span></li>
-  <li class="m5"><span><highm>themes</highm>: Aesthetic details</high></span></li>
-  <li class="m6"><span><highm>facets</highm>: Stratify plot according to variable</high></span></li>
+  <li class="m4"><span><highm>facets</highm>: Stratify plot according to variable</high></span></li>
+  <li class="m5">e<span><highm>labs</highm>: Plot annotation</high></span></li>
+  <li class="m6"><span><highm>themes</highm>: Aesthetic details</high></span></li>
   <li class="m7"><span><highm>scales</highm>: Scaling of dimensions</high></span></li>
 </ul>
 
@@ -718,9 +718,7 @@ ggplot(data = basel_avg_long,
        mapping = aes(
          x = year, 
          y = income,
-                     
          # add many dimensions
-         # (not recommended)
          col = statistic) +
   geom_point() +
   geom_line() 

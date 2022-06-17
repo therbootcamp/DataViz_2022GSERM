@@ -325,7 +325,7 @@ my_plot + theme_minimal()
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>With <high>87 arguments</high> <mono>theme()</mono> permits specification of all aesthetic details.</span></li>
+  <li class="m1"><span>With <high>96 arguments</high> <mono>theme()</mono> permits specification of all aesthetic details.</span></li>
   <li class="m2"><span>Makes uses of helper functions:</span></li>
   <ul class="level">
     <li><span><mono>element_rect()</mono> | for rectangles</span></li>
@@ -759,7 +759,7 @@ basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 < median(inc_2001)) %>% 
+           low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median)) %>% 
   
   # plot code
@@ -788,7 +788,7 @@ basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 < median(inc_2001)) %>% 
+           low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median)) %>% 
   
   # plot code
@@ -818,7 +818,7 @@ basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 < median(inc_2001)) %>% 
+           low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
@@ -851,7 +851,7 @@ basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 < median(inc_2001)) %>% 
+           low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
@@ -885,7 +885,7 @@ basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 < median(inc_2001)) %>% 
+           low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
@@ -896,7 +896,7 @@ basel %>%
   # ribbon geom inserted
   geom_ribbon(aes(ymin = income - income_sd,
                   ymax = income + income_sd), 
-              alpha = .5) + 
+              alpha = .2) + 
 
   ...
 
@@ -919,7 +919,7 @@ basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 < median(inc_2001)) %>% 
+           low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median),
             income_sd = sd(income_median)) %>% 
   
@@ -928,7 +928,7 @@ basel %>%
              col = low, fill = low)) +
   geom_ribbon(aes(ymin = income - income_sd,
                   ymax = income + income_sd), 
-              alpha = .5) + 
+              alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
