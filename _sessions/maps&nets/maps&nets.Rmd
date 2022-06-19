@@ -515,7 +515,7 @@ read_sf('1_Data/quarters') %>%
          lat = sapply(centr, `[`, 2)) %>% 
   ggplot() +
   geom_sf(aes(fill = income_mean),
-          col = "black") + 
+          col = "white") + 
   theme_void() + 
   scale_fill_continuous(name = 'Income') +
   labs(title = "Inequality in Basel",
@@ -586,7 +586,7 @@ quarters_map <- read_sf('1_Data/quarters') %>%
 quarters_map %>% 
   ggplot() +
   geom_sf(aes(fill = income_mean),
-          col = "black") + 
+          col = "white") + 
   theme_void() + 
   scale_fill_continuous(name = 'Income') +
   labs(title = "Inequality in Basel",
@@ -605,8 +605,8 @@ quarters_map %>%
 # Networks with <mono>tidygraph</mono> & <mono>ggraph</mono>
 
 <ul>
-  <li class="m1"><span>Maps require geometric shapes stored in <high>shapefiles</high>.</span></li><br>
-  <li class="m2"><span>The <high>simple features</high> (<mono>sf</mono>) framework makes processing and visualizing maps with the <mono>tidyverse<mono> easy.</span></li>
+  <li class="m1"><span>Networks (graphs) show relationships (edges) between units (nodes).</span></li><br>
+  <li class="m2"><span><highm>tidygraph</highm> helps with creating tidy network objects, <highm>ggraph</highm> helps with visualizing networks within the <mono>ggplot</mono> framework.</span></li>
 </ul>
 
 ]
@@ -662,10 +662,10 @@ graph %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Networks require particular data structures, such as an <high>edge list</high> or an adjacency matrix.</span></li><br>
+  <li class="m1"><span>A network is typically created from either an <high>edge list</high> or an adjacency matrix.</span></li><br>
 </ul>
 
-```{r, fig.width = 5, fig.height = 4, dpi=250}
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # determine correlations
 basel %>% 
   select(year, quarter, income_median) %>% 
@@ -682,7 +682,6 @@ basel %>%
   # limit to strong edges
   filter(weight < 1, weight > .5)
 ```
-
 
 ]
 
@@ -709,17 +708,73 @@ basel %>%
 
 ---
 
-# tidygraph
+# <mono>tidygraph</mono>
 
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Networks require particular data structures, such as an <high>edge list</high> or an adjacency matrix.</span></li><br>
+  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> the edge list.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # determine correlations
-graph = basel %>% 
+network <- basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  filter(weight < 1, weight > .5) %>% 
+  
+  # format to graph
+  as_tbl_graph(edges, directed = FALSE)
+
+```
+
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+require(tidygraph)
+basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, 
+              values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  filter(weight < 1, weight > .5) %>% 
+  
+  # format to graph
+  as_tbl_graph(edges, directed = FALSE)
+```
+
+]
+
+---
+
+# <mono>tidygraph</mono>
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> the edge list.</span></li><br>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+# determine correlations
+network <- basel %>% 
   select(year, quarter, income_median) %>% 
   pivot_wider(names_from = quarter, 
               values_from = income_median) %>% 
@@ -763,11 +818,12 @@ basel %>%
 
 ]
 
+
 ---
 
 class: middle, center
 
-<h1><a href="">Schedule</a></h1>
+<h1><a href="">Practical</a></h1>
 
 
 

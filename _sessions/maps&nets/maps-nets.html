@@ -482,8 +482,8 @@ quarters_map %&gt;%
 # Networks with &lt;mono&gt;tidygraph&lt;/mono&gt; &amp; &lt;mono&gt;ggraph&lt;/mono&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Maps require geometric shapes stored in &lt;high&gt;shapefiles&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;The &lt;high&gt;simple features&lt;/high&gt; (&lt;mono&gt;sf&lt;/mono&gt;) framework makes processing and visualizing maps with the &lt;mono&gt;tidyverse&lt;mono&gt; easy.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Networks (graphs) show relationships (edges) between units (nodes).&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;highm&gt;tidygraph&lt;/highm&gt; helps with creating tidy network objects, &lt;highm&gt;ggraph&lt;/highm&gt; helps with visualizing networks within the &lt;mono&gt;ggplot&lt;/mono&gt; framework.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -503,7 +503,7 @@ quarters_map %&gt;%
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Networks require particular data structures, such as an &lt;high&gt;edge list&lt;/high&gt; or an adjacency matrix.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;A network is typically created from either an &lt;high&gt;edge list&lt;/high&gt; or an adjacency matrix.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
 &lt;/ul&gt;
 
 
@@ -524,24 +524,6 @@ basel %&gt;%
   # limit to strong edges
   filter(weight &lt; 1, weight &gt; .5)
 ```
-
-```
-# A tibble: 184 × 3
-   from                to                  weight
-   &lt;chr&gt;               &lt;chr&gt;                &lt;dbl&gt;
- 1 Am Ring             Altstadt Grossbasel  0.523
- 2 Bachletten          Altstadt Grossbasel  0.558
- 3 Am Ring             Vorstädte            0.881
- 4 St. Alban           Vorstädte            0.806
- 5 Gundeldingen        Vorstädte            0.721
- 6 Bruderholz          Vorstädte            0.605
- 7 Bachletten          Vorstädte            0.770
- 8 Gotthelf            Vorstädte            0.872
- 9 Altstadt Kleinbasel Vorstädte            0.560
-10 Wettstein           Vorstädte            0.917
-# … with 174 more rows
-```
-
 
 ]
 
