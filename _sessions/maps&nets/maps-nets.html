@@ -551,18 +551,18 @@ basel %&gt;%
 
 ---
 
-# tidygraph
+# &lt;mono&gt;tidygraph&lt;/mono&gt;
 
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Networks require particular data structures, such as an &lt;high&gt;edge list&lt;/high&gt; or an adjacency matrix.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;tidygraph&lt;/mono&gt; generates a &lt;high&gt;network object&lt;/high&gt; the edge list.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
 &lt;/ul&gt;
 
 
 ```r
 # determine correlations
-graph = basel %&gt;% 
+network &lt;- basel %&gt;% 
   select(year, quarter, income_median) %&gt;% 
   pivot_wider(names_from = quarter, 
               values_from = income_median) %&gt;% 
@@ -614,9 +614,171 @@ graph = basel %&gt;%
 
 ---
 
+# &lt;mono&gt;ggraph&lt;/mono&gt;
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;ggraph&lt;/mono&gt; provides syntax to plot networks within the &lt;highm&gt;ggplot framwork&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# start network plot
+network %&gt;% 
+  ggplot() 
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Adding nodes &amp; edges
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_node_point()&lt;/mono&gt; adds points to represent the nodes of the network.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li class="m2"&gt;&lt;mono&gt;geom_edge_link()&lt;/mono&gt; adds (straight) lines to represent the edges of the network.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# start network plot
+network %&gt;% 
+  ggplot() + 
+  
+  # add nodes and edges
+  geom_edge_link() +
+  geom_node_point()
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Adding labels
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_node_label()&lt;/mono&gt; adds node labels.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# start network plot
+network %&gt;% 
+  ggplot() + 
+  geom_edge_link() +
+  geom_node_point() +
+
+  # add labels
+  geom_node_label(aes(label = name), 
+                  show.legend = FALSE) 
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+# Styling networks
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;theme_graph()&lt;/mono&gt; removes unnecessary background details.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;scale_edge_width()&lt;/mono&gt; and similar functions can be used to adapt edges or nodes.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# start network plot
+network %&gt;% 
+  ggplot() + 
+  geom_edge_link() + # style change
+  geom_node_point() +
+  geom_node_label(aes(label = name), 
+                  show.legend = FALSE) +
+  
+  # add styling
+  theme_graph() + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off")
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Adding clusters
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;group_louvain()&lt;/mono&gt; and similar functions can be used to determine node groups (clusters).&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# add clusters
+network %&gt;% 
+  mutate(community = 
+           group_louvain(weight) %&gt;% 
+           as.factor()) %&gt;%
+  
+  # network plot
+  ggraph() + 
+  geom_edge_hive() +
+  geom_node_point() +
+  geom_node_label(aes(label = name,
+                      col = community), 
+                  show.legend = FALSE) +
+  theme_graph() + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off")
+  scale_color_manual(values=viridis(3)[1:2])
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
 class: middle, center
 
-&lt;h1&gt;&lt;a href=""&gt;Schedule&lt;/a&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;a href=""&gt;Practical&lt;/a&gt;&lt;/h1&gt;
 
 
 

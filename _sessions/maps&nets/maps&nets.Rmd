@@ -70,6 +70,8 @@ knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval =
 library(tidyverse)
 library(ggthemes)
 library(sf)
+require(tidygraph)
+require(ggraph)
 basel = read_csv('1_Data/taxation.csv')
 basel_map = sf::read_sf('1_Data/quarters')
 
@@ -742,8 +744,7 @@ network <- basel %>%
 .pull-right45[
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
-require(tidygraph)
-basel %>% 
+network = basel %>% 
   select(year, quarter, income_median) %>% 
   pivot_wider(names_from = quarter, 
               values_from = income_median) %>% 
@@ -758,63 +759,223 @@ basel %>%
   
   # format to graph
   as_tbl_graph(edges, directed = FALSE)
+network
 ```
 
 ]
 
 ---
 
-# <mono>tidygraph</mono>
+# <mono>ggraph</mono>
 
 .pull-left45[
 
 <ul>
-  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> the edge list.</span></li><br>
+  <li class="m1"><span><mono>ggraph</mono> provides syntax to plot networks within the <highm>ggplot framwork</high>.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
-# determine correlations
-network <- basel %>% 
-  select(year, quarter, income_median) %>% 
-  pivot_wider(names_from = quarter, 
-              values_from = income_median) %>% 
-  select(-1) %>% 
-  cor() %>% 
-  as.table() %>% 
-  as_tibble(.name_repair = "unique") %>% 
-  rename(from = `...1`,
-         to = `...2`,
-         weight = n) %>% 
-  filter(weight < 1, weight > .5) %>% 
-  
-  # format to graph
-  as_tbl_graph(edges, directed = FALSE)
+# start network plot
+network %>% 
+  ggplot() 
 
 ```
-
 
 ]
 
 .pull-right45[
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
-require(tidygraph)
-basel %>% 
-  select(year, quarter, income_median) %>% 
-  pivot_wider(names_from = quarter, 
-              values_from = income_median) %>% 
-  select(-1) %>% 
-  cor() %>% 
-  as.table() %>% 
-  as_tibble(.name_repair = "unique") %>% 
-  rename(from = `...1`,
-         to = `...2`,
-         weight = n) %>% 
-  filter(weight < 1, weight > .5) %>% 
+# start network plot
+network %>% 
+  ggraph()
+```
+
+]
+
+---
+
+# Adding nodes & edges
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>geom_node_point()</mono> adds points to represent the nodes of the network.</span></li><br>
+    <li class="m2"><mono>geom_edge_link()</mono> adds (straight) lines to represent the edges of the network.</span></li><br>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+# start network plot
+network %>% 
+  ggplot() + 
   
-  # format to graph
-  as_tbl_graph(edges, directed = FALSE)
-````
+  # add nodes and edges
+  geom_edge_link() +
+  geom_node_point()
+
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+# start network plot
+network %>% 
+  ggraph() + 
+  geom_edge_link() +
+  geom_node_point()
+  
+```
+
+]
+
+---
+
+# Adding labels
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span><mono>geom_node_label()</mono> adds node labels.</span></li><br>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+# start network plot
+network %>% 
+  ggplot() + 
+  geom_edge_link() +
+  geom_node_point() +
+
+  # add labels
+  geom_node_label(aes(label = name), 
+                  show.legend = FALSE) 
+
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+# start network plot
+network %>% 
+  ggraph() + 
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name), 
+                  show.legend = FALSE) 
+  
+```
+
+]
+
+
+---
+
+# Styling networks
+
+.pull-left5[
+
+<ul>
+  <li class="m1"><span><mono>theme_graph()</mono> removes unnecessary background details.</span></li><br>
+  <li class="m2"><span><mono>scale_edge_width()</mono> and similar functions can be used to adapt edges or nodes.</span></li><br>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+# start network plot
+network %>% 
+  ggplot() + 
+  geom_edge_link() + # style change
+  geom_node_point() +
+  geom_node_label(aes(label = name), 
+                  show.legend = FALSE) +
+  
+  # add styling
+  theme_graph() + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off")
+
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+# start network plot
+network %>% 
+  ggraph() + 
+  geom_edge_hive() + # style change
+  geom_node_point() +
+  geom_node_label(aes(label = name), 
+                  show.legend = FALSE)  +
+  
+  # add styling
+  theme_graph() + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off")
+  
+```
+
+]
+
+---
+
+# Adding clusters
+
+.pull-left5[
+
+<ul>
+  <li class="m1"><span><mono>group_louvain()</mono> and similar functions can be used to determine node groups (clusters).</span></li><br>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+# add clusters
+network %>% 
+  mutate(community = 
+           group_louvain(weight) %>% 
+           as.factor()) %>%
+  
+  # network plot
+  ggraph() + 
+  geom_edge_hive() +
+  geom_node_point() +
+  geom_node_label(aes(label = name,
+                      col = community), 
+                  show.legend = FALSE) +
+  theme_graph() + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off")
+  scale_color_manual(values=viridis(3)[1:2])
+
+
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+# start network plot
+network %>% 
+  mutate(community = 
+           group_louvain(weight) %>% 
+           as.factor()) %>%
+  
+  # network plot
+  ggraph() + 
+  geom_edge_hive() +
+  geom_node_point() +
+  geom_node_label(aes(label = name,
+                      col = community), 
+                  show.legend = FALSE) +
+  theme_graph() + 
+  scale_edge_width(range=c(.2, 1)) +
+  coord_cartesian(clip = "off") +
+  scale_color_manual(values=viridis(3)[1:2])
+  
+```
 
 ]
 

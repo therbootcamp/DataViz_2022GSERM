@@ -112,8 +112,14 @@ basel %>%
   pivot_longer(XX, names_to = "XX", values_to = "XX")
 ```
 
-# 5 - Project work
+# 5 - Go explore
 
-1. Try to use what you have learned in this section to read in and process the data for your data visualization project. 
+1. Calculate the average income and wealth across time!
+
+2. How has the mean income/wealth developed relative to the median?
+
+
+
+
 
 

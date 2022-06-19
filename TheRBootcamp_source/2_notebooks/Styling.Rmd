@@ -232,9 +232,10 @@ averages %>%
 ```
 
 
-# 8 - Project work
+# 6 - Go explore
 
-1. Try to use what you have learned in this section to style the visualizations that you created in the first plotting session based on your data. 
+1. Install the `ggthemes` package and try out some of its themes. 
+
 
 
 
