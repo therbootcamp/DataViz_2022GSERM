@@ -20,10 +20,12 @@ library(tidyverse)
 basel <- read_csv('../1_data/taxation.csv')
 ```
 
-2. Load the `sf` package. 
+2. Load the packages `sf`, `tidygraph`, and `ggraph`. 
 
 ```{r}
 library(sf)
+library(tidygraph)
+library(ggraph)
 ```
 
 # 1 - Loading shapefiles
@@ -118,13 +120,49 @@ basel_map %>%
   scale_fill_continuous(name = 'Wealth')
 ```
 
+# 5 - Networks
+
+1. The first step to creating a network involves obtaining relational data. In this example, you will analyze the relatedness in the development of wealth between quarters. Use the code below to create a matrix of correlations that reflect the pairwise relatednes in wealth development. 
+
+```{r}
+edges <- basel %>% 
+  select(year, quarter, income_median) %>% 
+  pivot_wider(names_from = quarter, values_from = income_median) %>% 
+  select(-1) %>% 
+  cor() %>% 
+  as.table() %>% 
+  as_tibble(.name_repair = "unique") %>% 
+  rename(from = `...1`,
+         to = `...2`,
+         weight = n) %>% 
+  filter(weight<1, weight < -.5)
+```
+
+2. Next, use the `as_tbl_graph()` function from the `tidygraph` package to create a network of the relational data. Set the argument `directed` to `FALSE`, since the correlations do no reflect a directed relatedness between the quarters. 
+
+```{r}
+network <- as_tbl_graph(XX, XX = XX)
+```
+
+3. Use now the `ggraph()` function from the `ggraph` package to start a blank network plot. The function needs to arguments
+
+```{r}
+network %>% 
+  XX
+```
+
+4. Add 
+
+```{r}
+network %>% 
+  XX
+```
+
+
 
 # 5 - Go explore
 
-1. Color the quarters according to other variables. 
-
-2. Change the color set to viridis. 
-
+1. https://www.diva-gis.org/datadown
 
 
 
