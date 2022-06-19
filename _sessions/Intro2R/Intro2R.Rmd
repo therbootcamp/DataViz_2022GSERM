@@ -434,8 +434,8 @@ mean(x = c(score, NA), na.rm = TRUE)
   <ul class="level">
     <li><span>Everything that happens is a function call</span></li>
     <li><span>Functions have (default) arguments</span></li>
-    <li><span>Beware object/argument classes/span></li>
-    <li><span><high>Functions "live" in packages</high><</span></li>
+    <li><span>Beware object/argument classes</span></li>
+    <li><span><high>Functions "live" in packages</high></span></li>
   </ul><br>
 </ul>
 ]
@@ -1140,9 +1140,11 @@ TIBBLE %>%
 ```{r}
 # wide to long
 basel %>% 
-  select(year, quarter, 
-         income_mean, wealth_mean) %>% 
-  pivot_longer(c(income_mean, wealth_mean))
+ select(year, quarter, 
+        income_mean, wealth_mean) %>% 
+ pivot_longer(cols = c(income_mean, wealth_mean),
+              names_to = 'name',
+              values_to = 'value')
 ```
 ]
 
@@ -1202,7 +1204,7 @@ basel %>%
   <img src="image/editor_edit.png">
 <br><br><br>
 Shortcut für <high>schicke Code zur Console</high>:<br><br2><font size = 6>&#8984;/ctrl + &#9166;</font><br><br2><br2>
-Shortcut für <high>führe Chunk wiederholt aus</high>:<br><br2><font size = 6>  &#8984;/ctrl + &#9095; + p</font>
+Shortcut für <high>führe Chunk wiederholt aus</high>:<br><br2><font size = 6>  &#8984;/ctrl + &#8997; + p</font>
 </p>
 
 ]

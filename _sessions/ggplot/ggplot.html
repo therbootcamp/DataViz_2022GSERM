@@ -95,9 +95,9 @@ layout: true
     &lt;li&gt;&lt;span&gt;What do size, shapes, colors, etc. represent?&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
   &lt;li class="m3"&gt;&lt;span&gt;&lt;highm&gt;geoms&lt;/highm&gt;: geometric shapes illustrating data&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m4"&gt;&lt;span&gt;&lt;highm&gt;labs&lt;/highm&gt;: Plot annotation&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m5"&gt;&lt;span&gt;&lt;highm&gt;themes&lt;/highm&gt;: Aesthetic details&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m6"&gt;&lt;span&gt;&lt;highm&gt;facets&lt;/highm&gt;: Stratify plot according to variable&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m4"&gt;&lt;span&gt;&lt;highm&gt;facets&lt;/highm&gt;: Stratify plot according to variable&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m5"&gt;&lt;span&gt;&lt;highm&gt;labs&lt;/highm&gt;: Plot annotation&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m6"&gt;&lt;span&gt;&lt;highm&gt;themes&lt;/highm&gt;: Aesthetic details&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m7"&gt;&lt;span&gt;&lt;highm&gt;scales&lt;/highm&gt;: Scaling of dimensions&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -624,9 +624,7 @@ ggplot(data = basel_avg_long,
        mapping = aes(
          x = year, 
          y = income,
-                     
          # add many dimensions
-         # (not recommended)
          col = statistic) +
   geom_point() +
   geom_line() 
