@@ -19,7 +19,7 @@ In this practical, you will visualize the development of wealth in Basel's quart
 
 ```{r}
 library(tidyverse)
-basel <- read_csv('../1_data/taxation.csv')
+basel <- read_csv('1_data/taxation.csv')
 ```
 
 # 1 - Plot base
