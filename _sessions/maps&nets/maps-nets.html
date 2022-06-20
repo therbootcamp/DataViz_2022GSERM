@@ -707,7 +707,7 @@ network %&gt;%
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;theme_graph()&lt;/mono&gt; removes unnecessary background details.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;scale_edge_width()&lt;/mono&gt; and similar functions can be used to adapt edges or nodes.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;scale_edge_width()&lt;/mono&gt; and similar functions can be used to adapt edges or nodes.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -741,7 +741,7 @@ network %&gt;%
 .pull-left5[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;group_louvain()&lt;/mono&gt; and similar functions can be used to determine node groups (clusters).&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;group_louvain()&lt;/mono&gt; and similar functions can be used to determine node groups (clusters).&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -770,6 +770,152 @@ network %&gt;%
 .pull-right45[
 
 &lt;img src="maps-nets_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Adding ellipses
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;stat_ellipse()&lt;/mono&gt; can be used to add ellipses covering points in the data (similar &lt;mono&gt;stat_*&lt;/mono&gt; functions exist for other visual elements.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+# add clusters
+network %&gt;% 
+  mutate(community = 
+           group_louvain(weight) %&gt;% 
+           as.factor()) %&gt;%
+  
+  # network plot
+  ggraph() + 
+  
+  # ellipses
+  stat_ellipse(aes(x = x , y = y, 
+                   group = community, fill = community), 
+               level = .8, geom = "polygon", 
+               alpha = .1, show.legend = FALSE) + 
+  
+  # rest of plot
+  scale_fill_manual(values=viridis(3)[1:2]) +
+  ...
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Adding ellipses
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;stat_ellipse()&lt;/mono&gt; can be used to add ellipses covering points in the data (similar &lt;mono&gt;stat_*&lt;/mono&gt; functions exist for other visual elements.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+# add clusters
+network %&gt;% 
+  ...
+  
+  # network plot
+  ggraph() + 
+  
+  # ellipses
+  stat_ellipse(aes(x = x , y = y, 
+                   group = community, 
+                   fill = community), 
+               level = .8, geom = "polygon", 
+               alpha = .1, show.legend = FALSE) + 
+  
+  # rest of plot
+  scale_fill_manual(values=viridis(3)[1:2]) +
+  ...
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+---
+
+# Adding annotation
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;annotate()&lt;/mono&gt; can be used to &lt;high&gt;add any type of plot elements&lt;/high&gt; (layers) using vector specification.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# add clusters
+network %&gt;% 
+  ...
+  
+  # network plot
+  ggraph() + 
+  ...
+  
+  # annotation
+  annotate("text", 
+           x = c(-2.5, 2), y = c(.8,1), 
+           label = c("Group 1","Group 2"), 
+           size=7)
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+# Adding labels
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Labels can be added as usual using &lt;mono&gt;labels()&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+&lt;/ul&gt;
+
+
+```r
+# add clusters
+network %&gt;% 
+  ... 
+  
+  # network plot
+  ggraph() + 
+  ...
+  
+  # labels
+  labs(title = "Network...",
+       subtitle = "reveals...")
+```
+
+]
+
+.pull-right45[
+
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
