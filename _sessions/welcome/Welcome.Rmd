@@ -111,7 +111,7 @@ Klicke auf <high>"....running..."</high> auf unserer Website!
 # Schedule 
 
 <ul>
-  <li class="m1"><span>Core of the workshop consists of 7 sessions on R. Each session is structured into:</span></li>
+  <li class="m1"><span>Core of the workshop consists of 6 sessions on R. Each session is structured into:</span></li>
   <ul class="level">
     <li><span>30-60min introduction</high></span></li> 
     <li><span>30-60min coding exercises</span></li> 
