@@ -1203,8 +1203,8 @@ basel %>%
 <p align = "left">
   <img src="image/editor_edit.png">
 <br><br><br>
-Shortcut für <high>schicke Code zur Console</high>:<br><br2><font size = 6>&#8984;/ctrl + &#9166;</font><br><br2><br2>
-Shortcut für <high>führe Chunk wiederholt aus</high>:<br><br2><font size = 6>  &#8984;/ctrl + &#8997; + p</font>
+Shortcut for <high>send Code to Console</high>:<br><br2><font size = 6>&#8984;/ctrl + &#9166;</font><br><br2><br2>
+Shortcut for <high>run Chunk again</high>:<br><br2><font size = 6>  &#8984;/ctrl + &#8997; + p</font>
 </p>
 
 ]
