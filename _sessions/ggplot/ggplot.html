@@ -12,15 +12,19 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-.title[
 # ggplot
-]
-.author[
-### Visualizing and communicating data with R<br> <a href='https://therbootcamp.github.io'> <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br> <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'> <i class='fas fa-clock' style='font-size:1.4em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:1.4em;' ></i> </a>  <a href='therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a>  <a href='https://www.linkedin.com/company/27090302'> <i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
-]
-.date[
+### Visualizing and communicating data with R<br>
+<a href='https://therbootcamp.github.io'>
+<font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br>
+<a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
+<i class='fas fa-clock' style='font-size:1.4em;'></i> </a> 
+<a href='https://therbootcamp.github.io'>
+<i class='fas fa-home' style='font-size:1.4em;' ></i> </a> 
+<a href='therbootcamp@gmail.com'>
+<i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a> 
+<a href='https://www.linkedin.com/company/27090302'>
+<i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
 ### June 2022
-]
 
 ---
 
@@ -96,7 +100,7 @@ layout: true
   &lt;/ul&gt;
   &lt;li class="m3"&gt;&lt;span&gt;&lt;highm&gt;geoms&lt;/highm&gt;: geometric shapes illustrating data&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m4"&gt;&lt;span&gt;&lt;highm&gt;facets&lt;/highm&gt;: Stratify plot according to variable&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m5"&gt;&lt;span&gt;&lt;highm&gt;labs&lt;/highm&gt;: Plot annotation&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m5"&gt;e&lt;span&gt;&lt;highm&gt;labs&lt;/highm&gt;: Plot annotation&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m6"&gt;&lt;span&gt;&lt;highm&gt;themes&lt;/highm&gt;: Aesthetic details&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m7"&gt;&lt;span&gt;&lt;highm&gt;scales&lt;/highm&gt;: Scaling of dimensions&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -382,15 +386,15 @@ ggplot(data = basel_avg,
 
 ---
 
-# `geom_*()`
+# Colors
 
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_*()&lt;/mono&gt; functions define which geometric objects are used to illustrate the data.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;R understands a large number of &lt;high&gt;color names&lt;/high&gt; (see &lt;mono&gt;colors()&lt;/mono&gt; for the whole set).&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Additionally colors can be specified using &lt;high&gt;hex codes&lt;/high&gt; or the &lt;mono&gt;rgb()&lt;/mono&gt; function.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;br&gt;
 
 ```r
 ggplot(data = basel_avg,
@@ -403,8 +407,8 @@ ggplot(data = basel_avg,
            fill = "grey75") +
   
   # Show as points and lines
-  geom_point() +
-  geom_line() 
+  geom_point(col = "#4682B4") +
+  geom_line(col = "#4682B4") 
 ```
 
 
@@ -425,7 +429,8 @@ ggplot(data = basel_avg,
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Most &lt;mono&gt;geom_*()&lt;/mono&gt; functions allow specification of &lt;highm&gt;data&lt;/highm&gt; and &lt;highm&gt;mapping&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Most &lt;mono&gt;geom_*()&lt;/mono&gt; functions allow the independent specification of &lt;highm&gt;data&lt;/highm&gt; and &lt;highm&gt;mapping&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Can be used to add geoms for other cases or variables in the data.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -940,19 +945,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
