@@ -83,7 +83,7 @@ basel = read_csv('1_Data/taxation.csv')
   <li class="m2"><span>Use existing <highm>theme_*()</highm> presets.</span></li>
   <li class="m3"><span>Customize details using <highm>theme()</highm>.</span></li>
   <li class="m4"><span>Adjust dimensions using <highm>scale_*()</highm>.</span></li>
-  <li class="m5"><span>Add annotion using <highm>labs()</highm>.</span></li>
+  <li class="m5"><span>Add an notion using <highm>labs()</highm>.</span></li>
   <li class="m6"><span>Write your plot as a <highm>.pdf</highm> or <highm>.png</highm>.</span></li>
 </ul>
 
@@ -362,7 +362,7 @@ my_plot +
 # `theme()`
 
 <ul>
-  <li class="m1"><span>With <high>87 arguments</high> <mono>theme()</mono> permits specification of all aesthetic details.</span></li>
+  <li class="m1"><span>With <high>96 arguments</high> <mono>theme()</mono> permits specification of all aesthetic details.</span></li>
   <li class="m2"><span>Makes uses of helper functions:</span></li>
   <ul class="level">
     <li><span><mono>element_rect()</mono> | for rectangles</span></li>
@@ -552,12 +552,12 @@ my_plot +
 # `scale_*()`
 
 <ul>
-  <li class="m1"><span>Various <mono>scale_*()</mono> permit specification of all <high>dimensions</high>, inclding axes, colors, sizes, etc.</span></li>
+  <li class="m1"><span>Various <mono>scale_*()</mono> permit specification of all <high>dimensions</high>, including axes, colors, sizes, etc.</span></li>
   <li class="m2"><span>Groups of <mono>scale_*()</mono> functions:</span></li>
   <ul class="level">
     <li><span><mono>scale_xy_*</mono> | Scales axes</span></li>
     <li><span><mono>scale_color_*</mono> | Scales colors</span></li>
-    <li><span><mono>scale_size_*</mono> | Sclaes sizes</span></li>
+    <li><span><mono>scale_size_*</mono> | Scales sizes</span></li>
     <li><span><mono>scale_alpha_*</mono> | Scales opacity</span></li>
   </ul>
 </ul>
@@ -586,7 +586,7 @@ my_plot +
 # `scale_*()`
 
 <ul>
-  <li class="m1"><span>Various <mono>scale_*()</mono> permit specification of all <high>dimensions</high>, inclding axes, colors, sizes, etc.</span></li>
+  <li class="m1"><span>Various <mono>scale_*()</mono> permit specification of all <high>dimensions</high>, including axes, colors, sizes, etc.</span></li>
 </ul>
 
 <br>
@@ -634,13 +634,41 @@ my_plot +
   <li class="m2">The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
 </ul>
 
-```{r, eval = F}
+```{r}
+basel_sorted <- 
 basel %>%
-  
   # sort by income and factor quarter
   arrange(year, income_median) %>% 
-  mutate(quarter = as_factor(quarter)) %>% 
-  
+  mutate(quarter = as_factor(quarter))
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r}
+basel_sorted %>%
+  select(year, quarter, income_median)
+```
+
+]
+
+---
+
+.pull-left45[
+
+# Wrangling
+
+<ul>
+  <li class="m1">Again, wrangling can help with plotting.</span></li>
+  <li class="m2">The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_sorted %>%
   # original code
   ggplot(aes(x = year, y = income_median, 
              col = quarter)) +
@@ -661,12 +689,7 @@ basel %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # sort by income and factor quarter
-  arrange(year, income_median) %>% 
-  mutate(quarter = as_factor(quarter)) %>% 
-  
+basel_sorted %>%
   # original code
   ggplot(aes(x = year, y = income_median, col = quarter)) +
   geom_line() + geom_point() +
@@ -680,7 +703,6 @@ basel %>%
 
 ]
 
-
 ---
 
 .pull-left45[
@@ -688,7 +710,7 @@ basel %>%
 # `labs()`
 
 <ul>
-  <li class="m1"><span>Various annotaions can be added using <mono>labs()</mono>.</span></li>
+  <li class="m1"><span>Various annotations can be added using <mono>labs()</mono>.</span></li>
   <li class="m2"><span>Key arguments:</span></li>
   <ul class="level">
     <li><span><mono>x,y</mono> | Axes</span></li>
@@ -749,7 +771,8 @@ my_plot +
 
 # Aggregates with dplyr
 
-```{r, eval = F}
+```{r, eval = T, echo=TRUE}
+basel_aggregate <- 
 basel %>%
   
   # get income mean in 2001
@@ -760,7 +783,30 @@ basel %>%
   # group by year and quarter
   group_by(year, 
            low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median)) %>% 
+  summarize(income = mean(income_median)) 
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r}
+basel_aggregate
+```
+
+]
+
+---
+
+.pull-left5[
+
+# Aggregates with dplyr
+
+```{r, eval = F}
+basel_aggregate %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -801,14 +847,14 @@ basel %>%
 ```
 
 ]
-
 ---
 
 .pull-left5[
 
 # <mono>geom_errorbar()</mono>
 
-```{r, eval = F}
+```{r, eval = T}
+basel_error <-
 basel %>%
   
   # get income mean in 2001
@@ -820,7 +866,30 @@ basel %>%
   group_by(year, 
            low = inc_2001 > median(inc_2001)) %>% 
   summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %>% 
+            income_sd = sd(income_median)) 
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r}
+basel_error
+```
+
+]
+
+---
+
+.pull-left5[
+
+# <mono>geom_errorbar()</mono>
+
+```{r, eval = F}
+basel_error %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -868,7 +937,6 @@ basel %>%
 
 ]
 
-
 ---
 
 .pull-left5[
@@ -876,18 +944,7 @@ basel %>%
 # <mono>geom_ribbon()</mono>
 
 ```{r, eval = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %>% 
+basel_error %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -945,10 +1002,10 @@ basel %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Saves plots to the harddrive.</span></li>
+  <li class="m1"><span>Saves plots to the hard drive.</span></li>
   <li class="m2"><span>Key arguments:</span></li>
   <ul class="level">
-    <li><span><mono>filename</mono> | Filename/path</span></li>
+    <li><span><mono>file name</mono> | File name/path</span></li>
     <li><span><mono>device</mono> | e.g., <mono>".pdf"</mono> or <mono>".png"</mono></span></li>
     <li><span><mono>path</mono> | Path to folder</span></li>
     <li><span><mono>height, width</mono> | Height, Width</span></li>

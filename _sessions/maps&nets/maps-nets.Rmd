@@ -1167,7 +1167,7 @@ network %>%
   geom_edge_hive() +
   geom_node_point() +
   geom_node_label(aes(label = name,
-                      col = community), 
+                      col = community),  
                   show.legend = FALSE) +
   theme_graph() + 
   scale_edge_width(range=c(.2, 1)) +
