@@ -12,19 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Styling
-### Visualizing and communicating data with R<br>
-<a href='https://therbootcamp.github.io'>
-<font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br>
-<a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
-<i class='fas fa-clock' style='font-size:1.4em;'></i> </a> 
-<a href='https://therbootcamp.github.io'>
-<i class='fas fa-home' style='font-size:1.4em;' ></i> </a> 
-<a href='therbootcamp@gmail.com'>
-<i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a> 
-<a href='https://www.linkedin.com/company/27090302'>
-<i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
+]
+.author[
+### Visualizing and communicating data with R<br> <a href='https://therbootcamp.github.io'> <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br> <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'> <i class='fas fa-clock' style='font-size:1.4em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:1.4em;' ></i> </a>  <a href='therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a>  <a href='https://www.linkedin.com/company/27090302'> <i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
+]
+.date[
 ### June 2022
+]
 
 ---
 
@@ -66,7 +62,7 @@ layout: true
   &lt;li class="m2"&gt;&lt;span&gt;Use existing &lt;highm&gt;theme_*()&lt;/highm&gt; presets.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m3"&gt;&lt;span&gt;Customize details using &lt;highm&gt;theme()&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m4"&gt;&lt;span&gt;Adjust dimensions using &lt;highm&gt;scale_*()&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m5"&gt;&lt;span&gt;Add annotion using &lt;highm&gt;labs()&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m5"&gt;&lt;span&gt;Add an notion using &lt;highm&gt;labs()&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m6"&gt;&lt;span&gt;Write your plot as a &lt;highm&gt;.pdf&lt;/highm&gt; or &lt;highm&gt;.png&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -350,7 +346,7 @@ my_plot +
 # `theme()`
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;With &lt;high&gt;87 arguments&lt;/high&gt; &lt;mono&gt;theme()&lt;/mono&gt; permits specification of all aesthetic details.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;With &lt;high&gt;96 arguments&lt;/high&gt; &lt;mono&gt;theme()&lt;/mono&gt; permits specification of all aesthetic details.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Makes uses of helper functions:&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;element_rect()&lt;/mono&gt; | for rectangles&lt;/span&gt;&lt;/li&gt;
@@ -390,7 +386,7 @@ my_plot +
 # `theme()`
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;With &lt;high&gt;87 arguments&lt;/high&gt; &lt;mono&gt;theme()&lt;/mono&gt; permits specification of all aesthetic details.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;With &lt;high&gt;96 arguments&lt;/high&gt; &lt;mono&gt;theme()&lt;/mono&gt; permits specification of all aesthetic details.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Makes uses of helper functions:&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;element_rect()&lt;/mono&gt; | for rectangles&lt;/span&gt;&lt;/li&gt;
@@ -518,12 +514,12 @@ my_plot +
 # `scale_*()`
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Various &lt;mono&gt;scale_*()&lt;/mono&gt; permit specification of all &lt;high&gt;dimensions&lt;/high&gt;, inclding axes, colors, sizes, etc.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Various &lt;mono&gt;scale_*()&lt;/mono&gt; permit specification of all &lt;high&gt;dimensions&lt;/high&gt;, including axes, colors, sizes, etc.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Groups of &lt;mono&gt;scale_*()&lt;/mono&gt; functions:&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;scale_xy_*&lt;/mono&gt; | Scales axes&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;scale_color_*&lt;/mono&gt; | Scales colors&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;scale_size_*&lt;/mono&gt; | Sclaes sizes&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;scale_size_*&lt;/mono&gt; | Scales sizes&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;scale_alpha_*&lt;/mono&gt; | Scales opacity&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/ul&gt;
@@ -545,7 +541,7 @@ my_plot +
 # `scale_*()`
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Various &lt;mono&gt;scale_*()&lt;/mono&gt; permit specification of all &lt;high&gt;dimensions&lt;/high&gt;, inclding axes, colors, sizes, etc.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Various &lt;mono&gt;scale_*()&lt;/mono&gt; permit specification of all &lt;high&gt;dimensions&lt;/high&gt;, including axes, colors, sizes, etc.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -588,12 +584,59 @@ my_plot +
 
 
 ```r
+basel_sorted &lt;- 
 basel %&gt;%
-  
   # sort by income and factor quarter
   arrange(year, income_median) %&gt;% 
-  mutate(quarter = as_factor(quarter)) %&gt;% 
-  
+  mutate(quarter = as_factor(quarter))
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+
+```r
+basel_sorted %&gt;%
+  select(year, quarter, income_median)
+```
+
+```
+# A tibble: 357 × 3
+    year quarter             income_median
+   &lt;dbl&gt; &lt;fct&gt;                       &lt;dbl&gt;
+ 1  2001 Altstadt Kleinbasel         40387
+ 2  2001 Clara                       40964
+ 3  2001 Matthäus                    41500
+ 4  2001 Rosental                    42100
+ 5  2001 Klybeck                     42777
+ 6  2001 St. Johann                  43118
+ 7  2001 Kleinhüningen               44115
+ 8  2001 Iselin                      45530
+ 9  2001 Gundeldingen                46265
+10  2001 Breite                      47227
+# … with 347 more rows
+```
+
+]
+
+---
+
+.pull-left45[
+
+# Wrangling
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;Again, wrangling can help with plotting.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;The order of discrete variables can be controlled using &lt;highm&gt;factors&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_sorted %&gt;%
   # original code
   ggplot(aes(x = year, y = income_median, 
              col = quarter)) +
@@ -613,10 +656,9 @@ basel %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
 
@@ -625,7 +667,7 @@ basel %&gt;%
 # `labs()`
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Various annotaions can be added using &lt;mono&gt;labs()&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Various annotations can be added using &lt;mono&gt;labs()&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Key arguments:&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;x,y&lt;/mono&gt; | Axes&lt;/span&gt;&lt;/li&gt;
@@ -655,7 +697,7 @@ my_plot +
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -667,6 +709,7 @@ my_plot +
 
 
 ```r
+basel_aggregate &lt;- 
 basel %&gt;%
   
   # get income mean in 2001
@@ -677,7 +720,50 @@ basel %&gt;%
   # group by year and quarter
   group_by(year, 
            low = inc_2001 &gt; median(inc_2001)) %&gt;% 
-  summarize(income = mean(income_median)) %&gt;% 
+  summarize(income = mean(income_median)) 
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+
+```r
+basel_aggregate
+```
+
+```
+# A tibble: 34 × 3
+# Groups:   year [17]
+    year low   income
+   &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;
+ 1  2001 FALSE 43813 
+ 2  2001 TRUE  55790.
+ 3  2002 FALSE 44467.
+ 4  2002 TRUE  56225 
+ 5  2003 FALSE 43926.
+ 6  2003 TRUE  56088.
+ 7  2004 FALSE 43518.
+ 8  2004 TRUE  56011 
+ 9  2005 FALSE 43028.
+10  2005 TRUE  55973.
+# … with 24 more rows
+```
+
+]
+
+---
+
+.pull-left5[
+
+# Aggregates with dplyr
+
+
+```r
+basel_aggregate %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -695,10 +781,128 @@ basel %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+---
+
+.pull-left5[
+
+# &lt;mono&gt;annotations()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;The &lt;mono&gt;annotation()&lt;/mono&gt; function adds text or highlights areas in a graph.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_aggregate %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2010, 
+           y = 60500, 
+           label = 'Financial Crisis')
+```
 
 ]
 
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+.pull-left5[
+
+# &lt;mono&gt;annotations()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;The &lt;mono&gt;annotation()&lt;/mono&gt; function adds text or highlights areas in a graph.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_aggregate %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2008, y = 60500, 
+           label = 'Financial Crisis') +
+  # add area 
+  annotate("rect", 
+           xmin = 2007, xmax = 2009, 
+           ymin = 41000, ymax = 60000,
+           alpha = .2)
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+.pull-left5[
+
+# &lt;mono&gt;Adding lines&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Horizontal and vertical lines can be added with &lt;mono&gt;geom_hline(), geom_vline&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_aggregate %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2010, 
+           y = 60500, 
+           label = 'Financial Crisis') + 
+  # add vertical line 
+  geom_vline(xintercept = 2008,
+             linetype = 2,
+             color = 'grey')
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+
+]
 ---
 
 .pull-left5[
@@ -707,6 +911,7 @@ basel %&gt;%
 
 
 ```r
+basel_error &lt;-
 basel %&gt;%
   
   # get income mean in 2001
@@ -718,7 +923,50 @@ basel %&gt;%
   group_by(year, 
            low = inc_2001 &gt; median(inc_2001)) %&gt;% 
   summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %&gt;% 
+            income_sd = sd(income_median)) 
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+
+```r
+basel_error
+```
+
+```
+# A tibble: 34 × 4
+# Groups:   year [17]
+    year low   income income_sd
+   &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+ 1  2001 FALSE 43813      2600.
+ 2  2001 TRUE  55790.     6200.
+ 3  2002 FALSE 44467.     2490.
+ 4  2002 TRUE  56225      6024.
+ 5  2003 FALSE 43926.     2862.
+ 6  2003 TRUE  56088.     6027.
+ 7  2004 FALSE 43518.     2758.
+ 8  2004 TRUE  56011      6511.
+ 9  2005 FALSE 43028.     3239.
+10  2005 TRUE  55973.     6359.
+# … with 24 more rows
+```
+
+]
+
+---
+
+.pull-left5[
+
+# &lt;mono&gt;geom_errorbar()&lt;/mono&gt;
+
+
+```r
+basel_error %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -738,10 +986,9 @@ basel %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
-
 
 ---
 
@@ -751,18 +998,7 @@ basel %&gt;%
 
 
 ```r
-basel %&gt;%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %&gt;% 
-  group_by(quarter) %&gt;% 
-  mutate(inc_2001 = first(income_median)) %&gt;% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 &gt; median(inc_2001)) %&gt;% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %&gt;% 
+basel_error %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -783,7 +1019,7 @@ basel %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -795,10 +1031,10 @@ basel %&gt;%
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Saves plots to the harddrive.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Saves plots to the hard drive.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Key arguments:&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;filename&lt;/mono&gt; | Filename/path&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;file name&lt;/mono&gt; | File name/path&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;device&lt;/mono&gt; | e.g., &lt;mono&gt;".pdf"&lt;/mono&gt; or &lt;mono&gt;".png"&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;path&lt;/mono&gt; | Path to folder&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;height, width&lt;/mono&gt; | Height, Width&lt;/span&gt;&lt;/li&gt;
@@ -889,6 +1125,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
