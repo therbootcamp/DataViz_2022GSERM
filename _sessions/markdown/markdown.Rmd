@@ -279,12 +279,12 @@ basel <- read_csv("1_Data/taxation.csv")
 
 ---
 
-# Rendern
+# Render
 
 .pull-left3[
 
 <ul>
-  <li class="m1"><span>HTML gets interpreted in RStudio (or browsers) so that a well-formated document emerges.</span></li>
+  <li class="m1"><span>HTML gets <high>interpreted</high> in RStudio (or browsers) so that a well-formatted document emerges.</span></li>
   <li class="m2"><span><high>Rstudio</high> also shows rendered documents (rather than the raw html). </span></li><br>
 </ul>
 
@@ -325,7 +325,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono># text</mono>
   </td>
   <td bgcolor="white">
-  Ebene 1
+  level 1
   </td> 
 </tr>
 <tr>
@@ -333,7 +333,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>## text</mono>
   </td>
   <td bgcolor="white">
-  Ebene 2
+  level 2
   </td> 
 </tr>
 <tr>
@@ -349,7 +349,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>##### txt</mono>
   </td>
   <td bgcolor="white">
-  Ebene 5
+  level 5
   </td> 
 </tr>
 </table>
@@ -372,7 +372,7 @@ basel <- read_csv("1_Data/taxation.csv")
 .pull-left3[
 
 <ul>
-  <li class="m1"><span>Überschriften verschiedener <high>Ebenen</high> werden durch verschieden viele <mono>#</mono> ausgedrückt.</span></li>
+  <li class="m1"><span>Headers on different <high>levels</high> can be set using <mono>#</mono>.</span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:20px" width=100%>
@@ -664,7 +664,7 @@ basel <- read_csv("1_Data/taxation.csv")
 
 <ul>
   <li class="m1"><span><high>Numbers or labels</high> in text can be parameterized using inline code.</span></li>
-  <li class="m2"><span>Inline code can include any type/length of code.</span></li>
+  <li class="m2"><span>Inline code can include <high>any</high> type/length of code.</span></li>
 </ul>
 
 ]
@@ -956,29 +956,6 @@ basel <- read_csv("1_Data/taxation.csv")
 
 .pull-right6[
 
-<br>
-<p align = "center">
-  <img src="image/markdown_trans_12.png">
-</p>
-
-]
-
-
----
-
-# Setup chunk
-
-.pull-left3[
-
-<ul>
-  <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
-  <li class="m2"><span>Addition functions assist.</span></li>
-</ul>
-
-]
-
-.pull-right6[
-
 
 <p align = "center">
   <img src="image/markdown_trans_13.png">
@@ -1026,7 +1003,7 @@ basel <- read_csv("1_Data/taxation.csv")
 .pull-right6[
 
 <p align = "center">
-  <img src="image/markdown_trans_15.png" height=420px>
+  <img src="image/markdown_trans_15.png">
 </p>
 
 ]
@@ -1046,7 +1023,7 @@ basel <- read_csv("1_Data/taxation.csv")
 <br>
 ```R
 # load data
-read_csv("../1_Data/daten.csv")
+read_csv("../1_data/data.csv")
 
 ```
 
@@ -1065,11 +1042,11 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Grafiken skalieren
+# Scale graphs
 
 <ul>
-  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
-  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+  <li class="m1"><span>The general <high>appearance</high> of graphs can be modified in the <mono>chunk</mono>-settings.</span></li> 
+  <li class="m2"><span>The arguments (normally) start with  <highm>fig.*</highm>.</span></li> 
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1088,7 +1065,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.width</mono>, <mono>fig.height</mono>
   </td>
   <td bgcolor="white">
-  <high>Breite</high> und <high>Höhe</high> in inches.
+  <high>Width</high> and <high>height</high> in inches.
   </td> 
 </tr>
 <tr>
@@ -1096,7 +1073,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.asp</mono>
   </td>
   <td bgcolor="white">
-   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+   <high>Aspect ratio</high>: Height relative to width.   
   </td> 
 </tr>
 <tr>
@@ -1104,7 +1081,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.align</mono>
   </td>
   <td bgcolor="white">
-  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  <high>Position</high> of the graph: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
   </td> 
 </tr>
 <tr>
@@ -1112,7 +1089,7 @@ read_csv("../1_Data/daten.csv")
   <mono>dpi</mono> 
   </td>
   <td bgcolor="white">
-  <high>Auflösung</high> der Abbildung (dots per inch).
+  <high>Resolution</high> of the graph (dots per inch).
   </td> 
 </tr>
 </table>
@@ -1130,11 +1107,11 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Grafiken skalieren
+# Scale graphs
 
 <ul>
-  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
-  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+  <li class="m1"><span>The general <high>appearance</high> of graphs can be modified in the <mono>chunk</mono>-settings.</span></li> 
+  <li class="m2"><span>The arguments (normally) start with  <highm>fig.*</highm>.</span></li> 
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1153,7 +1130,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.width</mono>, <mono>fig.height</mono>
   </td>
   <td bgcolor="white">
-  <high>Breite</high> und <high>Höhe</high> in inches.
+  <high>Width</high> and <high>height</high> in inches.
   </td> 
 </tr>
 <tr>
@@ -1161,7 +1138,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.asp</mono>
   </td>
   <td bgcolor="white">
-   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+   <high>Aspect ratio</high>: Height relative to width.   
   </td> 
 </tr>
 <tr>
@@ -1169,7 +1146,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.align</mono>
   </td>
   <td bgcolor="white">
-  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  <high>Position</high> of the graph: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
   </td> 
 </tr>
 <tr>
@@ -1177,11 +1154,12 @@ read_csv("../1_Data/daten.csv")
   <mono>dpi</mono> 
   </td>
   <td bgcolor="white">
-  <high>Auflösung</high> der Abbildung (dots per inch).
+  <high>Resolution</high> of the graph (dots per inch).
   </td> 
 </tr>
 </table>
 ]
+
 
 .pull-right5[
 <br>
@@ -1195,11 +1173,11 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Grafiken skalieren
+# Scale graphs
 
 <ul>
-  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
-  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+  <li class="m1"><span>The general <high>appearance</high> of graphs can be modified in the <mono>chunk</mono>-settings.</span></li> 
+  <li class="m2"><span>The arguments (normally) start with  <highm>fig.*</highm>.</span></li> 
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1218,7 +1196,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.width</mono>, <mono>fig.height</mono>
   </td>
   <td bgcolor="white">
-  <high>Breite</high> und <high>Höhe</high> in inches.
+  <high>Width</high> and <high>height</high> in inches.
   </td> 
 </tr>
 <tr>
@@ -1226,7 +1204,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.asp</mono>
   </td>
   <td bgcolor="white">
-   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+   <high>Aspect ratio</high>: Height relative to width.   
   </td> 
 </tr>
 <tr>
@@ -1234,7 +1212,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.align</mono>
   </td>
   <td bgcolor="white">
-  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  <high>Position</high> of the graph: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
   </td> 
 </tr>
 <tr>
@@ -1242,7 +1220,7 @@ read_csv("../1_Data/daten.csv")
   <mono>dpi</mono> 
   </td>
   <td bgcolor="white">
-  <high>Auflösung</high> der Abbildung (dots per inch).
+  <high>Resolution</high> of the graph (dots per inch).
   </td> 
 </tr>
 </table>
@@ -1260,11 +1238,11 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Grafiken skalieren
+# Scale graphs
 
 <ul>
-  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
-  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+  <li class="m1"><span>The general <high>appearance</high> of graphs can be modified in the <mono>chunk</mono>-settings.</span></li> 
+  <li class="m2"><span>The arguments (normally) start with  <highm>fig.*</highm>.</span></li> 
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1283,7 +1261,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.width</mono>, <mono>fig.height</mono>
   </td>
   <td bgcolor="white">
-  <high>Breite</high> und <high>Höhe</high> in inches.
+  <high>Width</high> and <high>height</high> in inches.
   </td> 
 </tr>
 <tr>
@@ -1291,7 +1269,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.asp</mono>
   </td>
   <td bgcolor="white">
-   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+   <high>Aspect ratio</high>: Height relative to width.   
   </td> 
 </tr>
 <tr>
@@ -1299,7 +1277,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.align</mono>
   </td>
   <td bgcolor="white">
-  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  <high>Position</high> of the graph: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
   </td> 
 </tr>
 <tr>
@@ -1307,7 +1285,7 @@ read_csv("../1_Data/daten.csv")
   <mono>dpi</mono> 
   </td>
   <td bgcolor="white">
-  <high>Auflösung</high> der Abbildung (dots per inch).
+  <high>Resolution</high> of the graph (dots per inch).
   </td> 
 </tr>
 </table>
@@ -1325,11 +1303,11 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Grafiken skalieren
+# Scale graphs
 
 <ul>
-  <li class="m1"><span>Die <high>Darstellung</high> von Grafiken kann in den <mono>Chunk</mono>-Settings angepasst werden.</span></li> 
-  <li class="m2"><span>Die Argumente beginnen (meist) mit <highm>fig.*</highm>.</span></li> 
+  <li class="m1"><span>The general <high>appearance</high> of graphs can be modified in the <mono>chunk</mono>-settings.</span></li> 
+  <li class="m2"><span>The arguments (normally) start with  <highm>fig.*</highm>.</span></li> 
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1348,7 +1326,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.width</mono>, <mono>fig.height</mono>
   </td>
   <td bgcolor="white">
-  <high>Breite</high> und <high>Höhe</high> in inches.
+  <high>Width</high> and <high>height</high> in inches.
   </td> 
 </tr>
 <tr>
@@ -1356,7 +1334,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.asp</mono>
   </td>
   <td bgcolor="white">
-   <high>Seitenverhältnis</high>: Höhe relativ zur Breite.   
+   <high>Aspect ratio</high>: Height relative to width.   
   </td> 
 </tr>
 <tr>
@@ -1364,7 +1342,7 @@ read_csv("../1_Data/daten.csv")
   <mono>fig.align</mono>
   </td>
   <td bgcolor="white">
-  <high>Position</high> der Abbildung: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
+  <high>Position</high> of the graph: <mono>'center'</mono>, <mono>'left'</mono>, <mono>'right'</mono>.
   </td> 
 </tr>
 <tr>
@@ -1372,7 +1350,7 @@ read_csv("../1_Data/daten.csv")
   <mono>dpi</mono> 
   </td>
   <td bgcolor="white">
-  <high>Auflösung</high> der Abbildung (dots per inch).
+  <high>Resolution</high> of the graph (dots per inch).
   </td> 
 </tr>
 </table>
@@ -1391,11 +1369,11 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Bildunterschrift
+# Captions
 
 <ul>
-  <li class="m1"><span>Bildunterschriften können durch <highm>fig.cap</highm> gesetzt.</span></li> 
-  <li class="m2"><span>Der Text kann <high>innerhalb des Chunks</high> definiert werden.</span></li> 
+  <li class="m1"><span>Captions can be added with  <highm>fig.cap</highm>.</span></li> 
+  <li class="m2"><span>The caption text can be defined  <high>within the chunks</high>.</span></li> 
 </ul>
 
 
@@ -1414,10 +1392,10 @@ read_csv("../1_Data/daten.csv")
 
 .pull-left4[
 
-# Links, Fussnoten
+# Links, footnotes
 
 <ul>
-  <li class="m1"><span>Zum Einbinden von Links und Fussnoten gibt es ebenfalls spezielle  <high>Markdown Syntax</high>.</span></li>
+  <li class="m1"><span>There is specific <high>markdown syntax</high> to include links and footnotes.</span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1436,7 +1414,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lsqb;Name&rsqb;(URL)</mono>
   </td>
   <td bgcolor="white">
-  <high>Link</high>. Name erscheint im Text, URL nicht.
+  <high>Link</high>. Name is displayed in the text, the URL is not displayed.
   </td> 
 </tr>
 <tr>
@@ -1444,7 +1422,7 @@ read_csv("../1_Data/daten.csv")
   <mono>^&lsqb;Text&rsqb;</mono>
   </td>
   <td bgcolor="white">
-   <high>Fussnoten</high> werden unten am Text angehängt.    
+   <high>Footnotes</high> are included after the end of the text.    
   </td> 
 </tr>
 <tr>
@@ -1452,7 +1430,7 @@ read_csv("../1_Data/daten.csv")
   <mono>***</mono>
   </td>
   <td bgcolor="white">
-   Fügt eine <high>horizontale</high> Trennlinie ein.
+   Includes a <high>horizontal</high> separation line.
   </td> 
 </tr>
 </table>
@@ -1462,7 +1440,7 @@ read_csv("../1_Data/daten.csv")
 .pull-right5[
 <br><br>
 <p align = "center">
-  <img src="image/links.png">
+  <img src="image/links.png" height = 540px>
 </p>
 
 ]
@@ -1474,7 +1452,7 @@ read_csv("../1_Data/daten.csv")
 # Quotes
 
 <ul>
-  <li class="m1"><span><high>Zitationen</high> (Quotes) werden direkt in Markdown erstellt.</span></li>
+  <li class="m1"><span><high>Quotes</high> are generated directly in Markdown.</span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1493,7 +1471,7 @@ read_csv("../1_Data/daten.csv")
   <mono>> block quote</mono>
   </td>
   <td bgcolor="white">
-  Text wird als <high>Zitat</high> angezeigt.<high></high>
+  Text will be displayed as a <high>Quote</high>.<high></high>
   </td> 
 </tr>
 <tr>
@@ -1517,7 +1495,7 @@ read_csv("../1_Data/daten.csv")
 .pull-right5[
 <br><br>
 <p align = "center">
-  <img src="image/quote.png">
+  <img src="image/quote.png" height = 540px>
 </p>
 
 
@@ -1532,7 +1510,7 @@ read_csv("../1_Data/daten.csv")
 
 <ul>
   <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
-  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+  <li class="m2"><span>Enables the definition of general <high>properties of a document</high> and code inclusions.<span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1559,7 +1537,7 @@ read_csv("../1_Data/daten.csv")
   <mono>toc_depth</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  <high>Depth</high> of the <b>T</b>able <b>O</b>f <b>C</b>ontents.
   </td> 
 </tr>
 <tr>
@@ -1567,7 +1545,7 @@ read_csv("../1_Data/daten.csv")
   <mono>theme</mono> 
   </td>
   <td bgcolor="white">
-  <high>Eigenschaften</high> des Textbilds.
+  <high>Properties</high> of the layout.
   </td> 
 </tr>
 <tr>
@@ -1575,7 +1553,7 @@ read_csv("../1_Data/daten.csv")
   <mono>includes</mono> 
   </td>
   <td bgcolor="white">
-  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  <high>Code inclusions</high> before (<mono>before_body</mono>), after (<mono>after_body</mono>) <mono>body</mono>, or <mono>in_header</mono>.
   </td> 
 </tr>
 </table>
@@ -1600,7 +1578,7 @@ read_csv("../1_Data/daten.csv")
 
 <ul>
   <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
-  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+  <li class="m2"><span>Enables the definition of general <high>properties of a document</high> and code inclusions.<span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1627,7 +1605,7 @@ read_csv("../1_Data/daten.csv")
   <mono>toc_depth</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  <high>Depth</high> of the <b>T</b>able <b>O</b>f <b>C</b>ontents.
   </td> 
 </tr>
 <tr>
@@ -1635,7 +1613,7 @@ read_csv("../1_Data/daten.csv")
   <mono>theme</mono> 
   </td>
   <td bgcolor="white">
-  <high>Eigenschaften</high> des Textbilds.
+  <high>Properties</high> of the layout.
   </td> 
 </tr>
 <tr>
@@ -1643,7 +1621,7 @@ read_csv("../1_Data/daten.csv")
   <mono>includes</mono> 
   </td>
   <td bgcolor="white">
-  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  <high>Code inclusions</high> before (<mono>before_body</mono>), after (<mono>after_body</mono>) <mono>body</mono>, or <mono>in_header</mono>.
   </td> 
 </tr>
 </table>
@@ -1667,7 +1645,7 @@ read_csv("../1_Data/daten.csv")
 
 <ul>
   <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
-  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+  <li class="m2"><span>Enables the definition of general <high>properties of a document</high> and code inclusions.<span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1694,7 +1672,7 @@ read_csv("../1_Data/daten.csv")
   <mono>toc_depth</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  <high>Depth</high> of the <b>T</b>able <b>O</b>f <b>C</b>ontents.
   </td> 
 </tr>
 <tr>
@@ -1702,7 +1680,7 @@ read_csv("../1_Data/daten.csv")
   <mono>theme</mono> 
   </td>
   <td bgcolor="white">
-  <high>Eigenschaften</high> des Textbilds.
+  <high>Properties</high> of the layout.
   </td> 
 </tr>
 <tr>
@@ -1710,7 +1688,7 @@ read_csv("../1_Data/daten.csv")
   <mono>includes</mono> 
   </td>
   <td bgcolor="white">
-  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  <high>Code inclusions</high> before (<mono>before_body</mono>), after (<mono>after_body</mono>) <mono>body</mono>, or <mono>in_header</mono>.
   </td> 
 </tr>
 </table>
@@ -1734,7 +1712,7 @@ read_csv("../1_Data/daten.csv")
 
 <ul>
   <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
-  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+  <li class="m2"><span>Enables the definition of general <high>properties of a document</high> and code inclusions.<span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1761,7 +1739,7 @@ read_csv("../1_Data/daten.csv")
   <mono>toc_depth</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  <high>Depth</high> of the <b>T</b>able <b>O</b>f <b>C</b>ontents.
   </td> 
 </tr>
 <tr>
@@ -1769,7 +1747,7 @@ read_csv("../1_Data/daten.csv")
   <mono>theme</mono> 
   </td>
   <td bgcolor="white">
-  <high>Eigenschaften</high> des Textbilds.
+  <high>Properties</high> of the layout.
   </td> 
 </tr>
 <tr>
@@ -1777,7 +1755,7 @@ read_csv("../1_Data/daten.csv")
   <mono>includes</mono> 
   </td>
   <td bgcolor="white">
-  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  <high>Code inclusions</high> before (<mono>before_body</mono>), after (<mono>after_body</mono>) <mono>body</mono>, or <mono>in_header</mono>.
   </td> 
 </tr>
 </table>
@@ -1801,7 +1779,7 @@ read_csv("../1_Data/daten.csv")
 
 <ul>
   <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
-  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+  <li class="m2"><span>Enables the definition of general <high>properties of a document</high> and code inclusions.<span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1828,7 +1806,7 @@ read_csv("../1_Data/daten.csv")
   <mono>toc_depth</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  <high>Depth</high> of the <b>T</b>able <b>O</b>f <b>C</b>ontents.
   </td> 
 </tr>
 <tr>
@@ -1836,7 +1814,7 @@ read_csv("../1_Data/daten.csv")
   <mono>theme</mono> 
   </td>
   <td bgcolor="white">
-  <high>Eigenschaften</high> des Textbilds.
+  <high>Properties</high> of the layout.
   </td> 
 </tr>
 <tr>
@@ -1844,7 +1822,7 @@ read_csv("../1_Data/daten.csv")
   <mono>includes</mono> 
   </td>
   <td bgcolor="white">
-  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  <high>Code inclusions</high> before (<mono>before_body</mono>), after (<mono>after_body</mono>) <mono>body</mono>, or <mono>in_header</mono>.
   </td> 
 </tr>
 </table>
@@ -1868,7 +1846,7 @@ read_csv("../1_Data/daten.csv")
 
 <ul>
   <li class="m1"><span><b>Y</b>AML <b>A</b>'int <b>M</b>arkup <b>L</b>anguage.<span></li>
-  <li class="m2"><span>Erlaubt die Definition der <high>Eigenschaften des Dokuments</high> einschliesslich Inklusionen.<span></li>
+  <li class="m2"><span>Enables the definition of general <high>properties of a document</high> and code inclusions.<span></li>
 </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1895,7 +1873,7 @@ read_csv("../1_Data/daten.csv")
   <mono>toc_depth</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tiefe</high> des <b>T</b>able <b>O</b>f <b>C</b>ontents.
+  <high>Depth</high> of the <b>T</b>able <b>O</b>f <b>C</b>ontents.
   </td> 
 </tr>
 <tr>
@@ -1903,7 +1881,7 @@ read_csv("../1_Data/daten.csv")
   <mono>theme</mono> 
   </td>
   <td bgcolor="white">
-  <high>Eigenschaften</high> des Textbilds.
+  <high>Properties</high> of the layout.
   </td> 
 </tr>
 <tr>
@@ -1911,7 +1889,7 @@ read_csv("../1_Data/daten.csv")
   <mono>includes</mono> 
   </td>
   <td bgcolor="white">
-  <high>Ergänzungen</high> vor (<mono>before_body</mono>), nach (<mono>after_body</mono>) <mono>body</mono>, oder <mono>in_header</mono>.
+  <high>Code inclusions</high> before (<mono>before_body</mono>), after (<mono>after_body</mono>) <mono>body</mono>, or <mono>in_header</mono>.
   </td> 
 </tr>
 </table>
@@ -1935,7 +1913,7 @@ read_csv("../1_Data/daten.csv")
 
 
 <ul>
-  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage enables the layout of text and content with <high>HTML-Tags<high>.</span></li> 
   </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -1953,7 +1931,7 @@ read_csv("../1_Data/daten.csv")
   <td bgcolor="white">
   <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
   <td bgcolor="white">
-  <high>Überschrift</high> Level 1, 2,...
+  <high>Heading</high> level 1, 2,...
   </td> 
 </tr>
 <tr>
@@ -1961,7 +1939,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;br&gt;</mono>
   </td>
   <td bgcolor="white">
-   Neue <high>Zeile</high>.
+   New <high>line</high>.
   </td> 
 </tr>
 <tr>
@@ -1969,7 +1947,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
   </td>
   <td bgcolor="white">
-  <high>Fett, Kursiv, Unterstrichen.</high>
+  <high>Bold, italics, underline.</high>
   </td> 
 </tr>
 <tr>
@@ -1977,7 +1955,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;div&gt;, &lt;p&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Abschnitt, Textabschnitt.</high>
+  <high>Container, text section.</high>
   </td> 
 </tr>
 <tr>
@@ -1985,7 +1963,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;table&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tabelle, Spalten.</high>
+  <high>Tables, columns.</high>
   </td> 
 </tr>
 </table>
@@ -2009,7 +1987,7 @@ read_csv("../1_Data/daten.csv")
 
 
 <ul>
-  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage enables the layout of text and content with <high>HTML-Tags<high>.</span></li> 
   </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -2027,7 +2005,7 @@ read_csv("../1_Data/daten.csv")
   <td bgcolor="white">
   <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
   <td bgcolor="white">
-  <high>Überschrift</high> Level 1, 2,...
+  <high>Heading</high> level 1, 2,...
   </td> 
 </tr>
 <tr>
@@ -2035,7 +2013,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;br&gt;</mono>
   </td>
   <td bgcolor="white">
-   Neue <high>Zeile</high>.
+   New <high>line</high>.
   </td> 
 </tr>
 <tr>
@@ -2043,7 +2021,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
   </td>
   <td bgcolor="white">
-  <high>Fett, Kursiv, Unterstrichen.</high>
+  <high>Bold, italics, underline.</high>
   </td> 
 </tr>
 <tr>
@@ -2051,7 +2029,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;div&gt;, &lt;p&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Abschnitt, Textabschnitt.</high>
+  <high>Container, text section.</high>
   </td> 
 </tr>
 <tr>
@@ -2059,11 +2037,10 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;table&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tabelle, Spalten.</high>
+  <high>Tables, columns.</high>
   </td> 
 </tr>
 </table>
-
 ]
 
 .pull-right6[
@@ -2084,7 +2061,7 @@ read_csv("../1_Data/daten.csv")
 
 
 <ul>
-  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage enables the layout of text and content with <high>HTML-Tags<high>.</span></li> 
   </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -2102,7 +2079,7 @@ read_csv("../1_Data/daten.csv")
   <td bgcolor="white">
   <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
   <td bgcolor="white">
-  <high>Überschrift</high> Level 1, 2,...
+  <high>Heading</high> level 1, 2,...
   </td> 
 </tr>
 <tr>
@@ -2110,7 +2087,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;br&gt;</mono>
   </td>
   <td bgcolor="white">
-   Neue <high>Zeile</high>.
+   New <high>line</high>.
   </td> 
 </tr>
 <tr>
@@ -2118,7 +2095,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
   </td>
   <td bgcolor="white">
-  <high>Fett, Kursiv, Unterstrichen.</high>
+  <high>Bold, italics, underline.</high>
   </td> 
 </tr>
 <tr>
@@ -2126,7 +2103,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;div&gt;, &lt;p&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Abschnitt, Textabschnitt.</high>
+  <high>Container, text section.</high>
   </td> 
 </tr>
 <tr>
@@ -2134,7 +2111,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;table&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tabelle, Spalten.</high>
+  <high>Tables, columns.</high>
   </td> 
 </tr>
 </table>
@@ -2159,7 +2136,7 @@ read_csv("../1_Data/daten.csv")
 
 
 <ul>
-  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage enables the layout of text and content with <high>HTML-Tags<high>.</span></li> 
   </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -2177,7 +2154,7 @@ read_csv("../1_Data/daten.csv")
   <td bgcolor="white">
   <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
   <td bgcolor="white">
-  <high>Überschrift</high> Level 1, 2,...
+  <high>Heading</high> level 1, 2,...
   </td> 
 </tr>
 <tr>
@@ -2185,7 +2162,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;br&gt;</mono>
   </td>
   <td bgcolor="white">
-   Neue <high>Zeile</high>.
+   New <high>line</high>.
   </td> 
 </tr>
 <tr>
@@ -2193,7 +2170,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
   </td>
   <td bgcolor="white">
-  <high>Fett, Kursiv, Unterstrichen.</high>
+  <high>Bold, italics, underline.</high>
   </td> 
 </tr>
 <tr>
@@ -2201,7 +2178,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;div&gt;, &lt;p&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Abschnitt, Textabschnitt.</high>
+  <high>Container, text section.</high>
   </td> 
 </tr>
 <tr>
@@ -2209,7 +2186,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;table&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tabelle, Spalten.</high>
+  <high>Tables, columns.</high>
   </td> 
 </tr>
 </table>
@@ -2233,7 +2210,7 @@ read_csv("../1_Data/daten.csv")
 
 
 <ul>
-  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage ermöglicht die Organization von Text und Inhalten mittels <high>HTML-Tags<high>.</span></li> 
+  <li class="m1"><span><b>H</b>ypertext <b>M</b>arkup <b>L</b>anguage enables the layout of text and content with <high>HTML-Tags<high>.</span></li> 
   </ul>
 
 <table style="cellspacing:0; cellpadding:0; border:none; padding-top:10px" width=100%>
@@ -2251,7 +2228,7 @@ read_csv("../1_Data/daten.csv")
   <td bgcolor="white">
   <mono>&lt;h1&gt;, &lt;h2&gt,...</mono> </td>
   <td bgcolor="white">
-  <high>Überschrift</high> Level 1, 2,...
+  <high>Heading</high> level 1, 2,...
   </td> 
 </tr>
 <tr>
@@ -2259,7 +2236,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;br&gt;</mono>
   </td>
   <td bgcolor="white">
-   Neue <high>Zeile</high>.
+   New <high>line</high>.
   </td> 
 </tr>
 <tr>
@@ -2267,7 +2244,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;b&gt;, &lt;i&gt;, &lt;u&gt;</mono>
   </td>
   <td bgcolor="white">
-  <high>Fett, Kursiv, Unterstrichen.</high>
+  <high>Bold, italics, underline.</high>
   </td> 
 </tr>
 <tr>
@@ -2275,7 +2252,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;div&gt;, &lt;p&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Abschnitt, Textabschnitt.</high>
+  <high>Container, text section.</high>
   </td> 
 </tr>
 <tr>
@@ -2283,7 +2260,7 @@ read_csv("../1_Data/daten.csv")
   <mono>&lt;table&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tabelle, Spalten.</high>
+  <high>Tables, columns.</high>
   </td> 
 </tr>
 </table>
