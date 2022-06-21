@@ -735,7 +735,7 @@ basel %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> the edge list.</span></li><br>
+  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> - the edge list.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
@@ -1022,7 +1022,7 @@ network %>%
                    group = community, 
                    fill = community), 
                level = .8, geom = "polygon", 
-               alpha = .1, show.legend = FALSE) + 
+               alpha = .1, show.legend = FALSE)+ 
   
   # rest of plot
   scale_fill_manual(values=viridis(3)[1:2]) +
@@ -1129,7 +1129,7 @@ network %>%
 .pull-left5[
 
 <ul>
-  <li class="m1"><span>Labels can be added as usual using <mono>labels()</mono>.</span></li><br>
+  <li class="m1"><span>Labels can be added as usual, using <mono>labels()</mono>.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}

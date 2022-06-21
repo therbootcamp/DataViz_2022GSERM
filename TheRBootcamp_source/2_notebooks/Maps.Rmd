@@ -71,7 +71,7 @@ basel_map %>%
 
 # 3 - Adding variables
 
-1. You know already how to create a map. Now, we shall see how we can add variables, such as income and wealth , and represent them in our map. To add the variables in our `basel` object, simply `join` it to the `basel_map` object by matching `"TYPE"` and `"qaurter"`. This is possible because `basel_map` is also a `tibble`. Save the result back to `basel_map`.
+1. You know already how to create a map. Now, we shall see how we can add variables, such as income and wealth and represent them in our map. To add the variables in our `basel` object, simply `join` it to the `basel_map` object by matching `"TYPE"` and `"quarter"`. This is possible because `basel_map` is also a `tibble`. Save the result back to `basel_map`.
 
 ```{r}
 basel_map <- basel_map %>% 
