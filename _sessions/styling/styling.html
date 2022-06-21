@@ -548,8 +548,6 @@ my_plot +
   &lt;li class="m1"&gt;&lt;span&gt;Various &lt;mono&gt;scale_*()&lt;/mono&gt; permit specification of all &lt;high&gt;dimensions&lt;/high&gt;, including axes, colors, sizes, etc.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;br&gt;
-
 
 ```r
 # Fixing the legend
@@ -582,25 +580,23 @@ my_plot +
 # Wrangling
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;Again, wrangling can help with plotting.&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;The order of discrete variables can be controlled using &lt;highm&gt;factors&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Again, wrangling can help with plotting.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;The order of discrete variables can be controlled using &lt;highm&gt;factors&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;br&gt;
 
 
 
 
 ```r
 # change data
-basel &lt;- basel %&gt;%
+basel_order &lt;- basel %&gt;%
     
   # factor ordered by income in 2001
   arrange(year, income_median) %&gt;% 
   mutate(quarter = as_factor(quarter))
 
 # show data
-basel
+basel_order
 ```
 
 
@@ -643,15 +639,12 @@ basel
 # Wrangling
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;Again, wrangling can help with plotting.&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;The order of discrete variables can be controlled using &lt;highm&gt;factors&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Colors are assigned according to the &lt;high&gt;order of factor levels&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;br&gt;
 
 
 ```r
-basel %&gt;%
+basel_order %&gt;%
   
   # original code
   ggplot(aes(x = year, y = income_median, 
@@ -662,6 +655,8 @@ basel %&gt;%
     legend.position = "bottom",
     legend.title = element_blank(),
     legend.text = element_text(size=7)) + 
+  
+  # ordered implicitly
   scale_color_viridis_d()
 ```
 
@@ -675,6 +670,202 @@ basel %&gt;%
 &lt;img src="styling_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;viridis&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;viridis&lt;/mono&gt; includes several preset color sets that can &lt;high&gt;useful for different scenarios&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_order %&gt;%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Magma
+  scale_color_viridis_d(option = "A")
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;viridis&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;viridis&lt;/mono&gt; includes several preset color sets that can &lt;high&gt;useful for different scenarios&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_order %&gt;%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Inferno
+  scale_color_viridis_d(option = "B")
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;viridis&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;viridis&lt;/mono&gt; includes several preset color sets that can &lt;high&gt;useful for different scenarios&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_order %&gt;%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Plasma
+  scale_color_viridis_d(option = "C")
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;viridis&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;viridis&lt;/mono&gt; includes several preset color sets that can &lt;high&gt;useful for different scenarios&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_order %&gt;%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Cividis
+  scale_color_viridis_d(option = "E")
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;viridis&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;viridis&lt;/mono&gt; includes several preset color sets that can &lt;high&gt;useful for different scenarios&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_order %&gt;%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Viridis default
+  scale_color_viridis_d(option = "D")
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
 
 ---
 
@@ -713,7 +904,7 @@ my_plot +
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -809,15 +1000,15 @@ basel_agg %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-# Error
-
 .pull-left45[
+
+# Error
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
@@ -832,7 +1023,7 @@ se = function(x) {
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
 # new data with error
-basel_error &lt;- basel %&gt;%
+basel_agg &lt;- basel %&gt;%
   
   # get income mean in 2001
   arrange(year, quarter) %&gt;% 
@@ -847,14 +1038,17 @@ basel_error &lt;- basel %&gt;%
 ```
 
 
+
+
 ]
 
 .pull-right45[
 
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
 
 ```
 # A tibble: 34 × 4
-# Groups:   year [17]
     year low    inc_m inc_se
    &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1  2001 FALSE 43813   1747.
@@ -879,12 +1073,12 @@ basel_error &lt;- basel %&gt;%
 # &lt;mono&gt;geom_errorbar()&lt;/mono&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_errorbar()&lt;/mono&gt; can be used to visualize &lt;high&gt;standard statistical error bars&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
 ```r
-basel_error %&gt;%
+basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -904,7 +1098,7 @@ basel_error %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-49-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -915,15 +1109,15 @@ basel_error %&gt;%
 # &lt;mono&gt;geom_ribbon()&lt;/mono&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_ribbon()&lt;/mono&gt; can be a replacement for &lt;high&gt;standard statistical error bars&lt;/high&gt; for line charts.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
 ```r
-basel_error %&gt;%
+basel_agg %&gt;%
   
   # plot code
-  ggplot(aes(x = year, y = income, 
+  ggplot(aes(x = year, y = inc_m, 
              col = low, fill = low)) +
   
   # ribbon geom inserted
@@ -941,7 +1135,7 @@ basel_error %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-51-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -949,29 +1143,34 @@ basel_error %&gt;%
 
 .pull-left45[
 
-# &lt;mono&gt;annotations()&lt;/mono&gt;
+# Labels
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;The &lt;mono&gt;annotation()&lt;/mono&gt; function adds text or highlights areas in a graph.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_ribbon()&lt;/mono&gt; can be a replacement for &lt;high&gt;standard statistical error bars&lt;/high&gt; for line charts.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
 ```r
-basel_aggregate %&gt;%
+basel_agg %&gt;%
   
   # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() +
-  # add text
-  annotate('text', 
-           x = 2010, 
-           y = 60500, 
-           label = 'Financial Crisis')
+  ggplot(aes(x = year, y = inc_m, 
+             col = low, fill = low)) +
+  
+  # ribbon geom inserted
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
+  
+  # annotation
+  labs(title = "Inequality in Basel",
+       subtitle = "Difference between...",
+       x = "Year",
+       y = "Income") + 
+
+  ... 
 ```
+
 
 ]
 
@@ -979,39 +1178,38 @@ basel_aggregate %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-53-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
+
 .pull-left45[
 
 # &lt;mono&gt;annotations()&lt;/mono&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;The &lt;mono&gt;annotation()&lt;/mono&gt; function adds text or highlights areas in a graph.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;annotate()&lt;/mono&gt; can be used to &lt;high&gt;add any type of plot elements&lt;/high&gt; (layers) using vector specification.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
 ```r
-basel_aggregate %&gt;%
+basel_agg %&gt;%
   
   # plot code
-  ggplot(aes(x = year, y = income, 
+  ggplot(aes(x = year, y = inc_m, 
              col = low)) +
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() +
-  # add text
-  annotate('text', 
-           x = 2008, y = 60500, 
+  
+  # annotate
+  annotate('line', 
+           x = 2008, y = c(37500,62500), 
            label = 'Financial Crisis') +
-  # add area 
-  annotate("rect", 
-           xmin = 2007, xmax = 2009, 
-           ymin = 41000, ymax = 60000,
-           alpha = .2)
+  annotate('text', 
+           x = 2010, y = 63000, 
+           label = 'Financial crisis',
+           fontface = "italic") +
+  
+  ...
 ```
 
 ]
@@ -1020,7 +1218,46 @@ basel_aggregate %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-55-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+.pull-left45[
+
+# &lt;mono&gt;annotations()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;annotate()&lt;/mono&gt; can be used to &lt;high&gt;add any type of plot elements&lt;/high&gt; (layers) using vector specification.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_agg %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = inc_m, 
+             col = low)) +
+  
+  # annotate
+  annotate("rect", alpha = .1,
+           xmin = 2007, xmax = 2009, 
+           ymin = 41000, ymax = 60000)+
+  annotate('text', 
+           x = 2010, y = 63000, 
+           label = 'Financial crisis',
+           fontface = "italic") +
+  
+  ...
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-57-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -1049,7 +1286,6 @@ basel_aggregate %&gt;%
 
 .pull-right45[
 
-&lt;br&gt;
 
 
 ```r

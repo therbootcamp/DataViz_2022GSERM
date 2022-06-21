@@ -590,8 +590,6 @@ my_plot +
   <li class="m1"><span>Various <mono>scale_*()</mono> permit specification of all <high>dimensions</high>, including axes, colors, sizes, etc.</span></li>
 </ul>
 
-<br>
-
 ```{r, eval = F}
 # Fixing the legend
 my_plot + 
@@ -631,15 +629,13 @@ my_plot +
 # Wrangling
 
 <ul>
-  <li class="m1">Again, wrangling can help with plotting.</span></li>
-  <li class="m2">The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
+  <li class="m1"><span>Again, wrangling can help with plotting.</span></li>
+  <li class="m2"><span>The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
 </ul>
-
-<br>
 
 ```{r, echo = F}
 # change data
-basel <- basel %>%
+basel_order <- basel %>%
     
   # factor ordered by income in 2001
   arrange(year, income_median) %>% 
@@ -650,14 +646,14 @@ options(tibble.width = 40)
 
 ```{r, eval = F}
 # change data
-basel <- basel %>%
+basel_order <- basel %>%
     
   # factor ordered by income in 2001
   arrange(year, income_median) %>% 
   mutate(quarter = as_factor(quarter))
 
 # show data
-basel
+basel_order
 ```
 
 
@@ -668,7 +664,7 @@ basel
 <br><br><br>
 
 ```{r, echo = FALSE}
-basel
+basel_order
 ```
 
 ]
@@ -680,14 +676,11 @@ basel
 # Wrangling
 
 <ul>
-  <li class="m1">Again, wrangling can help with plotting.</span></li>
-  <li class="m2">The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
+  <li class="m1"><span>Colors are assigned according to the <high>order of factor levels</high>.</span></li>
 </ul>
 
-<br>
-
 ```{r, eval = F}
-basel %>%
+basel_order %>%
   
   # original code
   ggplot(aes(x = year, y = income_median, 
@@ -698,6 +691,8 @@ basel %>%
     legend.position = "bottom",
     legend.title = element_blank(),
     legend.text = element_text(size=7)) + 
+  
+  # ordered implicitly
   scale_color_viridis_d()
 ```
 
@@ -709,7 +704,7 @@ basel %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
+basel_order %>%
   
   # original code
   ggplot(aes(x = year, y = income_median, col = quarter)) +
@@ -723,6 +718,257 @@ basel %>%
 ```
 
 ]
+
+---
+
+.pull-left45[
+
+# <mono>viridis</mono>
+
+<ul>
+  <li class="m1"><span><mono>viridis</mono> includes several preset color sets that can <high>useful for different scenarios</high>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Magma
+  scale_color_viridis_d(option = "A")
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d(option = "A")
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>viridis</mono>
+
+<ul>
+  <li class="m1"><span><mono>viridis</mono> includes several preset color sets that can <high>useful for different scenarios</high>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Inferno
+  scale_color_viridis_d(option = "B")
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d(option = "B")
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>viridis</mono>
+
+<ul>
+  <li class="m1"><span><mono>viridis</mono> includes several preset color sets that can <high>useful for different scenarios</high>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Plasma
+  scale_color_viridis_d(option = "C")
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d(option = "C")
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>viridis</mono>
+
+<ul>
+  <li class="m1"><span><mono>viridis</mono> includes several preset color sets that can <high>useful for different scenarios</high>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Cividis
+  scale_color_viridis_d(option = "E")
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d(option = "E")
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>viridis</mono>
+
+<ul>
+  <li class="m1"><span><mono>viridis</mono> includes several preset color sets that can <high>useful for different scenarios</high>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, 
+             col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  
+  # palette: Viridis default
+  scale_color_viridis_d(option = "D")
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel_order %>%
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d(option = "D")
+```
+
+]
+
 
 ---
 
@@ -878,17 +1124,7 @@ basel_agg %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median)) %>% 
+basel_agg %>% 
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -903,9 +1139,9 @@ basel %>%
 
 ---
 
-# Error
-
 .pull-left45[
+
+# Error
 
 <ul>
   <li class="m1"><span>To visualize aggregates and error, first generate them using <highm>dplyr</highm>.</span></li>
@@ -919,7 +1155,7 @@ se = function(x) {
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
 # new data with error
-basel_error <- basel %>%
+basel_agg <- basel %>%
   
   # get income mean in 2001
   arrange(year, quarter) %>% 
@@ -940,7 +1176,7 @@ se = function(x) {
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
 # new data with error
-basel_error <- basel %>%
+basel_agg <- basel %>%
   
   # get income mean in 2001
   arrange(year, quarter) %>% 
@@ -960,8 +1196,10 @@ basel_error <- basel %>%
 
 .pull-right45[
 
+<br><br><br><br>
+
 ```{r, echo = FALSE}
-basel_error
+basel_agg
 ```
 
 ]
@@ -973,11 +1211,11 @@ basel_error
 # <mono>geom_errorbar()</mono>
 
 <ul>
-  <li class="m1"><span><mono>geom_errorbar()</mono> can be used to visualize standard statistical error bars.</span></li>
+  <li class="m1"><span><mono>geom_errorbar()</mono> can be used to visualize <high>standard statistical error bars</high>.</span></li>
 </ul>
 
 ```{r, eval = F}
-basel_error %>%
+basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -999,24 +1237,13 @@ basel_error %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %>% 
+basel_agg %>% 
   
   # original code
-  ggplot(aes(x = year, y = income, 
+  ggplot(aes(x = year, y = inc_m, 
              col = low, fill = low)) +
-  geom_errorbar(aes(ymin = income - income_sd,
-                    ymax = income + income_sd)) + 
+  geom_errorbar(aes(ymin = inc_m - inc_se,
+                    ymax = inc_m + inc_se)) + 
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
@@ -1032,14 +1259,14 @@ basel %>%
 # <mono>geom_ribbon()</mono>
 
 <ul>
-  <li class="m1"><span>To visualize aggregates and error, first generate them using <highm>dplyr</highm>.</span></li>
+  <li class="m1"><span><mono>geom_ribbon()</mono> can be a replacement for <high>standard statistical error bars</high> for line charts.</span></li>
 </ul>
 
 ```{r, eval = F}
-basel_error %>%
+basel_agg %>%
   
   # plot code
-  ggplot(aes(x = year, y = income, 
+  ggplot(aes(x = year, y = inc_m, 
              col = low, fill = low)) +
   
   # ribbon geom inserted
@@ -1059,24 +1286,13 @@ basel_error %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %>% 
+basel_agg %>% 
   
   # adapted plot
-  ggplot(aes(x = year, y = income, 
+  ggplot(aes(x = year, y = inc_m, 
              col = low, fill = low)) +
-  geom_ribbon(aes(ymin = income - income_sd,
-                  ymax = income + income_sd), 
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
               alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
@@ -1090,27 +1306,90 @@ basel %>%
 
 .pull-left45[
 
-# <mono>annotations()</mono>
+# Labels
 
 <ul>
-  <li class="m1"><span>The <mono>annotation()</mono> function adds text or highlights areas in a graph.</span></li>
+  <li class="m1"><span><mono>geom_ribbon()</mono> can be a replacement for <high>standard statistical error bars</high> for line charts.</span></li>
 </ul>
 
 ```{r, eval = F}
-basel_aggregate %>%
+basel_agg %>%
   
   # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
+  ggplot(aes(x = year, y = inc_m, 
+             col = low, fill = low)) +
+  
+  # ribbon geom inserted
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
+  
+  # annotation
+  labs(title = "Inequality in Basel",
+       subtitle = "Difference between...",
+       x = "Year",
+       y = "Income") + 
+
+  ... 
+
+
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel_agg %>% 
+  
+  # adapted plot
+  ggplot(aes(x = year, y = inc_m, 
+             col = low, fill = low)) +
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
-  scale_color_viridis_d() +
-  # add text
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+    labs(title = "Inequality in Basel",
+       subtitle = "Difference between poor and rich quarters",
+       x = "Year",
+       y = "Income") 
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>annotations()</mono>
+
+<ul>
+  <li class="m1"><span><mono>annotate()</mono> can be used to <high>add any type of plot elements</high> (layers) using vector specification.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_agg %>%
+  
+  # plot code
+  ggplot(aes(x = year, y = inc_m, 
+             col = low)) +
+  
+  # annotate
+  annotate('line', 
+           x = 2008, y = c(37500,62500), 
+           label = 'Financial Crisis') +
   annotate('text', 
-           x = 2010, 
-           y = 60500, 
-           label = 'Financial Crisis')
+           x = 2010, y = 63000, 
+           label = 'Financial crisis',
+           fontface = "italic") +
+  
+  ...
 ```
 
 ]
@@ -1120,27 +1399,24 @@ basel_aggregate %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
+basel_agg %>% 
   
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median)) %>% 
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
+  # adapted plot
+  ggplot(aes(x = year, y = inc_m, 
+             col = low, fill = low)) +
+  annotate('line', x = 2008, y = c(37500,62500), label = 'Financial Crisis') +
+  annotate('text', x = 2008, y = 63000, label = 'Financial crisis',fontface = "italic")+
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
-  scale_color_viridis_d()  +
-  # add text
-  annotate('text', x = 2010, y = 60500, label = 'Financial Crisis')
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+    labs(title = "Inequality in Basel",
+       subtitle = "Difference between poor and rich quarters",
+       x = "Year",
+       y = "Income")
 ```
 
 ]
@@ -1151,28 +1427,26 @@ basel %>%
 # <mono>annotations()</mono>
 
 <ul>
-  <li class="m1"><span>The <mono>annotation()</mono> function adds text or highlights areas in a graph.</span></li>
+  <li class="m1"><span><mono>annotate()</mono> can be used to <high>add any type of plot elements</high> (layers) using vector specification.</span></li>
 </ul>
 
 ```{r, eval = F}
-basel_aggregate %>%
+basel_agg %>%
   
   # plot code
-  ggplot(aes(x = year, y = income, 
+  ggplot(aes(x = year, y = inc_m, 
              col = low)) +
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() +
-  # add text
-  annotate('text', 
-           x = 2008, y = 60500, 
-           label = 'Financial Crisis') +
-  # add area 
-  annotate("rect", 
+  
+  # annotate
+  annotate("rect", alpha = .1,
            xmin = 2007, xmax = 2009, 
-           ymin = 41000, ymax = 60000,
-           alpha = .2)
+           ymin = 41000, ymax = 60000)+
+  annotate('text', 
+           x = 2010, y = 63000, 
+           label = 'Financial crisis',
+           fontface = "italic") +
+  
+  ...
 ```
 
 ]
@@ -1182,33 +1456,25 @@ basel_aggregate %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
+basel_agg %>% 
   
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median)) %>% 
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
+  # adapted plot
+  ggplot(aes(x = year, y = inc_m, 
+             col = low, fill = low)) +
+  annotate("rect", xmin = 2007, xmax = 2009, 
+           alpha = .1, ymin = 37500, ymax = 62500)+
+  annotate('text', x = 2008, y = 63000, label = 'Financial crisis',fontface = "italic")+
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
-  scale_color_viridis_d()  +
-  # add text
-  annotate('text', 
-           x = 2008, 
-           y = 60500, 
-           label = 'Financial Crisis') +
-  # add area 
-annotate("rect", xmin = 2007, xmax = 2009, ymin = 41569, ymax = 60000,
-  alpha = .2)
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+    labs(title = "Inequality in Basel",
+       subtitle = "Difference between poor and rich quarters",
+       x = "Year",
+       y = "Income")
 ```
 
 ]
@@ -1238,7 +1504,6 @@ annotate("rect", xmin = 2007, xmax = 2009, ymin = 41569, ymax = 60000,
 
 .pull-right45[
 
-<br>
 
 ```{r, eval = FALSE}
 # Save as pdf
