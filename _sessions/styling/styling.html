@@ -12,15 +12,19 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-.title[
 # Styling
-]
-.author[
-### Visualizing and communicating data with R<br> <a href='https://therbootcamp.github.io'> <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br> <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'> <i class='fas fa-clock' style='font-size:1.4em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:1.4em;' ></i> </a>  <a href='therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a>  <a href='https://www.linkedin.com/company/27090302'> <i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
-]
-.date[
+### Visualizing and communicating data with R<br>
+<a href='https://therbootcamp.github.io'>
+<font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br>
+<a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
+<i class='fas fa-clock' style='font-size:1.4em;'></i> </a> 
+<a href='https://therbootcamp.github.io'>
+<i class='fas fa-home' style='font-size:1.4em;' ></i> </a> 
+<a href='therbootcamp@gmail.com'>
+<i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a> 
+<a href='https://www.linkedin.com/company/27090302'>
+<i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
 ### June 2022
-]
 
 ---
 
@@ -582,13 +586,21 @@ my_plot +
   &lt;li class="m2"&gt;The order of discrete variables can be controlled using &lt;highm&gt;factors&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;br&gt;
+
+
+
 
 ```r
-basel_sorted &lt;- 
-basel %&gt;%
-  # sort by income and factor quarter
+# change data
+basel &lt;- basel %&gt;%
+    
+  # factor ordered by income in 2001
   arrange(year, income_median) %&gt;% 
   mutate(quarter = as_factor(quarter))
+
+# show data
+basel
 ```
 
 
@@ -596,29 +608,30 @@ basel %&gt;%
 
 .pull-right45[
 
-&lt;br&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-
-```r
-basel_sorted %&gt;%
-  select(year, quarter, income_median)
-```
 
 ```
-# A tibble: 357 × 3
-    year quarter             income_median
-   &lt;dbl&gt; &lt;fct&gt;                       &lt;dbl&gt;
- 1  2001 Altstadt Kleinbasel         40387
- 2  2001 Clara                       40964
- 3  2001 Matthäus                    41500
- 4  2001 Rosental                    42100
- 5  2001 Klybeck                     42777
- 6  2001 St. Johann                  43118
- 7  2001 Kleinhüningen               44115
- 8  2001 Iselin                      45530
- 9  2001 Gundeldingen                46265
-10  2001 Breite                      47227
-# … with 347 more rows
+# A tibble: 357 × 10
+    year quarter        quarter_no     N
+   &lt;dbl&gt; &lt;fct&gt;               &lt;dbl&gt; &lt;dbl&gt;
+ 1  2001 Altstadt Klei…         12  1659
+ 2  2001 Clara                  13  2416
+ 3  2001 Matthäus               17  9089
+ 4  2001 Rosental               16  2499
+ 5  2001 Klybeck                18  4053
+ 6  2001 St. Johann             11 10493
+ 7  2001 Kleinhüningen          19  1363
+ 8  2001 Iselin                 10  9853
+ 9  2001 Gundeldingen            6 11224
+10  2001 Breite                  4  5433
+# … with 347 more rows, and 6 more
+#   variables: income_mean &lt;dbl&gt;,
+#   income_median &lt;dbl&gt;,
+#   income_gini &lt;dbl&gt;,
+#   wealth_mean &lt;dbl&gt;,
+#   wealth_median &lt;dbl&gt;,
+#   wealth_gini &lt;dbl&gt;
 ```
 
 ]
@@ -634,9 +647,12 @@ basel_sorted %&gt;%
   &lt;li class="m2"&gt;The order of discrete variables can be controlled using &lt;highm&gt;factors&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;br&gt;
+
 
 ```r
-basel_sorted %&gt;%
+basel %&gt;%
+  
   # original code
   ggplot(aes(x = year, y = income_median, 
              col = quarter)) +
@@ -656,7 +672,7 @@ basel_sorted %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -697,30 +713,44 @@ my_plot +
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-.pull-left5[
+# Aggregates
 
-# Aggregates with dplyr
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
 
 
 ```r
-basel_aggregate &lt;- 
-basel %&gt;%
+basel_agg &lt;- basel %&gt;%
   
   # get income mean in 2001
   arrange(year, quarter) %&gt;% 
   group_by(quarter) %&gt;% 
-  mutate(inc_2001 = first(income_median)) %&gt;% 
+  mutate(inc01 = first(income_med.)) %&gt;% 
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 &gt; median(inc_2001)) %&gt;% 
-  summarize(income = mean(income_median)) 
+           low = inc01 &gt; median(inc01)) %&gt;% 
+  summarize(income = mean(income_med.)) %&gt;% 
+  
+  # remove grouping
+  ungroup()
+
+# show data
+basel_agg
 ```
 
 
@@ -728,16 +758,9 @@ basel %&gt;%
 
 .pull-right45[
 
-&lt;br&gt;
-
-
-```r
-basel_aggregate
-```
 
 ```
 # A tibble: 34 × 3
-# Groups:   year [17]
     year low   income
    &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;
  1  2001 FALSE 43813 
@@ -757,13 +780,18 @@ basel_aggregate
 
 ---
 
-.pull-left5[
+.pull-left45[
 
-# Aggregates with dplyr
+# Aggregates
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
 
 
 ```r
-basel_aggregate %&gt;%
+basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -781,12 +809,145 @@ basel_aggregate %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
+
 ---
 
-.pull-left5[
+# Error
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+```r
+# standard error function
+se = function(x) {
+  n = length(x)
+  sd(x) / sqrt(n) * qt(.975, n-1)}
+
+# new data with error
+basel_error &lt;- basel %&gt;%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %&gt;% 
+  group_by(quarter) %&gt;% 
+  mutate(inc01 = first(income_median)) %&gt;% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc01 &gt; median(inc01)) %&gt;% 
+  summarize(inc_m = mean(income_median),
+            inc_se = se(income_median)) 
+```
+
+
+]
+
+.pull-right45[
+
+
+```
+# A tibble: 34 × 4
+# Groups:   year [17]
+    year low    inc_m inc_se
+   &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1  2001 FALSE 43813   1747.
+ 2  2001 TRUE  55790.  4435.
+ 3  2002 FALSE 44467.  1673.
+ 4  2002 TRUE  56225   4309.
+ 5  2003 FALSE 43926.  1922.
+ 6  2003 TRUE  56088.  4311.
+ 7  2004 FALSE 43518.  1853.
+ 8  2004 TRUE  56011   4658.
+ 9  2005 FALSE 43028.  2176.
+10  2005 TRUE  55973.  4549.
+# … with 24 more rows
+```
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;geom_errorbar()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_error %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low, fill = low)) +
+  
+  # error bar geom inserted
+  geom_errorbar(aes(ymin = inc_m - inc_se,
+                    ymax = inc_m + inc_se)) + 
+
+  ...
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;geom_ribbon()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;To visualize aggregates and error, first generate them using &lt;highm&gt;dplyr&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_error %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low, fill = low)) +
+  
+  # ribbon geom inserted
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
+
+  ...
+```
+
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
 
 # &lt;mono&gt;annotations()&lt;/mono&gt;
 
@@ -818,12 +979,12 @@ basel_aggregate %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
-.pull-left5[
+.pull-left45[
 
 # &lt;mono&gt;annotations()&lt;/mono&gt;
 
@@ -852,166 +1013,6 @@ basel_aggregate %&gt;%
            ymin = 41000, ymax = 60000,
            alpha = .2)
 ```
-
-]
-
-.pull-right45[
-
-&lt;br&gt;
-
-&lt;img src="styling_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-.pull-left5[
-
-# &lt;mono&gt;Adding lines&lt;/mono&gt;
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Horizontal and vertical lines can be added with &lt;mono&gt;geom_hline(), geom_vline&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-```r
-basel_aggregate %&gt;%
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() +
-  # add text
-  annotate('text', 
-           x = 2010, 
-           y = 60500, 
-           label = 'Financial Crisis') + 
-  # add vertical line 
-  geom_vline(xintercept = 2008,
-             linetype = 2,
-             color = 'grey')
-```
-
-]
-
-.pull-right45[
-
-&lt;br&gt;
-
-&lt;img src="styling_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
-
-]
----
-
-.pull-left5[
-
-# &lt;mono&gt;geom_errorbar()&lt;/mono&gt;
-
-
-```r
-basel_error &lt;-
-basel %&gt;%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %&gt;% 
-  group_by(quarter) %&gt;% 
-  mutate(inc_2001 = first(income_median)) %&gt;% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 &gt; median(inc_2001)) %&gt;% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) 
-```
-
-
-]
-
-.pull-right45[
-
-&lt;br&gt;
-
-
-```r
-basel_error
-```
-
-```
-# A tibble: 34 × 4
-# Groups:   year [17]
-    year low   income income_sd
-   &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
- 1  2001 FALSE 43813      2600.
- 2  2001 TRUE  55790.     6200.
- 3  2002 FALSE 44467.     2490.
- 4  2002 TRUE  56225      6024.
- 5  2003 FALSE 43926.     2862.
- 6  2003 TRUE  56088.     6027.
- 7  2004 FALSE 43518.     2758.
- 8  2004 TRUE  56011      6511.
- 9  2005 FALSE 43028.     3239.
-10  2005 TRUE  55973.     6359.
-# … with 24 more rows
-```
-
-]
-
----
-
-.pull-left5[
-
-# &lt;mono&gt;geom_errorbar()&lt;/mono&gt;
-
-
-```r
-basel_error %&gt;%
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
-  
-  # error bar geom inserted
-  geom_errorbar(aes(ymin = income - income_sd,
-                    ymax = income + income_sd)) + 
-
-  ...
-```
-
-
-]
-
-.pull-right45[
-
-&lt;br&gt;
-
-&lt;img src="styling_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-.pull-left5[
-
-# &lt;mono&gt;geom_ribbon()&lt;/mono&gt;
-
-
-```r
-basel_error %&gt;%
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
-  
-  # ribbon geom inserted
-  geom_ribbon(aes(ymin = income - income_sd,
-                  ymax = income + income_sd), 
-              alpha = .2) + 
-
-  ...
-```
-
 
 ]
 
@@ -1125,19 +1126,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

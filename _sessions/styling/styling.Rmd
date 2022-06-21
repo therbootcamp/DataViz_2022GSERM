@@ -635,12 +635,29 @@ my_plot +
   <li class="m2">The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
 </ul>
 
-```{r}
-basel_sorted <- 
-basel %>%
-  # sort by income and factor quarter
+<br>
+
+```{r, echo = F}
+# change data
+basel <- basel %>%
+    
+  # factor ordered by income in 2001
   arrange(year, income_median) %>% 
   mutate(quarter = as_factor(quarter))
+
+options(tibble.width = 40)
+```
+
+```{r, eval = F}
+# change data
+basel <- basel %>%
+    
+  # factor ordered by income in 2001
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter))
+
+# show data
+basel
 ```
 
 
@@ -648,11 +665,10 @@ basel %>%
 
 .pull-right45[
 
-<br>
+<br><br><br>
 
-```{r}
-basel_sorted %>%
-  select(year, quarter, income_median)
+```{r, echo = FALSE}
+basel
 ```
 
 ]
@@ -668,8 +684,11 @@ basel_sorted %>%
   <li class="m2">The order of discrete variables can be controlled using <highm>factors</highm>.</span></li>
 </ul>
 
+<br>
+
 ```{r, eval = F}
-basel_sorted %>%
+basel %>%
+  
   # original code
   ggplot(aes(x = year, y = income_median, 
              col = quarter)) +
@@ -690,7 +709,8 @@ basel_sorted %>%
 <br>
 
 ```{r, fig.width=6,fig.height=7,echo = F}
-basel_sorted %>%
+basel %>%
+  
   # original code
   ggplot(aes(x = year, y = income_median, col = quarter)) +
   geom_line() + geom_point() +
@@ -768,23 +788,52 @@ my_plot +
 
 ---
 
-.pull-left5[
+# Aggregates
 
-# Aggregates with dplyr
 
-```{r, eval = T, echo=TRUE}
-basel_aggregate <- 
-basel %>%
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>To visualize aggregates and error, first generate them using <highm>dplyr</highm>.</span></li>
+</ul>
+
+
+```{r, eval = T, echo=F}
+basel_agg <- basel %>%
   
   # get income mean in 2001
   arrange(year, quarter) %>% 
   group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
+  mutate(inc01 = first(income_median)) %>% 
   
   # group by year and quarter
   group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median)) 
+           low = inc01 > median(inc01)) %>% 
+  summarize(income = mean(income_median)) %>% 
+  
+  # remove grouping
+  ungroup()
+```
+
+
+```{r, eval = F, echo=T}
+basel_agg <- basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc01 = first(income_med.)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc01 > median(inc01)) %>% 
+  summarize(income = mean(income_med.)) %>% 
+  
+  # remove grouping
+  ungroup()
+
+# show data
+basel_agg
 ```
 
 
@@ -792,22 +841,25 @@ basel %>%
 
 .pull-right45[
 
-<br>
-
-```{r}
-basel_aggregate
+```{r, echo = FALSE}
+basel_agg
 ```
 
 ]
 
 ---
 
-.pull-left5[
+.pull-left45[
 
-# Aggregates with dplyr
+# Aggregates
+
+<ul>
+  <li class="m1"><span>To visualize aggregates and error, first generate them using <highm>dplyr</highm>.</span></li>
+</ul>
+
 
 ```{r, eval = F}
-basel_aggregate %>%
+basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
@@ -848,9 +900,195 @@ basel %>%
 ```
 
 ]
+
 ---
 
-.pull-left5[
+# Error
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>To visualize aggregates and error, first generate them using <highm>dplyr</highm>.</span></li>
+</ul>
+
+
+```{r, eval = F}
+# standard error function
+se = function(x) {
+  n = length(x)
+  sd(x) / sqrt(n) * qt(.975, n-1)}
+
+# new data with error
+basel_error <- basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc01 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc01 > median(inc01)) %>% 
+  summarize(inc_m = mean(income_median),
+            inc_se = se(income_median)) 
+```
+
+```{r, eval = T, echo = F}
+# standard error function
+se = function(x) {
+  n = length(x)
+  sd(x) / sqrt(n) * qt(.975, n-1)}
+
+# new data with error
+basel_error <- basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc01 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc01 > median(inc01)) %>% 
+  summarize(inc_m = mean(income_median),
+            inc_se = se(income_median))  %>% 
+  ungroup
+```
+
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE}
+basel_error
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>geom_errorbar()</mono>
+
+<ul>
+  <li class="m1"><span><mono>geom_errorbar()</mono> can be used to visualize standard statistical error bars.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_error %>%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low, fill = low)) +
+  
+  # error bar geom inserted
+  geom_errorbar(aes(ymin = inc_m - inc_se,
+                    ymax = inc_m + inc_se)) + 
+
+  ...
+  
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc_2001 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc_2001 > median(inc_2001)) %>% 
+  summarize(income = mean(income_median),
+            income_sd = sd(income_median)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income, 
+             col = low, fill = low)) +
+  geom_errorbar(aes(ymin = income - income_sd,
+                    ymax = income + income_sd)) + 
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() + scale_fill_viridis_d()
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>geom_ribbon()</mono>
+
+<ul>
+  <li class="m1"><span>To visualize aggregates and error, first generate them using <highm>dplyr</highm>.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_error %>%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low, fill = low)) +
+  
+  # ribbon geom inserted
+  geom_ribbon(aes(ymin = inc_m - inc_se,
+                  ymax = inc_m + inc_se), 
+              alpha = .2) + 
+
+  ...
+
+```
+
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc_2001 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc_2001 > median(inc_2001)) %>% 
+  summarize(income = mean(income_median),
+            income_sd = sd(income_median)) %>% 
+  
+  # adapted plot
+  ggplot(aes(x = year, y = income, 
+             col = low, fill = low)) +
+  geom_ribbon(aes(ymin = income - income_sd,
+                  ymax = income + income_sd), 
+              alpha = .2) + 
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() + scale_fill_viridis_d()
+```
+
+]
+
+---
+
+.pull-left45[
 
 # <mono>annotations()</mono>
 
@@ -908,7 +1146,7 @@ basel %>%
 ]
 
 ---
-.pull-left5[
+.pull-left45[
 
 # <mono>annotations()</mono>
 
@@ -971,218 +1209,6 @@ basel %>%
   # add area 
 annotate("rect", xmin = 2007, xmax = 2009, ymin = 41569, ymax = 60000,
   alpha = .2)
-```
-
-]
-
----
-.pull-left5[
-
-# <mono>Adding lines</mono>
-
-<ul>
-  <li class="m1"><span>Horizontal and vertical lines can be added with <mono>geom_hline(), geom_vline</mono></span></li>
-</ul>
-
-```{r, eval = F}
-basel_aggregate %>%
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() +
-  # add text
-  annotate('text', 
-           x = 2010, 
-           y = 60500, 
-           label = 'Financial Crisis') + 
-  # add vertical line 
-  geom_vline(xintercept = 2008,
-             linetype = 2,
-             color = 'grey')
-```
-
-]
-
-.pull-right45[
-
-<br>
-
-```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median)) %>% 
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low)) +
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d()  +
-  # add text
-  annotate('text', x = 2010, y = 60500, label = 'Financial Crisis') +
-  # add vertical line 
-  geom_vline(xintercept = 2008,
-             linetype = 2,
-             color = 'grey')
-```
-
-]
----
-
-.pull-left5[
-
-# <mono>geom_errorbar()</mono>
-
-```{r, eval = T}
-basel_error <-
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) 
-```
-
-
-]
-
-.pull-right45[
-
-<br>
-
-```{r}
-basel_error
-```
-
-]
-
----
-
-.pull-left5[
-
-# <mono>geom_errorbar()</mono>
-
-```{r, eval = F}
-basel_error %>%
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
-  
-  # error bar geom inserted
-  geom_errorbar(aes(ymin = income - income_sd,
-                    ymax = income + income_sd)) + 
-
-  ...
-  
-```
-
-
-]
-
-.pull-right45[
-
-<br>
-
-```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %>% 
-  
-  # original code
-  ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
-  geom_errorbar(aes(ymin = income - income_sd,
-                    ymax = income + income_sd)) + 
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() + scale_fill_viridis_d()
-```
-
-]
-
----
-
-.pull-left5[
-
-# <mono>geom_ribbon()</mono>
-
-```{r, eval = F}
-basel_error %>%
-  
-  # plot code
-  ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
-  
-  # ribbon geom inserted
-  geom_ribbon(aes(ymin = income - income_sd,
-                  ymax = income + income_sd), 
-              alpha = .2) + 
-
-  ...
-
-```
-
-
-]
-
-.pull-right45[
-
-<br>
-
-```{r, fig.width=6,fig.height=7,echo = F}
-basel %>%
-  
-  # get income mean in 2001
-  arrange(year, quarter) %>% 
-  group_by(quarter) %>% 
-  mutate(inc_2001 = first(income_median)) %>% 
-  
-  # group by year and quarter
-  group_by(year, 
-           low = inc_2001 > median(inc_2001)) %>% 
-  summarize(income = mean(income_median),
-            income_sd = sd(income_median)) %>% 
-  
-  # adapted plot
-  ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
-  geom_ribbon(aes(ymin = income - income_sd,
-                  ymax = income + income_sd), 
-              alpha = .2) + 
-  geom_line() + geom_point() +
-  theme_minimal() +
-  theme(legend.position = "none") + 
-  scale_color_viridis_d() + scale_fill_viridis_d()
 ```
 
 ]
