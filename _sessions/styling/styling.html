@@ -386,7 +386,7 @@ my_plot +
 # `theme()`
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;With &lt;high&gt;87 arguments&lt;/high&gt; &lt;mono&gt;theme()&lt;/mono&gt; permits specification of all aesthetic details.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;With &lt;high&gt;96 arguments&lt;/high&gt; &lt;mono&gt;theme()&lt;/mono&gt; permits specification of all aesthetic details.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Makes uses of helper functions:&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;element_rect()&lt;/mono&gt; | for rectangles&lt;/span&gt;&lt;/li&gt;
@@ -788,6 +788,125 @@ basel_aggregate %&gt;%
 
 .pull-left5[
 
+# &lt;mono&gt;annotations()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;The &lt;mono&gt;annotation()&lt;/mono&gt; function adds text or highlights areas in a graph.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_aggregate %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2010, 
+           y = 60500, 
+           label = 'Financial Crisis')
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+.pull-left5[
+
+# &lt;mono&gt;annotations()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;The &lt;mono&gt;annotation()&lt;/mono&gt; function adds text or highlights areas in a graph.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_aggregate %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2008, y = 60500, 
+           label = 'Financial Crisis') +
+  # add area 
+  annotate("rect", 
+           xmin = 2007, xmax = 2009, 
+           ymin = 41000, ymax = 60000,
+           alpha = .2)
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+.pull-left5[
+
+# &lt;mono&gt;Adding lines&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Horizontal and vertical lines can be added with &lt;mono&gt;geom_hline(), geom_vline&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel_aggregate %&gt;%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2010, 
+           y = 60500, 
+           label = 'Financial Crisis') + 
+  # add vertical line 
+  geom_vline(xintercept = 2008,
+             linetype = 2,
+             color = 'grey')
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;
+
+&lt;img src="styling_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+---
+
+.pull-left5[
+
 # &lt;mono&gt;geom_errorbar()&lt;/mono&gt;
 
 
@@ -867,7 +986,7 @@ basel_error %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -900,7 +1019,7 @@ basel_error %&gt;%
 
 &lt;br&gt;
 
-&lt;img src="styling_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="styling_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 

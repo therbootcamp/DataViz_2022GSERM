@@ -68,6 +68,7 @@ options(digits = 4)
 knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, 
                       message = FALSE, warning = FALSE, fig.align = 'center', dpi = 200)
 library(tidyverse)
+library(lubridate)
 library(ggthemes)
 
 basel = read_csv('1_Data/taxation.csv')
@@ -406,7 +407,7 @@ my_plot +
 # `theme()`
 
 <ul>
-  <li class="m1"><span>With <high>87 arguments</high> <mono>theme()</mono> permits specification of all aesthetic details.</span></li>
+  <li class="m1"><span>With <high>96 arguments</high> <mono>theme()</mono> permits specification of all aesthetic details.</span></li>
   <li class="m2"><span>Makes uses of helper functions:</span></li>
   <ul class="level">
     <li><span><mono>element_rect()</mono> | for rectangles</span></li>
@@ -844,6 +845,198 @@ basel %>%
   theme_minimal() +
   theme(legend.position = "none") + 
   scale_color_viridis_d()
+```
+
+]
+---
+
+.pull-left5[
+
+# <mono>annotations()</mono>
+
+<ul>
+  <li class="m1"><span>The <mono>annotation()</mono> function adds text or highlights areas in a graph.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_aggregate %>%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2010, 
+           y = 60500, 
+           label = 'Financial Crisis')
+```
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc_2001 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc_2001 > median(inc_2001)) %>% 
+  summarize(income = mean(income_median)) %>% 
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d()  +
+  # add text
+  annotate('text', x = 2010, y = 60500, label = 'Financial Crisis')
+```
+
+]
+
+---
+.pull-left5[
+
+# <mono>annotations()</mono>
+
+<ul>
+  <li class="m1"><span>The <mono>annotation()</mono> function adds text or highlights areas in a graph.</span></li>
+</ul>
+
+```{r, eval = F}
+basel_aggregate %>%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2008, y = 60500, 
+           label = 'Financial Crisis') +
+  # add area 
+  annotate("rect", 
+           xmin = 2007, xmax = 2009, 
+           ymin = 41000, ymax = 60000,
+           alpha = .2)
+```
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc_2001 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc_2001 > median(inc_2001)) %>% 
+  summarize(income = mean(income_median)) %>% 
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d()  +
+  # add text
+  annotate('text', 
+           x = 2008, 
+           y = 60500, 
+           label = 'Financial Crisis') +
+  # add area 
+annotate("rect", xmin = 2007, xmax = 2009, ymin = 41569, ymax = 60000,
+  alpha = .2)
+```
+
+]
+
+---
+.pull-left5[
+
+# <mono>Adding lines</mono>
+
+<ul>
+  <li class="m1"><span>Horizontal and vertical lines can be added with <mono>geom_hline(), geom_vline</mono></span></li>
+</ul>
+
+```{r, eval = F}
+basel_aggregate %>%
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d() +
+  # add text
+  annotate('text', 
+           x = 2010, 
+           y = 60500, 
+           label = 'Financial Crisis') + 
+  # add vertical line 
+  geom_vline(xintercept = 2008,
+             linetype = 2,
+             color = 'grey')
+```
+
+]
+
+.pull-right45[
+
+<br>
+
+```{r, fig.width=6,fig.height=7,echo = F}
+basel %>%
+  
+  # get income mean in 2001
+  arrange(year, quarter) %>% 
+  group_by(quarter) %>% 
+  mutate(inc_2001 = first(income_median)) %>% 
+  
+  # group by year and quarter
+  group_by(year, 
+           low = inc_2001 > median(inc_2001)) %>% 
+  summarize(income = mean(income_median)) %>% 
+  
+  # plot code
+  ggplot(aes(x = year, y = income, 
+             col = low)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  scale_color_viridis_d()  +
+  # add text
+  annotate('text', x = 2010, y = 60500, label = 'Financial Crisis') +
+  # add vertical line 
+  geom_vline(xintercept = 2008,
+             linetype = 2,
+             color = 'grey')
 ```
 
 ]
