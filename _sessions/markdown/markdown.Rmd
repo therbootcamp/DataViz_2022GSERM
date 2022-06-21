@@ -84,7 +84,7 @@ basel <- read_csv("1_Data/taxation.csv")
 <ul>
   <li class="m1"><span>Developed by John Gruber and Aaron Swartz in 2004.<br><br>
   "<high>easy-to-read</high> and <high>easy-to-write</high> plain text format, [...] convert it to structurally valid XHTML (or HTML)"</span></li> 
-  <li class="m2"><span>Simple <high>syntax for formating</high> documents.</span></li>  
+  <li class="m2"><span>Simple <high>syntax for formatting</high> documents.</span></li>  
   <ul>
     <li><span>highlight text with bold and italic text</span></li>   
     <li><span>lists</span></li>  
@@ -114,13 +114,13 @@ basel <- read_csv("1_Data/taxation.csv")
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Uses Markdown for <high>formating dynamic reports</high> that include ...</span></li><br> 
+  <li class="m1"><span>Uses Markdown for <high>formatting dynamic reports</high> that include ...</span></li><br> 
   <ul>
     <li><span><high>R code chunks</high></span></li>
     <li><span><high>R inline Code</high></span></li>  
-    <li><span><high>Visualisierungen</high></span></li>
+    <li><span><high>Visualizations</high></span></li>
     <li><span>Statistical outputs</span></li>
-    <li><span>Tabellen</span></li>
+    <li><span>Tables</span></li>
     <li><span>etc.</span></li>
   </ul>
 </ul>
@@ -746,7 +746,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>message=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>messages</highm> im output.
+  Include/exclude <highm>messages</highm> in output.
   </td> 
 </tr>
 <tr>
@@ -754,7 +754,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>warning=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>warnings</highm> im output.
+  Include/exclude <highm>warnings</highm> mi output.
   </td> 
 </tr>
 </table>
@@ -820,7 +820,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>message=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>messages</highm> im output.
+  Include/exclude <highm>messages</highm> mi output.
   </td> 
 </tr>
 <tr>
@@ -828,7 +828,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>warning=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>warnings</highm> im output.
+  Include/exclude <highm>warnings</highm> mi output.
   </td> 
 </tr>
 </table>
@@ -893,7 +893,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>message=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>messages</highm> im output.
+  Include/exclude <highm>messages</highm> mi output.
   </td> 
 </tr>
 <tr>
@@ -901,7 +901,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>warning=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>warnings</highm> im output.
+  Include/exclude <highm>warnings</highm> mi output.
   </td> 
 </tr>
 </table>
@@ -1382,7 +1382,7 @@ read_csv("../1_data/data.csv")
 .pull-right5[
 <br>
 <p align = "center">
-  <img src="image/plot_7.png" height=520px>
+  <img src="image/plot_6.png" height=520px>
 </p>
 
 ]
@@ -1986,7 +1986,7 @@ read_csv("../1_data/data.csv")
 # CSS
 
 <ul>
-  <li class="m1"><span><b>C</b>ascading <b>S</b>tyle <b>S</b>sheets allow you to set additional <high>aesthetic characterisica</high> of <high>HTML</high> in an external file.</span></li>
+  <li class="m1"><span><b>C</b>ascading <b>S</b>tyle <b>S</b>sheets allow you to set additional <high>aesthetic characteristics</high> of <high>HTML</high> in an external file.</span></li>
 </ul>
 
 ]
