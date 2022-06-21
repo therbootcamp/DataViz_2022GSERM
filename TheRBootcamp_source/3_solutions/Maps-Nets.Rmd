@@ -1,5 +1,5 @@
 ---
-title: "maps & nets"
+title: "R Notebook"
 output:
 editor_options:
   chunk_output_type: console
@@ -17,7 +17,7 @@ In this practical, you will create a map of Basel showing the distribution of we
 
 ```{r}
 library(tidyverse)
-basel <- read_csv('1_data/taxation.csv')
+basel <- read_csv('../1_data/taxation.csv')
 ```
 
 2. Load the packages `sf`, `tidygraph`, and `ggraph`. 

@@ -1129,7 +1129,7 @@ network %>%
 .pull-left5[
 
 <ul>
-  <li class="m1"><span>Labels can be added as usual using <mono>labels()</mono>.</span></li><br>
+  <li class="m1"><span>Labels can be added as usual using <mono>labs()</mono>.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
