@@ -787,46 +787,6 @@ network %&gt;%
 ```r
 # add clusters
 network %&gt;% 
-  mutate(community = 
-           group_louvain(weight) %&gt;% 
-           as.factor()) %&gt;%
-  
-  # network plot
-  ggraph() + 
-  
-  # ellipses
-  stat_ellipse(aes(x = x , y = y, 
-                   group = community, fill = community), 
-               level = .8, geom = "polygon", 
-               alpha = .1, show.legend = FALSE) + 
-  
-  # rest of plot
-  scale_fill_manual(values=viridis(3)[1:2]) +
-  ...
-```
-
-]
-
-.pull-right45[
-
-&lt;img src="maps-nets_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
-
-]
-
----
-
-# Adding ellipses
-
-.pull-left5[
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;stat_ellipse()&lt;/mono&gt; can be used to add ellipses covering points in the data (similar &lt;mono&gt;stat_*&lt;/mono&gt; functions exist for other visual elements.&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-```r
-# add clusters
-network %&gt;% 
   ...
   
   # network plot
@@ -848,7 +808,7 @@ network %&gt;%
 
 .pull-right45[
 
-&lt;img src="maps-nets_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 ---
@@ -882,7 +842,7 @@ network %&gt;%
 
 .pull-right45[
 
-&lt;img src="maps-nets_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -915,7 +875,7 @@ network %&gt;%
 
 .pull-right45[
 
-&lt;img src="maps-nets_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="maps-nets_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
