@@ -118,7 +118,7 @@ basel = read_csv('1_Data/taxation.csv')
   </ul>
   <li class="m3"><span><highm>geoms</highm>: geometric shapes illustrating data</high></span></li>
   <li class="m4"><span><highm>facets</highm>: Stratify plot according to variable</high></span></li>
-  <li class="m5">e<span><highm>labs</highm>: Plot annotation</high></span></li>
+  <li class="m5"><span><highm>labs</highm>: Plot annotation</high></span></li>
   <li class="m6"><span><highm>themes</highm>: Aesthetic details</high></span></li>
   <li class="m7"><span><highm>scales</highm>: Scaling of dimensions</high></span></li>
 </ul>
@@ -147,6 +147,36 @@ ggplot(data = basel_agg,
 ]
 
 
+---
+
+# Prepare dataset
+
+
+.pull-left45[
+
+<ul>
+  <li class="m1">Calculate <mono>mean + median</mono> income for each year</span></li>
+</ul>
+
+```{r}
+# averages per year
+basel_avg <- basel %>% 
+  group_by(year) %>% 
+  summarize(
+    income_mean = mean(income_mean),
+    income_median = mean(income_median))
+```
+
+]
+
+
+.pull-right45[
+
+```{r}
+basel_avg
+```
+
+]
 
 ---
 
@@ -164,15 +194,6 @@ ggplot(data = basel_agg,
   </ul>
   </span></li>
 </ul>
-
-```{r}
-# averages per year
-basel_avg <- basel %>% 
-  group_by(year) %>% 
-  summarize(
-    income_mean = mean(income_mean),
-    income_median = mean(income_median))
-```
 
 ]
 
@@ -469,8 +490,8 @@ ggplot(data = basel_avg,
   
   # Add bars (not necessarily recommended)
   geom_bar(stat = "identity", 
-           col = "grey75",
-           fill = "grey75") +
+           col = "lightblue",
+           fill = "lightblue") +
   
   # Show as points and lines
   geom_point(col = "#4682B4") +
