@@ -221,3 +221,13 @@ el {
   max-height: 150px;
   border: 2px solid #e9ecef;
 }
+
+
+.details td {
+  font-family: Montserrat;
+  color: #212529;
+  font-weight: 400;
+  margin-bottom: 11px;
+  }
+
+

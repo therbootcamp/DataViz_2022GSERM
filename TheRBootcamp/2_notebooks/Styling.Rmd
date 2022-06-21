@@ -19,7 +19,7 @@ In this practical, you will visualize the development of wealth in Basel's quart
 
 ```{r}
 library(tidyverse)
-basel <- read_csv('../1_data/taxation.csv')
+basel <- read_csv('1_data/taxation.csv')
 ```
 
 # 1 - Plot base
@@ -232,10 +232,9 @@ averages %>%
 ```
 
 
-# 6 - Go explore
+# 8 - Project work
 
-1. Install the `ggthemes` package and try out some of its themes. 
-
+1. Try to use what you have learned in this section to style the visualizations that you created in the first plotting session based on your data. 
 
 
 

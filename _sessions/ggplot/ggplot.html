@@ -111,22 +111,15 @@ layout: true
 ]
 
 
-
 ---
 
-# `ggplot()`
+# Prepare dataset
 
 
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;All plots start with &lt;mono&gt;ggplot()&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Two arguments&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;data&lt;/mono&gt; | The data set (&lt;mono&gt;tibble&lt;/mono&gt;)&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;mapping&lt;/mono&gt; | The plot structure. Defined using &lt;mono&gt;aes()&lt;/mono&gt;
-  &lt;/ul&gt;
-  &lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;Calculate &lt;mono&gt;mean + median&lt;/mono&gt; income for each year&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -146,10 +139,62 @@ basel_avg &lt;- basel %&gt;%
 
 
 ```r
+basel_avg
+```
+
+```
+# A tibble: 17 × 3
+    year income_mean income_median
+   &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+ 1  2001      63027.        49516.
+ 2  2002      63555.        50066.
+ 3  2003      63083.        49717.
+ 4  2004      62298.        49467.
+ 5  2005      63133.        49192.
+ 6  2006      64148.        49102.
+ 7  2007      66594         50164.
+ 8  2008      66463.        48068.
+ 9  2009      66614.        48818.
+10  2010      67185.        49028.
+11  2011      66050.        49213.
+12  2012      66987.        49433.
+13  2013      68748.        49878.
+14  2014      70499.        50440.
+15  2015      71115.        50426.
+16  2016      73272.        50653.
+17  2017      72388.        50840.
+```
+
+]
+
+---
+
+# `ggplot()`
+
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;All plots start with &lt;mono&gt;ggplot()&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Two arguments&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;data&lt;/mono&gt; | The data set (&lt;mono&gt;tibble&lt;/mono&gt;)&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;mapping&lt;/mono&gt; | The plot structure. Defined using &lt;mono&gt;aes()&lt;/mono&gt;
+  &lt;/ul&gt;
+  &lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right45[
+
+
+```r
 ggplot(data = basel_avg)
 ```
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -184,7 +229,7 @@ ggplot(data = basel_avg,
                      y = income_mean))
 ```
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -217,7 +262,7 @@ ggplot(data = basel_avg,
 .pull-right45[
 
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -246,7 +291,7 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -277,7 +322,7 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -308,7 +353,7 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ]
@@ -341,7 +386,7 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -376,21 +421,21 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-# `geom_*()`
+# Colors
 
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_*()&lt;/mono&gt; functions define which geometric objects are used to illustrate the data.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;R understands a large number of &lt;high&gt;color names&lt;/high&gt; (see &lt;mono&gt;colors()&lt;/mono&gt; for the whole set).&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Additionally colors can be specified using &lt;high&gt;hex codes&lt;/high&gt; or the &lt;mono&gt;rgb()&lt;/mono&gt; function.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;br&gt;
 
 ```r
 ggplot(data = basel_avg,
@@ -399,12 +444,12 @@ ggplot(data = basel_avg,
   
   # Add bars (not necessarily recommended)
   geom_bar(stat = "identity", 
-           col = "grey75",
-           fill = "grey75") +
+           col = "lightblue",
+           fill = "lightblue") +
   
   # Show as points and lines
-  geom_point() +
-  geom_line() 
+  geom_point(col = "#4682B4") +
+  geom_line(col = "#4682B4") 
 ```
 
 
@@ -412,7 +457,7 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -425,7 +470,8 @@ ggplot(data = basel_avg,
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Most &lt;mono&gt;geom_*()&lt;/mono&gt; functions allow specification of &lt;highm&gt;data&lt;/highm&gt; and &lt;highm&gt;mapping&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Most &lt;mono&gt;geom_*()&lt;/mono&gt; functions allow the independent specification of &lt;highm&gt;data&lt;/highm&gt; and &lt;highm&gt;mapping&lt;/highm&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Can be used to add geoms for other cases or variables in the data.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -447,7 +493,7 @@ ggplot(data = basel_avg,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -531,7 +577,7 @@ ggplot(data = basel_avg_long,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-26-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -565,7 +611,7 @@ ggplot(data = basel_avg_long,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-28-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -603,7 +649,7 @@ ggplot(data = basel_avg_long,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -636,7 +682,7 @@ ggplot(data = basel_avg_long,
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-32-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -671,7 +717,7 @@ basel_long &lt;- basel %&gt;%
 
 .pull-right45[
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -708,7 +754,7 @@ ggplot(data = basel_long,
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-36-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -751,7 +797,7 @@ clara
 breite/clara
 ```
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-38-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -792,7 +838,7 @@ clara
 breite+clara
 ```
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-40-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -834,7 +880,7 @@ clara
 breite+clara+plot_layout(guides="collect")
 ```
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-42-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -877,7 +923,7 @@ all/(breite+clara)+
   plot_layout(guides="collect")
 ```
 
-&lt;img src="ggplot_files/figure-html/unnamed-chunk-44-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="ggplot_files/figure-html/unnamed-chunk-45-1.png" style="display: block; margin: auto;" /&gt;
 
 ]
 

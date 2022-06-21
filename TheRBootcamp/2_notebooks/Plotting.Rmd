@@ -19,7 +19,7 @@ In this practical, you will visualize the development of wealth in Basel across 
 
 ```{r}
 library(tidyverse)
-basel <- read_csv('../1_data/taxation.csv')
+basel <- read_csv('1_data/taxation.csv')
 ```
 
 
@@ -155,9 +155,9 @@ XX / (XX + XX)
 XX / (XX + XX) + XX
 ```
 
-# 6 - Go explore
+# 6 - Project work
 
-1. Try other kinds of plots. E.g., for the full `basel` data set, use `geom_boxplot()` or `geom_violin()` to show the distribution of `wealth_mean` across the quarters for each of the `years`.    
+1. Try to use what you have learned in this section to visually explore your project data and possibly create a basic version of your data visualization. 
 
 
 
