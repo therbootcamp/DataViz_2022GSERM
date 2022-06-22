@@ -1306,10 +1306,11 @@ basel_agg %>%
 
 .pull-left45[
 
-# Labels
+# Labels and annotations
 
 <ul>
-  <li class="m1"><span><mono>geom_ribbon()</mono> can be a replacement for <high>standard statistical error bars</high> for line charts.</span></li>
+  <li class="m1"><span><mono>labs()</mono> allow for the addition of titles, subtitles, axis labels and captions.</span></li>
+  <li class="m2"><span>Within a canvas <mono>annotation()</mono> adds further elements to a plot.</span></li>
 </ul>
 
 ```{r, eval = F}
