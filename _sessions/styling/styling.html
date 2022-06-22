@@ -12,19 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Styling
-### Visualizing and communicating data with R<br>
-<a href='https://therbootcamp.github.io'>
-<font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br>
-<a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
-<i class='fas fa-clock' style='font-size:1.4em;'></i> </a> 
-<a href='https://therbootcamp.github.io'>
-<i class='fas fa-home' style='font-size:1.4em;' ></i> </a> 
-<a href='therbootcamp@gmail.com'>
-<i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a> 
-<a href='https://www.linkedin.com/company/27090302'>
-<i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
+]
+.author[
+### Visualizing and communicating data with R<br> <a href='https://therbootcamp.github.io'> <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br> <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'> <i class='fas fa-clock' style='font-size:1.4em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:1.4em;' ></i> </a>  <a href='therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a>  <a href='https://www.linkedin.com/company/27090302'> <i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
+]
+.date[
 ### June 2022
+]
 
 ---
 
@@ -934,7 +930,7 @@ basel_agg &lt;- basel %&gt;%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 &gt; median(inc01)) %&gt;% 
+           hi = inc01 &gt; median(inc01)) %&gt;% 
   summarize(income = mean(income_med.)) %&gt;% 
   
   # remove grouping
@@ -952,7 +948,7 @@ basel_agg
 
 ```
 # A tibble: 34 × 3
-    year low   income
+    year hi    income
    &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;
  1  2001 FALSE 43813 
  2  2001 TRUE  55790.
@@ -986,7 +982,7 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low)) +
+             col = hi)) +
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
@@ -1018,7 +1014,7 @@ basel_agg %&gt;%
 
 ```r
 # standard error function
-se = function(x) {
+ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
@@ -1032,9 +1028,9 @@ basel_agg &lt;- basel %&gt;%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 &gt; median(inc01)) %&gt;% 
+           hi = inc01 &gt; median(inc01)) %&gt;% 
   summarize(inc_m = mean(income_median),
-            inc_se = se(income_median)) 
+            inc_ci = ci(income_median)) 
 ```
 
 
@@ -1049,7 +1045,7 @@ basel_agg &lt;- basel %&gt;%
 
 ```
 # A tibble: 34 × 4
-    year low    inc_m inc_se
+    year hi     inc_m inc_ci
    &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1  2001 FALSE 43813   1747.
  2  2001 TRUE  55790.  4435.
@@ -1082,11 +1078,11 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # error bar geom inserted
-  geom_errorbar(aes(ymin = inc_m - inc_se,
-                    ymax = inc_m + inc_se)) + 
+  geom_errorbar(aes(ymin = inc_m - inc_ci,
+                    ymax = inc_m + inc_ci)) + 
 
   ...
 ```
@@ -1118,11 +1114,11 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # ribbon geom inserted
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
 
   ...
@@ -1143,10 +1139,11 @@ basel_agg %&gt;%
 
 .pull-left45[
 
-# Labels
+# Labels and annotations
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;geom_ribbon()&lt;/mono&gt; can be a replacement for &lt;high&gt;standard statistical error bars&lt;/high&gt; for line charts.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;labs()&lt;/mono&gt; allow for the addition of titles, subtitles, axis labels and captions.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Within a canvas &lt;mono&gt;annotation()&lt;/mono&gt; adds further elements to a plot.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -1155,11 +1152,11 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # ribbon geom inserted
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   
   # annotation
@@ -1198,7 +1195,7 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low)) +
+             col = hi)) +
   
   # annotate
   annotate('line', 
@@ -1237,7 +1234,7 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low)) +
+             col = hi)) +
   
   # annotate
   annotate("rect", alpha = .1,
@@ -1362,6 +1359,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

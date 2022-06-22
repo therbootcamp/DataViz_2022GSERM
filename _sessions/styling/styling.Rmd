@@ -1054,7 +1054,7 @@ basel_agg <- basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 > median(inc01)) %>% 
+           hi = inc01 > median(inc01)) %>% 
   summarize(income = mean(income_median)) %>% 
   
   # remove grouping
@@ -1072,7 +1072,7 @@ basel_agg <- basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 > median(inc01)) %>% 
+           hi = inc01 > median(inc01)) %>% 
   summarize(income = mean(income_med.)) %>% 
   
   # remove grouping
@@ -1109,7 +1109,7 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low)) +
+             col = hi)) +
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
@@ -1128,7 +1128,7 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low)) +
+             col = hi)) +
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
@@ -1150,7 +1150,7 @@ basel_agg %>%
 
 ```{r, eval = F}
 # standard error function
-se = function(x) {
+ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
@@ -1164,14 +1164,14 @@ basel_agg <- basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 > median(inc01)) %>% 
+           hi = inc01 > median(inc01)) %>% 
   summarize(inc_m = mean(income_median),
-            inc_se = se(income_median)) 
+            inc_ci = ci(income_median)) 
 ```
 
 ```{r, eval = T, echo = F}
 # standard error function
-se = function(x) {
+ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
@@ -1185,9 +1185,9 @@ basel_agg <- basel %>%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 > median(inc01)) %>% 
+           hi = inc01 > median(inc01)) %>% 
   summarize(inc_m = mean(income_median),
-            inc_se = se(income_median))  %>% 
+            inc_ci = ci(income_median))  %>% 
   ungroup
 ```
 
@@ -1219,11 +1219,11 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # error bar geom inserted
-  geom_errorbar(aes(ymin = inc_m - inc_se,
-                    ymax = inc_m + inc_se)) + 
+  geom_errorbar(aes(ymin = inc_m - inc_ci,
+                    ymax = inc_m + inc_ci)) + 
 
   ...
   
@@ -1241,9 +1241,9 @@ basel_agg %>%
   
   # original code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
-  geom_errorbar(aes(ymin = inc_m - inc_se,
-                    ymax = inc_m + inc_se)) + 
+             col = hi, fill = hi)) +
+  geom_errorbar(aes(ymin = inc_m - inc_ci,
+                    ymax = inc_m + inc_ci)) + 
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
@@ -1267,11 +1267,11 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # ribbon geom inserted
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
 
   ...
@@ -1290,9 +1290,9 @@ basel_agg %>%
   
   # adapted plot
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+             col = hi, fill = hi)) +
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
@@ -1306,10 +1306,11 @@ basel_agg %>%
 
 .pull-left45[
 
-# Labels
+# Labels and annotations
 
 <ul>
-  <li class="m1"><span><mono>geom_ribbon()</mono> can be a replacement for <high>standard statistical error bars</high> for line charts.</span></li>
+  <li class="m1"><span><mono>labs()</mono> allow for the addition of titles, subtitles, axis labels and captions.</span></li>
+  <li class="m2"><span>Within a canvas <mono>annotation()</mono> adds further elements to a plot.</span></li>
 </ul>
 
 ```{r, eval = F}
@@ -1317,11 +1318,11 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # ribbon geom inserted
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   
   # annotation
@@ -1347,9 +1348,9 @@ basel_agg %>%
   
   # adapted plot
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+             col = hi, fill = hi)) +
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
@@ -1378,7 +1379,7 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low)) +
+             col = hi)) +
   
   # annotate
   annotate('line', 
@@ -1403,11 +1404,11 @@ basel_agg %>%
   
   # adapted plot
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   annotate('line', x = 2008, y = c(37500,62500), label = 'Financial Crisis') +
   annotate('text', x = 2008, y = 63000, label = 'Financial crisis',fontface = "italic")+
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
@@ -1435,7 +1436,7 @@ basel_agg %>%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low)) +
+             col = hi)) +
   
   # annotate
   annotate("rect", alpha = .1,
@@ -1460,12 +1461,12 @@ basel_agg %>%
   
   # adapted plot
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   annotate("rect", xmin = 2007, xmax = 2009, 
            alpha = .1, ymin = 37500, ymax = 62500)+
   annotate('text', x = 2008, y = 63000, label = 'Financial crisis',fontface = "italic")+
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   geom_line() + geom_point() +
   theme_minimal() +
