@@ -735,7 +735,7 @@ basel %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> - the edge list.</span></li><br>
+  <li class="m1"><span><mono>tidygraph</mono> generates a <high>network object</high> the edge list.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
@@ -1022,7 +1022,7 @@ network %>%
                    group = community, 
                    fill = community), 
                level = .8, geom = "polygon", 
-               alpha = .1, show.legend = FALSE)+ 
+               alpha = .1, show.legend = FALSE) + 
   
   # rest of plot
   scale_fill_manual(values=viridis(3)[1:2]) +
@@ -1129,7 +1129,7 @@ network %>%
 .pull-left5[
 
 <ul>
-  <li class="m1"><span>Labels can be added as usual, using <mono>labels()</mono>.</span></li><br>
+  <li class="m1"><span>Labels can be added as usual using <mono>labs()</mono>.</span></li><br>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
@@ -1167,7 +1167,7 @@ network %>%
   geom_edge_hive() +
   geom_node_point() +
   geom_node_label(aes(label = name,
-                      col = community),  
+                      col = community), 
                   show.legend = FALSE) +
   theme_graph() + 
   scale_edge_width(range=c(.2, 1)) +
@@ -1188,7 +1188,7 @@ network %>%
 
 class: middle, center
 
-<h1><a href="">Practical</a></h1>
+<h1><font style="font-size:12px">click to download</font><br><a href="https://www.dropbox.com/s/owwx4n27ta03pdg/Maps%26Nets.Rmd?dl=1">Practical</a></h1>
 
 
 

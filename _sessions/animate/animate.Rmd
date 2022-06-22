@@ -93,8 +93,6 @@ basel_map = sf::read_sf('1_Data/quarters')
 
 .pull-right6[
 
-<br><br>
-
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
 quarters_map <- basel_map %>% 
   left_join(basel,by = c("TYPE" = "quarter"))
@@ -117,9 +115,9 @@ animate(p,3)
 
 ---
 
-# <mono>transition_states()</mono>
+.pull-left45[
 
-.pull-left5[
+# Transitions
 
 <ul>
   <li class="m1"><span><mono>transition_states()</mono> .</span></li>
@@ -142,6 +140,8 @@ quarters_map %>%
 
 .pull-right45[
 
+<br><br>
+
 ```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
 p = quarters_map %>% 
   ggplot() +
@@ -159,11 +159,11 @@ animate(p,3)
 
 
 ---
+
+.pull-left45[
 
 # Labels
 
-.pull-left5[
-
 <ul>
   <li class="m1"><span><mono>transition_states()</mono> .</span></li>
 </ul>
@@ -184,6 +184,8 @@ quarters_map %>%
 ]
 
 .pull-right45[
+
+<br><br>
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
 p = quarters_map %>% 
@@ -205,48 +207,204 @@ animate(p,3)
 
 ---
 
-# <mono>transition_reveal()</mono>
+.pull-left45[
 
-.pull-left5[
+# Transition
 
 <ul>
   <li class="m1"><span><mono>transition_states()</mono> .</span></li>
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
-quarters_map <- basel_map %>% 
-  left_join(basel,by = c("TYPE" = "quarter"))
-
-quarters_map %>% 
-  ggplot() +
-  geom_sf(aes(fill = income_mean),
-          col = "white") + 
-  theme_void() + 
-  scale_fill_viridis_c(name = 'Income', option = "E") +
+basel %>%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
   ggtitle(label = "Inequality in Basel", 
-          subtitle = "Average income in Basel's quarters in {closest_state}") +
-  labs(caption = "Source: Open Data Basel Stadt") +
-  transition_states(year) 
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_time(as.integer(year))
 ```
 
 ]
 
 .pull-right45[
 
-```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
-quarters_map <- basel_map %>% 
-  left_join(basel,by = c("TYPE" = "quarter"))
+<br><br>
 
-quarters_map %>% 
-  ggplot() +
-  geom_sf(aes(fill = income_mean),
-          col = "white") + 
-  theme_void() + 
-  scale_fill_viridis_c(name = 'Income', option = "E") +
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+p = basel %>%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
   ggtitle(label = "Inequality in Basel", 
-          subtitle = "Average income in Basel's quarters in {closest_state}") +
-  labs(caption = "Source: Open Data Basel Stadt") +
-  transition_states(year)
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_reveal(as.integer(year))
+
+animate(p,3)
+```
+
+]
+
+---
+
+.pull-left45[
+
+# Labels
+
+<ul>
+  <li class="m1"><span><mono>transition_states()</mono> .</span></li>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+basel %>%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_time(as.integer(year))
+```
+
+]
+
+.pull-right45[
+
+<br><br>
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+p = basel %>%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_reveal(as.integer(year))
+
+animate(p,3)
+```
+
+]
+
+---
+
+.pull-left45[
+
+# Types
+
+<ul>
+  <li class="m1"><span><mono>transition_states()</mono> .</span></li>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+basel %>%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_time(as.integer(year))
+```
+
+]
+
+.pull-right45[
+
+<br><br>
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+p = basel %>%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %>% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %>% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_reveal(as.integer(year))
+
+animate(p,3)
 ```
 
 ]
@@ -255,6 +413,8 @@ quarters_map %>%
 ---
 
 # <mono>ease</mono>
+
+
 
 ---
 
