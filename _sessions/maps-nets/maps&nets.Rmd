@@ -476,7 +476,7 @@ quarters_map %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Styling can be adjusted just like in any other <mono>ggplot<mono>.</span></li>
+  <li class="m1"><span>Annotation with labels or images requires specification of a location such as the <high>polygon's centroid</high>.</span></li>
 </ul>
 
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
@@ -536,7 +536,7 @@ read_sf('1_Data/quarters') %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Styling can be adjusted just like in any other <mono>ggplot<mono>.</span></li>
+  <li class="m1"><span>Annotation with labels or images requires specification of a location such as the <high>polygon's centroid</high>.</span></li>
 </ul>
 
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
