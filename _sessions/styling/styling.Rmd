@@ -1149,7 +1149,7 @@ basel_agg %>%
 
 
 ```{r, eval = F}
-# standard error function
+# confidence interval function
 ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}
@@ -1170,7 +1170,7 @@ basel_agg <- basel %>%
 ```
 
 ```{r, eval = T, echo = F}
-# standard error function
+# confidence interval function
 ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}

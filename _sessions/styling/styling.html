@@ -1013,7 +1013,7 @@ basel_agg %&gt;%
 
 
 ```r
-# standard error function
+# confidence interval function
 ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}
