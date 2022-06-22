@@ -1383,8 +1383,7 @@ basel_agg %>%
   
   # annotate
   annotate('line', 
-           x = 2008, y = c(37500,62500), 
-           label = 'Financial Crisis') +
+           x = 2008, y = c(37500,62500)) +
   annotate('text', 
            x = 2010, y = 63000, 
            label = 'Financial crisis',
