@@ -930,7 +930,7 @@ basel_agg &lt;- basel %&gt;%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 &gt; median(inc01)) %&gt;% 
+           hi = inc01 &gt; median(inc01)) %&gt;% 
   summarize(income = mean(income_med.)) %&gt;% 
   
   # remove grouping
@@ -948,7 +948,7 @@ basel_agg
 
 ```
 # A tibble: 34 × 3
-    year low   income
+    year hi    income
    &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;
  1  2001 FALSE 43813 
  2  2001 TRUE  55790.
@@ -982,7 +982,7 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low)) +
+             col = hi)) +
   geom_line() + geom_point() +
   theme_minimal() +
   theme(legend.position = "none") + 
@@ -1014,7 +1014,7 @@ basel_agg %&gt;%
 
 ```r
 # standard error function
-se = function(x) {
+ci = function(x) {
   n = length(x)
   sd(x) / sqrt(n) * qt(.975, n-1)}
 
@@ -1028,9 +1028,9 @@ basel_agg &lt;- basel %&gt;%
   
   # group by year and quarter
   group_by(year, 
-           low = inc01 &gt; median(inc01)) %&gt;% 
+           hi = inc01 &gt; median(inc01)) %&gt;% 
   summarize(inc_m = mean(income_median),
-            inc_se = se(income_median)) 
+            inc_ci = ci(income_median)) 
 ```
 
 
@@ -1045,7 +1045,7 @@ basel_agg &lt;- basel %&gt;%
 
 ```
 # A tibble: 34 × 4
-    year low    inc_m inc_se
+    year hi     inc_m inc_ci
    &lt;dbl&gt; &lt;lgl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
  1  2001 FALSE 43813   1747.
  2  2001 TRUE  55790.  4435.
@@ -1078,11 +1078,11 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = income, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # error bar geom inserted
-  geom_errorbar(aes(ymin = inc_m - inc_se,
-                    ymax = inc_m + inc_se)) + 
+  geom_errorbar(aes(ymin = inc_m - inc_ci,
+                    ymax = inc_m + inc_ci)) + 
 
   ...
 ```
@@ -1114,11 +1114,11 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # ribbon geom inserted
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
 
   ...
@@ -1152,11 +1152,11 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low, fill = low)) +
+             col = hi, fill = hi)) +
   
   # ribbon geom inserted
-  geom_ribbon(aes(ymin = inc_m - inc_se,
-                  ymax = inc_m + inc_se), 
+  geom_ribbon(aes(ymin = inc_m - inc_ci,
+                  ymax = inc_m + inc_ci), 
               alpha = .2) + 
   
   # annotation
@@ -1195,7 +1195,7 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low)) +
+             col = hi)) +
   
   # annotate
   annotate('line', 
@@ -1234,7 +1234,7 @@ basel_agg %&gt;%
   
   # plot code
   ggplot(aes(x = year, y = inc_m, 
-             col = low)) +
+             col = hi)) +
   
   # annotate
   annotate("rect", alpha = .1,
