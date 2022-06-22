@@ -486,9 +486,9 @@ quarters_map <- read_sf('1_Data/quarters') %>%
             by = c("TYPE" = "quarter")) %>% 
   
   # determine centroids
-  mutate(centr = st_centroid(geometry),
-         lon = sapply(centr, function(x) x[1]),
-         lat = sapply(centr, function(x) x[2])) %>% 
+  mutate(ctr = st_centroid(geometry),
+    lon = sapply(ctr, function(x) x[1]),
+    lat = sapply(ctr, function(x) x[2])) %>% 
 
   # plot quarters
   ggplot(...) +
@@ -512,9 +512,9 @@ read_sf('1_Data/quarters') %>%
             by = c("TYPE" = "quarter")) %>% 
   
   # determine centroids
-  mutate(centr = st_centroid(geometry),
-         lon = sapply(centr, `[`, 1),
-         lat = sapply(centr, `[`, 2)) %>% 
+  mutate(ctr = st_centroid(geometry),
+        lon = sapply(ctr, function(x) x[1]),
+        lat = sapply(ctr, function(x) x[2])) %>% 
   ggplot() +
   geom_sf(aes(fill = income_mean),
           col = "white") + 
@@ -546,9 +546,9 @@ quarters_map %>%
             by = c("TYPE" = "quarter")) %>% 
   
   # determine centroids
-  mutate(centr = st_centroid(geometry),
-         lon = sapply(centr, function(x) x[1]),
-         lat = sapply(centr, function(x) x[2])) %>% 
+  mutate(ctr = st_centroid(geometry),
+    lon = sapply(ctr, function(x) x[1]),
+    lat = sapply(ctr, function(x) x[2])) %>% 
 
   # plot quarters
   ggplot(...) +

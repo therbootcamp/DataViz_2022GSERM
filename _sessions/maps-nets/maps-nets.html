@@ -413,9 +413,9 @@ quarters_map &lt;- read_sf('1_Data/quarters') %&gt;%
             by = c("TYPE" = "quarter")) %&gt;% 
   
   # determine centroids
-  mutate(centr = st_centroid(geometry),
-         lon = sapply(centr, function(x) x[1]),
-         lat = sapply(centr, function(x) x[2])) %&gt;% 
+  mutate(ctr = st_centroid(geometry),
+    lon = sapply(ctr, function(x) x[1]),
+    lat = sapply(ctr, function(x) x[2])) %&gt;% 
 
   # plot quarters
   ggplot(...) +
@@ -454,9 +454,9 @@ quarters_map %&gt;%
             by = c("TYPE" = "quarter")) %&gt;% 
   
   # determine centroids
-  mutate(centr = st_centroid(geometry),
-         lon = sapply(centr, function(x) x[1]),
-         lat = sapply(centr, function(x) x[2])) %&gt;% 
+  mutate(ctr = st_centroid(geometry),
+    lon = sapply(ctr, function(x) x[1]),
+    lat = sapply(ctr, function(x) x[2])) %&gt;% 
 
   # plot quarters
   ggplot(...) +
