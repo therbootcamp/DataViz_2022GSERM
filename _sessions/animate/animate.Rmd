@@ -99,7 +99,7 @@ basel_map = sf::read_sf('1_Data/quarters')
 quarters_map <- basel_map %>% 
   left_join(basel,by = c("TYPE" = "quarter"))
 
-quarters_map %>% 
+p = quarters_map %>% 
   ggplot() +
   geom_sf(aes(fill = income_mean),
           col = "white") + 
@@ -109,6 +109,8 @@ quarters_map %>%
           subtitle = "Average income in Basel's quarters in {closest_state}") +
   labs(caption = "Source: Open Data Basel Stadt") +
   transition_states(year)
+
+animate(p,3)
 ```
 
 ]
@@ -124,25 +126,16 @@ quarters_map %>%
 </ul>
 
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
-# add clusters
-network %>% 
-  mutate(community = 
-           group_louvain(weight) %>% 
-           as.factor()) %>%
-  
-  # network plot
-  ggraph() + 
-  geom_edge_hive() +
-  geom_node_point() +
-  geom_node_label(aes(label = name,
-                      col = community), 
-                  show.legend = FALSE) +
-  theme_graph() + 
-  scale_edge_width(range=c(.2, 1)) +
-  coord_cartesian(clip = "off")
-  scale_color_manual(values=viridis(3)[1:2])
+quarters_map <- basel_map %>% 
+  left_join(basel,by = c("TYPE" = "quarter"))
 
-
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  transition_states(year) 
 ```
 
 ]
@@ -150,24 +143,16 @@ network %>%
 .pull-right45[
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
-# start network plot
-network %>% 
-  mutate(community = 
-           group_louvain(weight) %>% 
-           as.factor()) %>%
-  
-  # network plot
-  ggraph() + 
-  geom_edge_hive() +
-  geom_node_point() +
-  geom_node_label(aes(label = name,
-                      col = community), 
-                  show.legend = FALSE) +
-  theme_graph() + 
-  scale_edge_width(range=c(.2, 1)) +
-  coord_cartesian(clip = "off") +
-  scale_color_manual(values=viridis(3)[1:2])
-  
+p = quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  transition_states(year)
+
+animate(p,3)
+
 ```
 
 ]
@@ -177,10 +162,95 @@ network %>%
 
 # Labels
 
+.pull-left5[
+
+<ul>
+  <li class="m1"><span><mono>transition_states()</mono> .</span></li>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Average income in Basel's quarters in {closest_state}") +
+  labs(caption = "Source: Open Data Basel Stadt") +
+  transition_states(year) 
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+p = quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Average income in Basel's quarters in {closest_state}") +
+  labs(caption = "Source: Open Data Basel Stadt") +
+  transition_states(year)
+
+animate(p,3)
+
+```
+
+]
 
 ---
 
 # <mono>transition_reveal()</mono>
+
+.pull-left5[
+
+<ul>
+  <li class="m1"><span><mono>transition_states()</mono> .</span></li>
+</ul>
+
+```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
+quarters_map <- basel_map %>% 
+  left_join(basel,by = c("TYPE" = "quarter"))
+
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Average income in Basel's quarters in {closest_state}") +
+  labs(caption = "Source: Open Data Basel Stadt") +
+  transition_states(year) 
+```
+
+]
+
+.pull-right45[
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 5, dpi=250, fig.align='center'}
+quarters_map <- basel_map %>% 
+  left_join(basel,by = c("TYPE" = "quarter"))
+
+quarters_map %>% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Average income in Basel's quarters in {closest_state}") +
+  labs(caption = "Source: Open Data Basel Stadt") +
+  transition_states(year)
+```
+
+]
+
 
 ---
 
