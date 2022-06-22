@@ -536,7 +536,7 @@ read_sf('1_Data/quarters') %>%
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Annotation with labels or images requires specification of a location such as the <high>polygon's centroid</high>.</span></li>
+  <li class="m1"><span>Styling can be adjusted just like in any other <mono>ggplot<mono>.</span></li>
 </ul>
 
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
@@ -1188,7 +1188,7 @@ network %>%
 
 class: middle, center
 
-<h1><font style="font-size:12px">click to download</font><br><a href="https://www.dropbox.com/s/owwx4n27ta03pdg/Maps%26Nets.Rmd?dl=1">Practical</a></h1>
+<h1><font style="font-size:12px">click to download</font><br><a href="https://www.dropbox.com/s/mx2x5bak5gie7sb/Maps%26Nets.Rmd?dl=1">Practical</a></h1>
 
 
 
