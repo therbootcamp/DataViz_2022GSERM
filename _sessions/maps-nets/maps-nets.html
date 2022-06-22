@@ -12,19 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # maps &amp; nets
-### Visualizing and communicating data with R<br>
-<a href='https://therbootcamp.github.io'>
-<font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br>
-<a href='https://therbootcamp.github.io/DataViz_2022GSERM/'>
-<i class='fas fa-clock' style='font-size:1.4em;'></i> </a> 
-<a href='https://therbootcamp.github.io'>
-<i class='fas fa-home' style='font-size:1.4em;' ></i> </a> 
-<a href='therbootcamp@gmail.com'>
-<i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a> 
-<a href='https://www.linkedin.com/company/27090302'>
-<i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
+]
+.author[
+### Visualizing and communicating data with R<br> <a href='https://therbootcamp.github.io'> <font style='font-size:1.4em'>The R Bootcamp @ GSERM</font> </a> <br> <a href='https://therbootcamp.github.io/DataViz_2022GSERM/'> <i class='fas fa-clock' style='font-size:1.4em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:1.4em;' ></i> </a>  <a href='therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: 1.4em;'></i> </a>  <a href='https://www.linkedin.com/company/27090302'> <i class='fab fa-linkedin' style='font-size: 1.4em;'></i> </a>
+]
+.date[
 ### June 2022
+]
 
 ---
 
@@ -132,16 +128,16 @@ Projected CRS: CH1903+ / LV95
 # A tibble: 21 × 6
    OBJID OBJECTID TXT   ZTXT  TYPE                                                          geometry
    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;                                                    &lt;POLYGON [m]&gt;
- 1 17136        1 7     07    Bruderholz   ((2612556 1264548, 2612561 1264514, 2612565 1264482, 261…
- 2 17139        2 6     06    Gundeldingen ((2610887 1266551, 2610896 1266546, 2610918 1266533, 261…
- 3 17142        3 5     05    St. Alban    ((2612942 1267023, 2613000 1267019, 2613027 1267020, 261…
- 4 17145        4 4     04    Breite       ((2613684 1266891, 2613686 1266889, 2613689 1266887, 261…
- 5 17148        5 8     08    Bachletten   ((2610561 1266791, 2610571 1266781, 2610595 1266757, 261…
- 6 17151        6 2     02    Vorstädte    ((2610928 1268323, 2610934 1268293, 2610947 1268297, 261…
- 7 17154        7 1     01    Altstadt Gr… ((2611366 1267578, 2611375 1267568, 2611376 1267569, 261…
- 8 17157        8 3     03    Am Ring      ((2610705 1267923, 2610680 1267844, 2610647 1267740, 261…
- 9 17160        9 9     09    Gotthelf     ((2609245 1266802, 2609236 1266801, 2609366 1267143, 260…
-10 17163       10 10    10    Iselin       ((2610234 1267656, 2610284 1267389, 2610234 1267403, 261…
+ 1 17136        1 7     07    Bruderholz          ((2612556 1264548, 2612561 1264514, 2612565 12644…
+ 2 17139        2 6     06    Gundeldingen        ((2610887 1266551, 2610896 1266546, 2610918 12665…
+ 3 17142        3 5     05    St. Alban           ((2612942 1267023, 2613000 1267019, 2613027 12670…
+ 4 17145        4 4     04    Breite              ((2613684 1266891, 2613686 1266889, 2613689 12668…
+ 5 17148        5 8     08    Bachletten          ((2610561 1266791, 2610571 1266781, 2610595 12667…
+ 6 17151        6 2     02    Vorstädte           ((2610928 1268323, 2610934 1268293, 2610947 12682…
+ 7 17154        7 1     01    Altstadt Grossbasel ((2611366 1267578, 2611375 1267568, 2611376 12675…
+ 8 17157        8 3     03    Am Ring             ((2610705 1267923, 2610680 1267844, 2610647 12677…
+ 9 17160        9 9     09    Gotthelf            ((2609245 1266802, 2609236 1266801, 2609366 12671…
+10 17163       10 10    10    Iselin              ((2610234 1267656, 2610284 1267389, 2610234 12674…
 # … with 11 more rows
 ```
 
@@ -626,7 +622,7 @@ network &lt;- basel %&gt;%
 ```r
 # start network plot
 network %&gt;% 
-  ggplot() 
+  ggraph() 
 ```
 
 ]
@@ -652,7 +648,7 @@ network %&gt;%
 ```r
 # start network plot
 network %&gt;% 
-  ggplot() + 
+  ggraph() + 
   
   # add nodes and edges
   geom_edge_link() +
@@ -681,7 +677,7 @@ network %&gt;%
 ```r
 # start network plot
 network %&gt;% 
-  ggplot() + 
+  ggraph() + 
   geom_edge_link() +
   geom_node_point() +
 
@@ -714,8 +710,8 @@ network %&gt;%
 ```r
 # start network plot
 network %&gt;% 
-  ggplot() + 
-  geom_edge_link() + # style change
+  ggraph() + 
+  geom_edge_hive() + # style change
   geom_node_point() +
   geom_node_label(aes(label = name), 
                   show.legend = FALSE) +
@@ -937,6 +933,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

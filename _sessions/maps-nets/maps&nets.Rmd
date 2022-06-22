@@ -797,7 +797,7 @@ network
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # start network plot
 network %>% 
-  ggplot() 
+  ggraph() 
 
 ```
 
@@ -827,7 +827,7 @@ network %>%
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # start network plot
 network %>% 
-  ggplot() + 
+  ggraph() + 
   
   # add nodes and edges
   geom_edge_link() +
@@ -863,7 +863,7 @@ network %>%
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # start network plot
 network %>% 
-  ggplot() + 
+  ggraph() + 
   geom_edge_link() +
   geom_node_point() +
 
@@ -905,8 +905,8 @@ network %>%
 ```{r, eval = FALSE, fig.width = 5, fig.height = 4, dpi=250}
 # start network plot
 network %>% 
-  ggplot() + 
-  geom_edge_link() + # style change
+  ggraph() + 
+  geom_edge_hive() + # style change
   geom_node_point() +
   geom_node_label(aes(label = name), 
                   show.legend = FALSE) +
