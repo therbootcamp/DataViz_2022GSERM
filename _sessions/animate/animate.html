@@ -64,8 +64,7 @@ layout: true
 # Animations with &lt;mono&gt;gganimate&lt;/mono&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Maps require geometric shapes stored in &lt;high&gt;shapefiles&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;The &lt;high&gt;simple features&lt;/high&gt; (&lt;mono&gt;sf&lt;/mono&gt;) framework makes processing and visualizing maps with the &lt;mono&gt;tidyverse&lt;mono&gt; easy.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;gganimate&lt;/mono&gt; provides functions to &lt;high&gt;animate any &lt;mono&gt;ggplot&lt;/mono&gt;&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -73,11 +72,150 @@ layout: true
 
 .pull-right6[
 
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
 &lt;img src="animate_files/figure-html/unnamed-chunk-2-1.gif" style="display: block; margin: auto;" /&gt;
 
 ]
+
+---
+
+.pull-left45[
+
+# Transitions
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;transition_states()&lt;/mono&gt; .&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+quarters_map &lt;- basel_map %&gt;% 
+  left_join(basel,by = c("TYPE" = "quarter"))
+
+quarters_map %&gt;% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  transition_states(year) 
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="animate_files/figure-html/unnamed-chunk-4-1.gif" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+.pull-left45[
+
+# Labels
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;transition_states()&lt;/mono&gt; .&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+quarters_map %&gt;% 
+  ggplot() +
+  geom_sf(aes(fill = income_mean),
+          col = "white") + 
+  theme_void() + 
+  scale_fill_viridis_c(name = 'Income', option = "E") +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Average income in Basel's quarters in {closest_state}") +
+  labs(caption = "Source: Open Data Basel Stadt") +
+  transition_states(year) 
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="animate_files/figure-html/unnamed-chunk-6-1.gif" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;transition_reveal()&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;transition_states()&lt;/mono&gt; .&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+basel %&gt;%
+  
+  # sort by income and factor quarter
+  arrange(year, income_median) %&gt;% 
+  mutate(quarter = as_factor(quarter),
+         year = as.integer(year)) %&gt;% 
+  
+  # original code
+  ggplot(aes(x = year, y = income_median, col = quarter)) +
+  geom_line() + geom_point() +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size=7)) + 
+  scale_color_viridis_d() +
+  ggtitle(label = "Inequality in Basel", 
+          subtitle = "Income development by quarter from 2001 to {frame_along}") +
+  labs(x = "Year", y = "Median income",
+       caption = "Source: Open Data Basel Stadt") +
+  transition_time(as.integer(year))
+```
+
+]
+
+.pull-right45[
+
+&lt;br&gt;&lt;br&gt;
+
+&lt;img src="animate_files/figure-html/unnamed-chunk-8-1.gif" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+# &lt;mono&gt;ease&lt;/mono&gt;
+
+---
+
+# &lt;mono&gt;enter_*&lt;/mono&gt;,&lt;mono&gt;exit_*&lt;/mono&gt;
+
+
+---
+
+# &lt;mono&gt;animate&lt;/mono&gt;
+
+
+---
+
+# &lt;mono&gt;ggplotly&lt;/mono&gt;
+
+---
+
+# &lt;mono&gt;ggplotly&lt;/mono&gt;
+
+
 
 ---
 
