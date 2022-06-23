@@ -50,7 +50,7 @@ plot +
   XX
 ```
 
-2. Add `ggtitle(title = "XX", subtitle = "XX")` to add a title and subtitle to the plot. In either title or subtitle, add `{closest_state}` directly inside the character string, so that the changing states will be shown. 
+2. Add `ggtitle(label = "XX", subtitle = "XX")` to add a title and subtitle to the plot. In either title or subtitle, add `{closest_state}` directly inside the character string, so that the changing states will be shown. 
 
 ```{r}
 plot + 

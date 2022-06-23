@@ -323,7 +323,7 @@ basel %>%
   ggplot(...) +
   
   # add transitions
-  transition_states(year) +
+  transition_reveal(year) +
 
   # add labels
   ggtitle(label = "Inequality in Basel", 
@@ -384,7 +384,7 @@ basel %>%
   ggplot(...) +
   
   # add transitions
-  transition_states(year) +
+  transition_reveal(year) +
 
   # add labels
   ...
