@@ -58,7 +58,7 @@ plot +
   XX
 ```
 
-3. Change the speed and focus of the animation by setting `transition_length = 10` and `state_length = 0`. As a result, you should a smoother, more fluid animation. 
+3. Change the speed and focus of the animation by setting `transition_length = 10` and `state_length = 0`. As a result, you should get a smoother, more fluid animation. 
 
 ```{r}
 plot + 
@@ -75,7 +75,7 @@ plot +
   XX
 ```
 
-5. Use `anim_save()`, to save your animation as a .gif to your harddrive. To do this, first store the animation in an oject. Make sure to add the extension `.gif` to your filename. If you don't specify a folder, you should find your animation inside of your project folder.   
+5. Use `anim_save()`, to save your animation as a .gif to your harddrive. To do this, first store the animation in an object. Make sure to add the extension `.gif` to your filename. If you don't specify a folder, you should find your animation inside of your project folder.   
 
 ```{r}
 anim <- plot + 
@@ -88,7 +88,7 @@ anim_save(filename = XX, animation = XX)
 
 # 3 - Plotly
 
-1. Use `ggplotly`, to turn the base plot into `plotly` package and then run it. Inspect the plot and observe whether the hover information includes all relevant information.  
+1. Use `ggplotly`, to turn the base plot into a `plotly` package and then run it. Inspect the plot and observe whether the hover information includes all relevant information.  
 
 ```{r}
 p <- XX(XX)
@@ -107,8 +107,3 @@ p
 # 4 - Project work
 
 1. Try to use what you have learned in this section to either create an animated or interactive version of your plot. 
-
-
-
-
-
