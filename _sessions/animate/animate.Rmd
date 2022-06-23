@@ -933,7 +933,7 @@ p = basel %>%
   labs(x = "Wealth", y = "Income") +
   scale_color_viridis_d()  +
   theme_minimal() +
-  shadow_wake(wake_length = .5)
+  shadow_wake(wake_length = .3)
 
 animate(p, 100)
 ```
@@ -970,7 +970,7 @@ p = quarters_map %>%
   theme(axis.line=element_blank())
 
 
-p = ggplotly(p, width = 600, height=700)
+p = ggplotly(p, width = 600, height=600)
 p
 ```
 
@@ -1021,7 +1021,7 @@ p = quarters_map %>%
   theme(axis.line=element_blank())
 
 
-p = ggplotly(p, width = 500, height=600)
+p = ggplotly(p, width = 500, height=500)
 p
 ```
 
@@ -1118,7 +1118,7 @@ p = quarters_map %>%
   theme(axis.line=element_blank())
 
 
-p = ggplotly(p, width = 500, height=600)
+p = ggplotly(p, width = 500, height=500)
 
 # change labels
 p$x$data = lapply(p$x$data, function(x){ 
@@ -1179,7 +1179,7 @@ p = quarters_map %>%
   theme(axis.line=element_blank())
 
 
-p = ggplotly(p, width = 500, height=600, tooltip = "text")
+p = ggplotly(p, width = 500, height=500, tooltip = "text")
 
 p
 ```
