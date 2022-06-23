@@ -24,7 +24,7 @@ library(gganimate)
 
 # 1 - Base plot
 
-1. Use the code below to generate the base plot for this practical. It shows the relationship between wealth and income for every year, with points colored according the wealth in 2017.  
+1. Use the code below to generate the base plot for this practical. It shows the relationship between wealth and income for every year, with points colored according to the wealth in 2017.  
 
 ```{r}
 plot <- basel %>% 
@@ -43,7 +43,7 @@ plot <- basel %>%
 
 # 2 - Animate
 
-1. To animate the base plot, that is to show the data for each year in an iterative fashion, simply add `transition_states(year)` to the plot. This will start a process during which first all individual images are created and then the images are joined in a single .gif file, which will be displayed in the Plots tab. Know that this may take a few seconds to a minute.
+1. To animate the base plot, that is, to show the data for each year in an iterative fashion, simply add `transition_states(year)` to the plot. This will start a process during which first all individual images are created and then the images are joined in a single .gif file, which will be displayed in the Plots tab. Know that this may take a few seconds to a minute.
 
 ```{r}
 plot + 

@@ -73,7 +73,7 @@ knitr::opts_chunk$set(dpi = 300, echo = FALSE, warning = FALSE, fig.align = 'cen
 print2 <- function(x, nlines=10,...) {
    cat(head(capture.output(print(x,...)), nlines), sep="\n")}
 
-basel <- read_csv("1_Data/taxation.csv")
+basel <- read_csv("1_data/taxation.csv")
 
 ```
 
@@ -86,7 +86,7 @@ basel <- read_csv("1_Data/taxation.csv")
   "<high>easy-to-read</high> and <high>easy-to-write</high> plain text format, [...] convert it to structurally valid XHTML (or HTML)"</span></li> 
   <li class="m2"><span>Simple <high>syntax for formatting</high> documents.</span></li>  
   <ul>
-    <li><span>highlight text with bold and italic text</span></li>   
+    <li><span>highlight text with bold and italic</span></li>   
     <li><span>lists</span></li>  
     <li><span>headers</span></li> 
     <li><span>hyperlinks</span></li>
@@ -754,7 +754,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>warning=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>warnings</highm> mi output.
+  Include/exclude <highm>warnings</highm> in output.
   </td> 
 </tr>
 </table>
@@ -820,7 +820,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>message=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>messages</highm> mi output.
+  Include/exclude <highm>messages</highm> in output.
   </td> 
 </tr>
 <tr>
@@ -828,7 +828,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>warning=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>warnings</highm> mi output.
+  Include/exclude <highm>warnings</highm> in output.
   </td> 
 </tr>
 </table>
@@ -893,7 +893,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>message=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>messages</highm> mi output.
+  Include/exclude <highm>messages</highm> in output.
   </td> 
 </tr>
 <tr>
@@ -901,7 +901,7 @@ basel <- read_csv("1_Data/taxation.csv")
   <mono>warning=T/F</mono>
   </td>
   <td bgcolor="white">
-  Include/exclude <highm>warnings</highm> mi output.
+  Include/exclude <highm>warnings</highm> in output.
   </td> 
 </tr>
 </table>
@@ -1955,7 +1955,7 @@ read_csv("../1_data/data.csv")
   <mono>&lt;div&gt;, &lt;p&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Container, text section.</high>
+  <high>Container</high>, text section.
   </td> 
 </tr>
 <tr>
@@ -1963,7 +1963,7 @@ read_csv("../1_data/data.csv")
   <mono>&lt;table&gt;</mono> 
   </td>
   <td bgcolor="white">
-  <high>Tables, columns.</high>
+  <high>Tables</high>, columns.
   </td> 
 </tr>
 </table>
@@ -1986,7 +1986,7 @@ read_csv("../1_data/data.csv")
 # CSS
 
 <ul>
-  <li class="m1"><span><b>C</b>ascading <b>S</b>tyle <b>S</b>sheets allow you to set additional <high>aesthetic characteristics</high> of <high>HTML</high> in an external file.</span></li>
+  <li class="m1"><span><b>C</b>ascading <b>S</b>tyle <b>S</b>heets allow you to set additional <high>aesthetic characteristics</high> of <high>HTML</high> in an external file.</span></li>
 </ul>
 
 ]
