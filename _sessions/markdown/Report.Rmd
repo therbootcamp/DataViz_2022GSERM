@@ -13,13 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 require(tidyverse)
 require(patchwork)
 
-basel = read_csv("../1_Data/taxation.csv")
+basel = read_csv("1_Data/taxation.csv")
 ```
 
 
 Inequalities in income and wealth are a growing social issue ^[See https://www.un.org/en/un75/inequality-bridging-divide.]. This analysis seeks to quantify inequality in Basel, Switzerland, by analyzing the widening of wealth and income gaps between the city's quarters.    
 
-### The data
+### Income and wealth data
 
 The data contains information on the wealth and income of the inhabitants of the `r length(unique(basel))` quarters of Basel, which was determined from tax-return documents. The data was provided by [Open Data Basel](https://www.opendata.bs.ch/). 
 
