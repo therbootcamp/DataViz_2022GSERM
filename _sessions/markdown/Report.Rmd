@@ -19,7 +19,7 @@ basel = read_csv("1_Data/taxation.csv")
 
 Inequalities in income and wealth are a growing social issue ^[See https://www.un.org/en/un75/inequality-bridging-divide.]. This analysis seeks to quantify inequality in Basel, Switzerland, by analyzing the widening of wealth and income gaps between the city's quarters.    
 
-### Income and wealth data
+### Income and wealth
 
 The data contains information on the wealth and income of the inhabitants of the `r length(unique(basel))` quarters of Basel, which was determined from tax-return documents. The data was provided by [Open Data Basel](https://www.opendata.bs.ch/). 
 
@@ -27,7 +27,7 @@ The data contains information on the wealth and income of the inhabitants of the
 
 The figure below shows the development of income (panel A) and wealth (panel B) in Basel's quarters in the years 2001 to 2017. It can be observed that the incomes in poorer quarters in 2001 declined with time, whereas those of richer quarters rose. Similarly, wealth in poorer quarters rose less strongly than wealth in quarters that started out wealthier. These results suggest a widening of income and wealth inequality in Basel.    
 
-```{r, echo = FALSE, fig.asp=.7, fig.fullwidth=TRUE}
+```{r, echo = FALSE, fig.asp=.7}
 # create quarter factor
 basel <- basel %>%
   arrange(year, income_mean) %>% 

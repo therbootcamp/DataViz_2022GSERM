@@ -2004,5 +2004,6 @@ read_csv("../1_data/data.csv")
 
 class: middle, center
 
-<h1><a href="">Practical</a></h1>
+<h1><font style="font-size:12px">click to open</font><br><a href="https://therbootcamp.github.io/DataViz_2022GSERM/_sessions/Markdown/markdown_report.html">Practical</a></h1>
+
 
