@@ -480,10 +480,8 @@ quarters_map %>%
 </ul>
 
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
-# join basel tax data
-quarters_map <- read_sf('1_Data/quarters') %>% 
-  left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter")) %>% 
+# start with joint object
+quarters_map %>% 
   
   # determine centroids
   mutate(ctr = st_centroid(geometry),
@@ -507,9 +505,7 @@ quarters_map <- read_sf('1_Data/quarters') %>%
 ```{r, echo = FALSE, fig.width = 5, fig.height = 4, dpi=250, fig.align='center'}
 require(ggrepel)
 
-read_sf('1_Data/quarters') %>% 
-  left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter")) %>% 
+quarters_map %>% 
   
   # determine centroids
   mutate(ctr = st_centroid(geometry),
@@ -542,8 +538,6 @@ read_sf('1_Data/quarters') %>%
 ```{r, eval = F, fig.width = 5, fig.height = 4, dpi=250}
 # join basel tax data
 quarters_map %>% 
-  left_join(filter(basel, year == 2017), 
-            by = c("TYPE" = "quarter")) %>% 
   
   # determine centroids
   mutate(ctr = st_centroid(geometry),
