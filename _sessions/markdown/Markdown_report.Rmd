@@ -61,9 +61,9 @@ The data contains information on the wealth and income of the inhabitants of the
 The figure below shows the development of income (panel A) and wealth (panel B) in Basel's quarters in the years 2001 to 2017. It can be observed that the incomes in poorer quarters in 2001 declined with time, whereas those of richer quarters rose. Similarly, wealth in poorer quarters rose less strongly than wealth in quarters that started out wealthier. These results suggest a widening of income and wealth inequality in Basel.
 ```
 
-3. Next move the cursor below the text you just added and then go to the Code menu on top and select the first option `Insert Chunk`.
+3. Next, move the cursor below the text you just added and then go to the Code menu on top and select the first option `Insert Chunk`.
 
-4. Now copy the following code into the newly-created, empty chunk. 
+4. Now, copy the following code into the newly-created, empty chunk. 
 
 ```{}
 # create quarter factor
