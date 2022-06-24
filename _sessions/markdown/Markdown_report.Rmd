@@ -9,7 +9,7 @@ In this practical, you will [**recreate this html report**](https://therbootcamp
 
 ### 0 - Preliminaries
 
-1. Go to the new file menu and select the file type R Markdown, enter the title `Do the rich get richer in Basel?` and your name, and then hit ok. 
+1. Go to the File - New File menu and select the file type R Markdown, enter the title `Do the rich get richer in Basel?` and your name, and then hit ok. 
 
 2. Click on the little gear symbol on top of the editor and select `Preview in Viewer Pane`. 
 
@@ -25,7 +25,7 @@ In this practical, you will [**recreate this html report**](https://therbootcamp
 Inequalities in income and wealth are a growing social issue FOOTNOTE. This analysis seeks to quantify inequality in Basel, Switzerland, by analyzing the widening of wealth and income gaps between the city’s quarters.
 ```
 
-2. Next in place of the text `FOOTNOTE`, set the actual footnote `^[See https://www.un.org/en/un75/inequality-bridging-divide.]`.
+2. Next replace the text `FOOTNOTE` with the actual footnote `^[See https://www.un.org/en/un75/inequality-bridging-divide.]`.
 
 3. Knit the document (i.e., hit the `Knit` button) and observe whether the new contents are accurately displayed. 
 
@@ -43,11 +43,11 @@ The data contains information on the wealth and income of the inhabitants of the
 
 4. Replace the text `LINK` with `[Open Data Basel](https://www.opendata.bs.ch/)` to link to the Basel Open Data webpage. 
 
-5. Knit the document and observe whether the new contents are accurately displayed. 
+5. Knit the document and observe whether the new contents are displayed. 
 
 ### 4 - Setup
 
-1. Before you can turn to including the visualization, you need to add a couple items within the setup chunk (below the `opts_chunk` function). First, load the `tidyverse` and `patchwork`. Second, read in the `taxation.csv` data and call the object `basel`. Note that when running the rmarkdown file it will use its own location as the working directly. Consequently, use `../1_data/taxation.csv` as the file path. 
+1. Before you can turn to including the visualization, you need to add a couple of items within the setup chunk (below the `opts_chunk` function). First, load the `tidyverse` and `patchwork`. Second, read in the `taxation.csv` data and call the object `basel`. Note that when running the rmarkdown file it will use its own location as the working directory. Consequently, use `../1_data/taxation.csv` as the file path. 
 
 2. Knit the document and observe that the changes to the setup chunk have no *visible* effect due to `include = FALSE`. 
 
@@ -61,9 +61,9 @@ The data contains information on the wealth and income of the inhabitants of the
 The figure below shows the development of income (panel A) and wealth (panel B) in Basel's quarters in the years 2001 to 2017. It can be observed that the incomes in poorer quarters in 2001 declined with time, whereas those of richer quarters rose. Similarly, wealth in poorer quarters rose less strongly than wealth in quarters that started out wealthier. These results suggest a widening of income and wealth inequality in Basel.
 ```
 
-3. Next copy and paste the setup chunk under the text. Remove from all contents from the new chunk. Also replace the name `setup` with `visualization` and remove the setting `include = FALSE`. 
+3. Next copy and paste the setup chunk under the text. Remove all contents from the new chunk. Also replace the name `setup` with `visualization` and remove the setting `include = FALSE`. 
 
-4. Now copy into the newly-created, empty chunk the following code. 
+4. Now copy the following code into the newly-created, empty chunk. 
 
 ```{}
 # create quarter factor
@@ -100,7 +100,7 @@ plot_income + plot_wealth  +
 
 5. Knit the document and observe that there it now includes code and a visualization.
 
-6. Add the following two changes to the chunk settsings: `echo = FALSE` to hide the code (but not the visualization) and `fig.asp=.7` to use more of the width of the document, and `fig.fullwidth=TRUE`.
+6. Add the following two changes to the chunk settings: `echo = FALSE` to hide the code (but not the visualization) and `fig.asp=.7` to use more of the width of the document, and `fig.fullwidth=TRUE`.
 
 5. Knit the document and observe that the code is no longer visible and that the aspect ratio of the plot has changed.
 
@@ -108,11 +108,13 @@ plot_income + plot_wealth  +
 
 1. Create a header at the third level (`###`) with the title `Income and wealth`. 
 
+2. Below the header, add the following text:
+
 ```{}
 The presented analysis of income and wealth inequalities based on Basel's quarters comes with several limitations. Most importantly, the analysis does not account for mobility, implying that some of the temporal differences could driven by changes in the quarters' inhabitants. More detailed analyses which track inhabited across time will be needed to  demonstrate conclusively a widening of inequality in Basel.
 ```
 
-2. Knit the document and observe that all of the report's contents are now included.
+3. Knit the document and observe that all of the report's contents are now included.
 
 ### 7 - Theme
 
