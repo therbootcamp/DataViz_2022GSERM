@@ -927,7 +927,7 @@ basel <- read_csv("1_data/taxation.csv")
 
 <ul>
   <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
-  <li class="m2"><span>Addition functions assist.</span></li>
+  <li class="m2"><span>Additional functions assist.</span></li>
 </ul>
 
 ]
@@ -949,7 +949,7 @@ basel <- read_csv("1_data/taxation.csv")
 
 <ul>
   <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
-  <li class="m2"><span>Addition functions assist.</span></li>
+  <li class="m2"><span>Additional functions assist.</span></li>
 </ul>
 
 ]
@@ -972,7 +972,7 @@ basel <- read_csv("1_data/taxation.csv")
 
 <ul>
   <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
-  <li class="m2"><span>Addition functions assist.</span></li>
+  <li class="m2"><span>Additional functions assist.</span></li>
 </ul>
 
 ]
@@ -995,7 +995,7 @@ basel <- read_csv("1_data/taxation.csv")
 
 <ul>
   <li class="m1"><span>The setup chunk affords <high> general settings for all chunks</high>.</span></li>
-  <li class="m2"><span>Addition functions assist.</span></li>
+  <li class="m2"><span>Additional functions assist.</span></li>
 </ul>
 
 ]
@@ -1017,7 +1017,7 @@ basel <- read_csv("1_data/taxation.csv")
 
 <ul>
   <li class="m1"><span>When rendered, markdown documents do not use the current <high>working directory</high>.</span></li><br>
-  <li class="m2"><span>Paths need be defined <high>relative to the position of the .Rmd file</high>.</span></li>
+  <li class="m2"><span>Paths need to be defined <high>relative to the position of the .Rmd file</high>.</span></li>
 </ul>
 
 <br>
