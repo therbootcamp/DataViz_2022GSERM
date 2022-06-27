@@ -48,16 +48,16 @@ basel_map %>%
 basel_map %>% 
   ggplot() + 
   geom_sf() + 
-  XX
+  theme_void()
 ```
 
 3. If you like, you could already start styling the map, e.g., by coloring the borders and areas. To do this, set, for instance, `col = "white"` and `fill = "blue"`. But the question is where? Try first making these settings inside `ggplot(aes())`. 
 
 ```{r}
 basel_map %>% 
-  ggplot(aes(XX = XX, XX = XX)) + 
+  ggplot(aes(col = "white", fill = "blue")) + 
   geom_sf() + 
-  XX
+  theme_void()
 ```
 
 4. That didn't work. The problem is that anything inside of `aes()` is interpreted as a variable, not as constant. Now make these settings inside of `geom_sf()` without using the `aes()` helper function. That's how we usually set aesthetics to constants: inside of the geom, outside of `aes()`.
@@ -65,8 +65,8 @@ basel_map %>%
 ```{r}
 basel_map %>% 
   ggplot() + 
-  geom_sf(XX = XX, XX = XX) + 
-  XX
+  geom_sf(col = "white", fill = "blue") + 
+  theme_void()
 ```
 
 # 3 - Adding variables
@@ -83,9 +83,9 @@ basel_map <- basel_map %>%
 
 ```{r}
 basel_map %>% 
-  ggplot(aes(XX = XX)) + 
-  geom_sf(XX = XX) + 
-  XX
+  ggplot(aes(fill = wealth_mean)) + 
+  geom_sf(col = "white") + 
+  theme_void()
 ```
 
 # 4 - Styling
@@ -115,63 +115,63 @@ edges <- basel %>%
 2. Next, use the `as_tbl_graph()` function from the `tidygraph` package to create a network of the relational data. Set the argument `directed` to `FALSE`, since the correlations do no reflect a directed relatedness between the quarters. 
 
 ```{r}
-network <- as_tbl_graph(XX, XX = XX)
+network <- as_tbl_graph(edges, directed = FALSE)
 ```
 
 3. Use now the `ggraph()` function from the `ggraph` package to start a blank network plot. The function needs no arguments.
 
 ```{r}
 network %>% 
-  XX
+  ggraph()
 ```
 
 4. Add nodes and edges using the functions `geom_node_point()` and `geom_edge_hive()`. First add the edges so that the edges don't overlay the nodes. You should now have a network in front of you.  
 
 ```{r}
 network %>% 
-  XX +
-  XX + 
-  XX
+  ggraph() +
+  geom_edge_hive() +
+  geom_node_point() 
 ```
 
 5. Add `aes(width = weight)` and `show.legend = FALSE` to the edges function so that the edges are scaled according to the relatedness between quarters, without showing a legend, which in this case is not stricly necessary.  
 
 ```{r}
 network %>% 
-  XX +
-  XX(XX, XX) + 
-  XX
+  ggraph() +
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_point()
 ```
 
 6. To further adjust the appearance of edges, add `scale_edge_width(range=c(.2, 1))` so that the edges are small enough to discriminate them.  
 
 ```{r}
 network %>% 
-  XX +
-  XX(XX, XX) + 
-  XX +
-  XX
+  ggraph() +
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_point() +
+  scale_edge_width(range=c(.2, 1))
 ```
 
 7. Add labels for the nodes by using `geom_node_label()` instead of `geom_node_point`. Within the function add a mapping with `label = name`. Note that `name` is a feature of the `network` object, so R knows where to look and what to do. 
 
 ```{r}
 network %>% 
-  XX +
-  XX(XX, XX) + 
-  XX(aes(XX = XX)) +
-  XX
+  ggraph() +
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_label(aes(label = name)) +
+  scale_edge_width(range=c(.2, 1))
 ```
 
 8. Finally, add `theme_graph()` to fix the background and finish off the base network plot.
 
 ```{r}
 network %>% 
-  XX +
-  XX(XX, XX) + 
-  XX(aes(XX = XX)) +
-  XX +
-  XX
+  ggraph() +
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_label(aes(label = name)) +
+  scale_edge_width(range=c(.2, 1)) +
+  theme_graph()
 ```
 
 # 6 - Adding network features and styling
@@ -180,61 +180,61 @@ network %>%
 
 ```{r}
 network %>% 
-  mutate(XX = XX(weights = weight) %>% XX) %>% 
-  XX +
-  XX(XX, XX) + 
-  XX(aes(XX = XX, XX = XX), XX) +
-  XX +
-  XX
+  mutate(community = group_louvain(weights = weight) %>% as_factor()) %>% 
+  ggraph() +
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_label(aes(label = name, col = community), show.legend = FALSE) +
+  scale_edge_width(range=c(.2, 1)) +
+  theme_graph()
 ```
 
 2. Next, add ellipses by inserting the code below right before edges and nodes are added to the plot.  
 
 ```{r}
 network %>% 
-  mutate(XX = XX(weights = weight) %>% XX)
-  XX +
+  mutate(community = group_louvain(weights = weight) %>% as_factor()) %>% 
+  ggraph() +
   stat_ellipse(aes(x = x , y = y, fill = community), 
              level = .8, geom = "polygon", alpha = .1, 
              show.legend = FALSE) +
-  XX(XX, XX) + 
-  XX(aes(XX = XX, XX = XX), XX) +
-  XX +
-  XX
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_label(aes(label = name, col = community), show.legend = FALSE) +
+  scale_edge_width(range=c(.2, 1)) +
+  theme_graph()
 ```
 
 3. Adjust the styling by changing both `color` and `fill` (for the ellipses) to colors from the `viridis` color set. To do this, use `scale_color_manual(values=viridis::viridis(3)[1:2])` and `scale_fill_manual(values=viridis::viridis(3)[1:2])` and ad them at the end.
 
 ```{r}
 network %>% 
-  mutate(XX = XX(weights = weight) %>% XX)
-  XX +
+  mutate(community = group_louvain(weights = weight) %>% as_factor()) %>% 
+  ggraph() +
   stat_ellipse(aes(x = x , y = y, fill = community), 
              level = .8, geom = "polygon", alpha = .1, 
              show.legend = FALSE) +
-  XX(XX, XX) + 
-  XX(aes(XX = XX, XX = XX), XX) +
-  XX +
-  XX + 
-  XX +
-  XX
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_label(aes(label = name, col = community), show.legend = FALSE) +
+  scale_edge_width(range=c(.2, 1)) +
+  theme_graph() +
+  scale_color_manual(values=viridis::viridis(3)[1:2]) +
+  scale_fill_manual(values=viridis::viridis(3)[1:2])
 ```
 
 4. Finally, use `annotate()` to add labels for each of the clusters. See code below.  
 
 ```{r}
 network %>% 
-  mutate(XX = XX(weights = weight) %>% XX)
-  XX +
+  mutate(community = group_louvain(weights = weight) %>% as_factor()) %>% 
+  ggraph() +
   stat_ellipse(aes(x = x , y = y, fill = community), 
-           level = .8, geom = "polygon", alpha = .1, 
-           show.legend = FALSE) +
-  XX(XX, XX) + 
-  XX(aes(XX = XX, XX = XX), XX) +
-  XX +
-  XX + 
-  XX +
-  XX +
+             level = .8, geom = "polygon", alpha = .1, 
+             show.legend = FALSE) +
+  geom_edge_hive(aes(width = weight), show.legend = FALSE) +
+  geom_node_label(aes(label = name, col = community), show.legend = FALSE) +
+  scale_edge_width(range=c(.2, 1)) +
+  theme_graph() +
+  scale_color_manual(values=viridis::viridis(3)[1:2]) +
+  scale_fill_manual(values=viridis::viridis(3)[1:2]) +
   annotate("text", x = c(-1, 1), y = c(1,.8), 
          label = c("Group 1","Group 2"), size=7)
 ```

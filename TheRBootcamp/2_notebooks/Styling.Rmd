@@ -24,7 +24,7 @@ basel <- read_csv('1_data/taxation.csv')
 
 # 1 - Plot base
 
-1. Begin by creating a plot showing, as lines (`geom_line()`), the relationship of `wealth_median` (`y`) and `years` (`x`) for each of the `quarter`s (`col`).   
+1. Begin by creating a plot showing, as lines (`geom_line()`), the relationship of `wealth_median` (`y`) and `year` (`x`) for each of the `quarter`s (`col`).   
 
 ```{r}
 basel %>% 
@@ -36,7 +36,7 @@ basel %>%
 
 # 2 - Themes
 
-1. Make the plot prettier by adding a `theme_*()`. I like `theme_minimal()`, but you can go for a different one if you like, e.g., `theme_light()`. 
+1. Make the plot prettier by adding a `theme_*()`. We like `theme_minimal()`, but you can go for a different one if you like, e.g., `theme_light()`. 
 
 ```{r}
 basel %>% 
@@ -98,7 +98,7 @@ basel %>%
 
 # 5 - Colors
 
-1. Add `scale_color_viridis_d` to change the color set to the popular viridis set. Note the `d` at the end. This stands for `discrete` as opposed to `continuous`, a distinction made for most scaling functions. `discrete` should be used whenever you are scaling a categorical variable and `continuous` whenever you are scaling a continuous variable. Here we are scaling a categorical variable: `quarter`. 
+1. Add `scale_color_viridis_d()` to change the color set to the popular viridis set. Note the `d` at the end. This stands for `discrete` as opposed to `continuous`, a distinction made for most scaling functions. `discrete` should be used whenever you are scaling a categorical variable and `continuous` whenever you are scaling a continuous variable. Here we are scaling a categorical variable: `quarter`. 
 
 ```{r}
 basel %>% 
@@ -120,7 +120,7 @@ basel %>%
 
 # 6 - Factors
 
-1. To change the order of categorical variables, one must rely on `factors`. The two data wrangling lines added below make sure that the factor levels in `quarter` are ordered according to `wealth_median` in year 2001. The `as_factor` function btw is part of the `forcats` package, which exists exactly to solve these kinds of problems.   
+1. To change the order of categorical variables, one must use `factors`. The two data wrangling lines added below make sure that the factor levels in `quarter` are ordered according to `wealth_median` in year 2001. The `as_factor` function btw is part of the `forcats` package, which exists exactly to solve these kinds of problems.   
 
 ```{r}
 basel %>% 
@@ -153,7 +153,6 @@ basel <- basel %>%
   mutate(wealth_2001 = first(wealth_median)) %>% 
   ungroup() %>% 
   mutate(rich = wealth_2001 > median(wealth_2001))
-  
 ```
 
 2. Next, use some more `dplyr` to calculate mean and standard deviations of medians as a function of the newly-created variable `rich` and `year`. 
@@ -186,7 +185,7 @@ averages %>%
   XX
 ```
 
-4. It seems the rich quarters have indeed grown faster in wealth than poor quarters. Add some error bars `geom_errorbar` reflecting confidence intervals. To this end divide the standard deviation by `sqrt(10)` and then multiply by `qt(.975, 10)`.  
+4. It seems the rich quarters have indeed grown faster in wealth than poor quarters. Add some error bars `geom_errorbar` reflecting confidence intervals. To this end divide the standard deviation by `sqrt(10)` and then multiply by `qt(.975, 9)`.  
 
 ```{r}
 averages %>% 
@@ -196,7 +195,7 @@ averages %>%
   XX +
   XX + 
   geom_errorbar(mapping = aes(ymin = XX - XX/XX*XX,
-                              ymax = XX - XX/XX*XX)) +
+                              ymax = XX + XX/XX*XX)) +
   XX(XX = XX,
      XX = XX,
      XX = XX) +
@@ -208,13 +207,14 @@ averages %>%
   XX
 ```
 
-5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependent variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you have control the color using `scale_fill_*`.    
+5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependent variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you need to add `fill = rich` to the global mapping in `ggplot` and at the end `scale_fill_*`.     
 
 ```{r}
 averages %>% 
   ggplot(aes(x = XX,
              y = XX,
-             col = XX)) + 
+             col = XX,
+             fill = XX)) + 
   geom_ribbon(mapping = aes(ymin = XX - XX/XX*XX,
                             ymax = XX - XX/XX*XX),
               alpha = .5) +
@@ -229,6 +229,30 @@ averages %>%
      XX = "XX",
      XX = "XX") + 
   XX + scale_fill_viridis_d()
+```
+
+6. Finally, add `labels = c("Poor","Rich")` to both the `scale_color_*` and `scale_fill_*` functions, to fix the legend labels.
+
+```{r}
+averages %>% 
+  ggplot(aes(x = XX,
+             y = XX,
+             col = XX,
+             fill = XX)) + 
+  geom_ribbon(mapping = aes(ymin = XX - XX/XX*XX,
+                            ymax = XX - XX/XX*XX),
+              alpha = .5) +
+  XX +
+  XX + 
+  XX(XX = XX,
+     XX = XX,
+     XX = XX) +
+  XX(XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX",
+     XX = "XX") + 
+  XX(XX) + scale_fill_viridis_d(XX)
 ```
 
 

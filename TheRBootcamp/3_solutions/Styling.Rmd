@@ -1,12 +1,14 @@
 ---
-title: "Styling exercises solutions"
+title: "Styling exercises"
 output:
 editor_options:
   chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE,
+                      eval = FALSE)
 ```
 
 In this practical, you will visualize the development of wealth in Basel's quarters across time and learn how to make your visualization prettier.   
@@ -17,7 +19,7 @@ In this practical, you will visualize the development of wealth in Basel's quart
 
 ```{r}
 library(tidyverse)
-basel <- read_csv('../1_data/taxation.csv')
+basel <- read_csv('1_data/taxation.csv')
 ```
 
 # 1 - Plot base
@@ -34,7 +36,7 @@ basel %>%
 
 # 2 - Themes
 
-1. Make the plot prettier by adding a `theme_*()`. I like `theme_minimal()`, but you can go for a different one if you like, e.g., `theme_light()`. 
+1. Make the plot prettier by adding a `theme_*()`. We like `theme_minimal()`, but you can go for a different one if you like, e.g., `theme_light()`. 
 
 ```{r}
 basel %>% 
@@ -69,8 +71,8 @@ basel %>%
   geom_line() +
   theme_minimal() + 
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7))
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7))
 ```
 
 # 4 - Labs
@@ -85,13 +87,13 @@ basel %>%
   geom_line() +
   theme_minimal() + 
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7)) +
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
   labs(x = "Year",
        y = "Median wealth",
        title = "Inequality in Basel",
        subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
-       caption = "Source: Open Data Basel-Stadt")
+       caption = "Source: Open Data Basel-Stadt") 
 ```
 
 # 5 - Colors
@@ -106,8 +108,8 @@ basel %>%
   geom_line() +
   theme_minimal() + 
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7)) +
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
   labs(x = "Year",
        y = "Median wealth",
        title = "Inequality in Basel",
@@ -118,7 +120,7 @@ basel %>%
 
 # 6 - Factors
 
-1. To change the order of categorical variables, one must rely on `factors`. The two data wrangling lines added below make sure that the factor levels in `quarter` are ordered according to `wealth_median` in year 2001. The `as_factor` function btw is part of the `forcats` package, which exists exactly to solve these kinds of problems.   
+1. To change the order of categorical variables, one must use `factors`. The two data wrangling lines added below make sure that the factor levels in `quarter` are ordered according to `wealth_median` in year 2001. The `as_factor` function btw is part of the `forcats` package, which exists exactly to solve these kinds of problems.   
 
 ```{r}
 basel %>% 
@@ -130,8 +132,8 @@ basel %>%
   geom_line() +
   theme_minimal() + 
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7)) +
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
   labs(x = "Year",
        y = "Median wealth",
        title = "Inequality in Basel",
@@ -151,7 +153,6 @@ basel <- basel %>%
   mutate(wealth_2001 = first(wealth_median)) %>% 
   ungroup() %>% 
   mutate(rich = wealth_2001 > median(wealth_2001))
-  
 ```
 
 2. Next, use some more `dplyr` to calculate mean and standard deviations of medians as a function of the newly-created variable `rich` and `year`. 
@@ -164,7 +165,7 @@ averages <- basel %>%
   
 ```
 
-3. OK, now, use the code from above to create a plot showing lines and points for the average wealth median of rich and poor quarters.    
+3. OK, now, use the code from above to create a plot showing lines and points for the average wealth median of rich and poor quarters.     
 
 ```{r}
 averages %>% 
@@ -172,11 +173,10 @@ averages %>%
              y = wealth_median_mean,
              col = rich)) + 
   geom_line() +
-  geom_point() +
   theme_minimal() + 
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7)) +
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
   labs(x = "Year",
        y = "Median wealth",
        title = "Inequality in Basel",
@@ -185,7 +185,7 @@ averages %>%
   scale_color_viridis_d()
 ```
 
-4. It seems the rich quarters have indeed grown faster in wealth than poor quarters. Add some error bars `geom_errorbar` reflecting confidence intervals. To this end divide the standard deviation by `sqrt(10)` and then multiply by `qt(.975, 10)`.  
+4. It seems the rich quarters have indeed grown faster in wealth than poor quarters. Add some error bars `geom_errorbar` reflecting confidence intervals. To this end divide the standard deviation by `sqrt(10)` and then multiply by `qt(.975, 9)`.  
 
 ```{r}
 averages %>% 
@@ -193,13 +193,12 @@ averages %>%
              y = wealth_median_mean,
              col = rich)) + 
   geom_line() +
-  geom_point() +
-  geom_errorbar(aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 10),
-                    ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 10))) + 
   theme_minimal() + 
+  geom_errorbar(mapping = aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 9),
+                              ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 9))) +
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7)) +
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
   labs(x = "Year",
        y = "Median wealth",
        title = "Inequality in Basel",
@@ -208,22 +207,22 @@ averages %>%
   scale_color_viridis_d()
 ```
 
-5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependent variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you have control the color using `scale_fill_*`.    
+5. Looks like there is a credible difference, which is not so surprising when you think about it. We effectively selected the groups based on the dependent variable. Nevertheless, the results underpin that the relative wealth of Basel's quarters has been very constant, with rich quarters staying rich (and getting richer) and poor quarters staying poor. If you want a slightly prettier version of the plot, try `geom_ribbon()` instead or in addition to `geom_errorbar()`. Since `geom_ribbon()` plots an area, it is better placed before the points and lines. Furthermore, for the same reason, you need to add `fill = rich` to the global mapping in `ggplot` and at the end `scale_fill_*`.    
 
 ```{r}
 averages %>% 
   ggplot(aes(x = year,
              y = wealth_median_mean,
-             col = rich)) + 
-  geom_ribbon(aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 10),
-                    ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 10)),
-              alpha = .5) + 
+             col = rich,
+             fill = rich)) + 
+  geom_ribbon(mapping = aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 9),
+                            ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 9)),
+              alpha = .5) +
   geom_line() +
-  geom_point() +
   theme_minimal() + 
   theme(legend.position = "bottom",
-     legend.title = element_blank(),
-     legend.text = element_text(size = 7)) +
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
   labs(x = "Year",
        y = "Median wealth",
        title = "Inequality in Basel",
@@ -232,12 +231,35 @@ averages %>%
   scale_color_viridis_d() + scale_fill_viridis_d()
 ```
 
+6. Finally, add `labels = c("Poor","Rich")` to both the `scale_color_*` and `scale_fill_*` functions, to fix the legend labels. 
+
+```{r}
+averages %>% 
+  ggplot(aes(x = year,
+             y = wealth_median_mean,
+             col = rich,
+             fill = rich)) + 
+  geom_ribbon(mapping = aes(ymin = wealth_median_mean - wealth_median_sd/sqrt(10)*qt(.975, 9),
+                            ymax = wealth_median_mean + wealth_median_sd/sqrt(10)*qt(.975, 9)),
+              alpha = .5) +
+  geom_line() +
+  theme_minimal() + 
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 7)) +
+  labs(x = "Year",
+       y = "Median wealth",
+       title = "Inequality in Basel",
+       subtitle = "Wealth development in Basel's quarters from 2001 to 2017",
+       caption = "Source: Open Data Basel-Stadt") + 
+  scale_color_viridis_d(labels = c("Poor","Rich")) + 
+  scale_fill_viridis_d(labels = c("Poor","Rich"))
+```
 
 
-# 8 - Go explore
+# 8 - Project work
 
-1. Install the `ggthemes` package and try out some of its themes. 
-
+1. Try to use what you have learned in this section to style the visualizations that you created in the first plotting session based on your data. 
 
 
 

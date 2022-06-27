@@ -22,7 +22,7 @@ library(tidyverse)
 2. Use the code below to read in the `taxation.csv` data set and store it as an object called `basel`. The messages printed in the console tell you how R has inferred the types of each of the columns. Should be all good.
 
 ```{r }
-basel <- read_csv('../1_data/taxation.csv')
+basel <- read_csv('1_data/taxation.csv')
 ```
 
 3. Take a look at `basel` by sending it to console. Note how the `tibble` shows types for each of the columns. Also note how some cases and variables are abbreviated. 
@@ -37,15 +37,15 @@ basel
 
 ```{r }
 basel %>% 
-  summarize(avg_gini_income = mean(XX))
+  summarize(avg_gini_income = mean(income_gini))
 ```
 
 2. Now add another statement within `summarize` to also calculate the average Gini for wealth. What do you make of the results? Think back to the distributions and corresponding Gini values from the intro presentation. 
 
 ```{r }
 basel %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX))
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini))
 ```
 
 # 2 - Filter
@@ -54,18 +54,18 @@ basel %>%
 
 ```{r }
 basel %>% 
-  filter(quarter == XX) %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX))
+  filter(quarter == "Bettingen") %>% 
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini))
 ```
 
 2. Now try `"Gundeldingen"` instead. How do the results compare?  
 
 ```{r }
 basel %>% 
-  filter(quarter == XX) %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX))
+  filter(quarter == "Gundeldingen") %>% 
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini))
 ```
 
 # 3 - Grouping
@@ -74,30 +74,30 @@ basel %>%
 
 ```{r }
 basel %>% 
-  group_by(XX) %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX))
+  group_by(quarter) %>% 
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini))
 ```
 
 2. R has printed only 10 of the 21 quarters due to a default setting for the `tibble` print. Overwrite this setting by telling R exactly how many rows you would like to see. 
 
 ```{r }
 basel %>% 
-  group_by(XX) %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX)) %>% 
-  print(n = XX)
+  group_by(quarter) %>% 
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini)) %>% 
+  print(n = 21)
 ```
 
 3. Looks like there are some differences between the quarters. How about arranging the results such that the quarters are sorted according to `avg_gini_income`. Which quarter has the highest Gini coefficient, which the lowest? How different are the two?
 
 ```{r }
 basel %>% 
-  group_by(XX) %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX)) %>% 
-  arrange(XX) %>% 
-  print(n = XX)
+  group_by(quarter) %>% 
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini)) %>% 
+  arrange(avg_gini_income) %>% 
+  print(n = 21)
 ```
 
 # 4 - Pivoting
@@ -106,10 +106,10 @@ basel %>%
 
 ```{r }
 basel %>% 
-  group_by(XX) %>% 
-  summarize(avg_gini_income = mean(XX),
-            avg_gini_wealth = mean(XX)) %>% 
-  pivot_longer(XX, names_to = "XX", values_to = "XX")
+  group_by(quarter) %>% 
+  summarize(avg_gini_income = mean(income_gini),
+            avg_gini_wealth = mean(wealth_gini)) %>%  
+  pivot_longer(XX, names_to = "names", values_to = "values")
 ```
 
 # 5 - Project work
